@@ -1,10 +1,10 @@
-import Map from "./map";
+import Map from "./Engine/map";
 
-import UI from "./ui";
+import UI from "./Engine/ui";
 
-import { floors } from "./roles";
-import { loadImages } from "./utils";
-import Box from "./box";
+import { floors } from "./Project/collect";
+import { loadImages } from "./Engine/utils";
+import Box from "./Engine/box";
 
 const images = {
   enemys: null,
@@ -14,6 +14,37 @@ const images = {
   terrains: null,
   animates: null,
 };
+
+const __floors = [
+  "MT0",
+  "MT1",
+  "MT2",
+  "MT3",
+  "MT4",
+  "MT5",
+  "MT6",
+  "MT7",
+  "MT8",
+  "MT9",
+  "MT10",
+  "MT11",
+  "MT12",
+  "MT13",
+  "MT14",
+  "MT15",
+  "MT16",
+  "MT17",
+  "MT18",
+  "MT19",
+  "MT20",
+  "MT21",
+  "MT22",
+  "MT23w",
+  "MT23e",
+  "MT23s",
+  "MT_1",
+];
+
 export default class Game {
   constructor(config = {}) {
     config = Object.assign(
@@ -30,7 +61,9 @@ export default class Game {
 
     this.tick = 0;
     this.config = config;
-    const list = Object.keys(images).map((url) => "static/images/" + url + ".png");
+    const list = Object.keys(images).map(
+      (url) => "static/images/" + url + ".png"
+    );
     loadImages(list, (arr) => {
       arr.forEach((img, i) => {
         images[Object.keys(images)[i]] = img;
@@ -69,8 +102,8 @@ export default class Game {
     const keydown = (e) => {
       switch (e.code) {
         case "KeyS": // 方向为下
-        console.log()
-          this.createMap(floors[floors[Math.random() * 26 | 0]])
+          console.log();
+          this.createMap(floors[floors[(Math.random() * 26) | 0]]);
           break;
         case 32: // 空格换方向
           if (this.downBox.downBoxType === 4) {

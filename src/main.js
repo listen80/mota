@@ -1,7 +1,5 @@
-import Game from "./Engine/game"
+import Game from "./game";
 
 const game = new Game({
-  el: document.querySelector('#app'),
-})
-
-// console.log(game.gameStart())
+  el: document.querySelector("#app"),
+});
