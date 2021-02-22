@@ -1,13 +1,11 @@
-import mapsInfo from "Project/mapsInfo";
-import icons from "Project/icons";
 class Box {
   constructor(value, { x, y }, config) {
     this.value = value;
-    this.info = mapsInfo[value];
-    if (this.info && this.info.cls) {
+    this.info = config.mapsInfo[value];
+    if (config && this.info && this.info.cls) {
       this.img = config.images[this.info.cls];
       this.backGroundImage = config.images.terrains;
-      this.offsetY = icons[this.info.cls][this.info.id];
+      this.offsetY = config.icons[this.info.cls][this.info.id];
       this.offsetX = 0;
     } else {
       // debugger;
@@ -27,8 +25,6 @@ class Box {
       y: this.x - origin.x + origin.y,
     };
   }
-  face() {
-    
-  }
+  face() {}
 }
 export default Box;

@@ -1,10 +1,8 @@
 import Map from "./Engine/map";
-
 import UI from "./Engine/ui";
-
-import { floors } from "./Project/collect";
-import { loadImages } from "./Engine/utils";
 import Box from "./Engine/box";
+
+import { loadImage, loadAll, loadJSON } from "./Engine/utils";
 
 const images = {
   enemys: null,
@@ -14,37 +12,6 @@ const images = {
   terrains: null,
   animates: null,
 };
-
-const __floors = [
-  "MT0",
-  "MT1",
-  "MT2",
-  "MT3",
-  "MT4",
-  "MT5",
-  "MT6",
-  "MT7",
-  "MT8",
-  "MT9",
-  "MT10",
-  "MT11",
-  "MT12",
-  "MT13",
-  "MT14",
-  "MT15",
-  "MT16",
-  "MT17",
-  "MT18",
-  "MT19",
-  "MT20",
-  "MT21",
-  "MT22",
-  "MT23w",
-  "MT23e",
-  "MT23s",
-  "MT_1",
-];
-
 export default class Game {
   constructor(config = {}) {
     config = Object.assign(
@@ -61,24 +28,53 @@ export default class Game {
 
     this.tick = 0;
     this.config = config;
-    const list = Object.keys(images).map(
-      (url) => "static/images/" + url + ".png"
+
+    loadAll(
+      loadJSON,
+      ["static/maps.js", "static/icons.js"],
+      ([mapsInfo, icons]) => {
+        config.mapsInfo = mapsInfo;
+        config.icons = icons;
+        this.init();
+      }
     );
-    loadImages(list, (arr) => {
-      arr.forEach((img, i) => {
-        images[Object.keys(images)[i]] = img;
-      });
-      config.images = images;
-      this.ui = new UI(config);
-      this.createMap(floors.MT0);
-      this.hero = new Box(config, { x: 0, y: 0 });
-      this.gameStart();
-      this.bindControl();
+  }
+
+  init() {
+    loadJSON("static/data.js", (data) => {
+      this.data = data;
+      console.log(data.main.floorIds);
+
+      loadAll(
+        loadJSON,
+        data.main.floorIds.map((v) => `static/floors/${v}.js`),
+        (floors) => {
+          console.log(floors);
+          this.floors = floors;
+          this.floorsIndex = 0;
+          const list = Object.keys(images).map(
+            (url) => "static/images/" + url + ".png"
+          );
+
+          loadAll(loadImage, list, (arr) => {
+            arr.forEach((img, i) => {
+              images[Object.keys(images)[i]] = img;
+            });
+            this.config.images = images;
+            this.ui = new UI(this.config);
+            this.createMap(floors[0]);
+            // this.hero = new Box(this.config, { x: 0, y: 0 });
+            this.gameStart();
+            this.bindControl();
+          });
+        }
+      );
     });
   }
 
   createMap(map) {
     this.map = new Map(this.config, map);
+    console.log(map);
     this.ui.layers[-1] = this.map.background;
     this.ui.layers[0] = this.map.boxes;
   }
@@ -95,27 +91,16 @@ export default class Game {
       this.tick++;
       this.map.calc(this.tick % 2);
       this.ui.draw(this.tick % 2);
-    }, 333);
+    }, 255);
   }
 
   bindControl() {
+    const floors = this.floors;
     const keydown = (e) => {
       switch (e.code) {
         case "KeyS": // 方向为下
-          console.log();
-          this.createMap(floors[floors[(Math.random() * 26) | 0]]);
-          break;
-        case 32: // 空格换方向
-          if (this.downBox.downBoxType === 4) {
-            break;
-          }
-          this.calcBoxes((box) => box.rotate(this.downBox[0]));
-          break;
-        case 37: // 方向为左
-          this.calcBoxes([-1, 0]);
-          break;
-        case 39: // 方向为右
-          this.calcBoxes([1, 0]);
+          this.floorsIndex++;
+          this.createMap(floors[this.floorsIndex % floors.length]);
           break;
       }
     };
