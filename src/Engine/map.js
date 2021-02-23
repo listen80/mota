@@ -1,7 +1,7 @@
 // 地图生成
 
-import Box from "./box";
-import Block from "./Block";
+import Block from "./roles/block";
+
 const cache = {};
 class Map {
   constructor(game, floor) {
@@ -11,59 +11,53 @@ class Map {
       return cache[floorId];
     }
     cache[floorId] = this;
-    this.floor = floor;
 
-    const mapArray = floor.map;
+    this.mainLayer = [];
+    this.backLayer = [];
 
-    this.boxes = mapArray.map((line, y) => {
-      return line.map((value, x) => {
+    floor.map.forEach((line, y) => {
+      line.forEach((value, x) => {
         if (value) {
           const info = game.maps[value];
           if (info) {
-            const img = game.images[info.cls];
-            const offsetY = game.icons[info.cls][info.id];
-            const offsetX = 0;
-            return new Block(game, {
-              value,
-              x,
-              y,
-              img,
-              offsetY,
-              offsetX,
-              info,
-            });
+            const { cls, id } = info;
+            // cls
+            // terrains 墙 不可达到之类
+            // items 物品
+            // npcs npc 有动画 2帧
+            // enemys 敌人 有动画 2帧
+            // animates 动画类 当然有动画 4帧
+            const keyFrames = {
+              enemys: 2,
+              npcs: 2,
+              animates: 2,
+              items: 0,
+              terrains: 0,
+            };
+            this.mainLayer.push(
+              new Block({
+                x,
+                y,
+                info,
+                img: game.images[cls],
+                offsetY: game.icons[cls][id],
+                maxAniFrame: keyFrames[cls],
+              })
+            );
           } else {
-            debugger;
-            return null;
+            console.error("未知的地图元素");
           }
         } else {
-          return null;
+          // 空地，只有背景
         }
+        this.backLayer.push(
+          new Block({
+            img: game.images.terrains,
+            y,
+            x,
+          })
+        );
       });
-    });
-
-    this.boxes = this.boxes.flat().filter((v) => v);
-
-    this.background = mapArray.map((line, y) => {
-      return line.map((item, x) => {
-        return new Box(game, {
-          img: game.images.terrains,
-          offsetX: 0,
-          offsetY: 0,
-          y,
-          x,
-        });
-      });
-    });
-    this.background = this.background.flat().filter((v) => v);
-  }
-  calc(tick) {
-    this.boxes.map((box) => {
-      // return line.map((box, x) => {
-      if (box) {
-        box.calc(tick);
-      }
-      // });
     });
   }
 }

@@ -5,6 +5,7 @@ class UI {
 
     const { el, side, width, height } = this.config;
     this.layers = {};
+
     const canvas = document.createElement("canvas");
     canvas.width = side * width;
     canvas.height = side * height;
@@ -12,10 +13,17 @@ class UI {
     this.canvas = canvas;
     this.paints = canvas.getContext("2d");
   }
-
-  setLayers(zIndex, boxes) {
-    this.layers[zIndex] = this.layers[zIndex] || [];
-    this.layers[zIndex].push(boxes);
+  setLayer(zIndex, layer) {
+    this.layers[zIndex] = layer;
+  }
+  setBacklayer(layer) {
+    this.setLayer(-1, layer);
+  }
+  setBlocklayer(layer) {
+    this.setLayer(0, layer);
+  }
+  setHerolayer(layer) {
+    this.setLayer(1, [layer]);
   }
   clearRect() {
     this.paints.clearRect(0, 0, this.canvas.width, this.canvas.height);

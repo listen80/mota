@@ -2,7 +2,7 @@
 // 物品 使用 放背包
 import Map from "./Engine/map";
 import UI from "./Engine/ui";
-import Hero from "./Engine/hero";
+import Hero from "./Engine/roles/hero";
 
 import { loadImage, loadAll, loadJSON, get, set } from "./Engine/utils";
 export default class Game {
@@ -61,27 +61,29 @@ export default class Game {
 
     Promise.all([P1, P2]).then(() => {
       this.ui = new UI(this.config);
-      let heroPosition = {};
+      let heroStoreInfo = {};
       if (this.config.keepPosition) {
-        heroPosition = get("hero");
+        heroStoreInfo = get("hero");
+        console.log(heroStoreInfo);
       }
-      this.hero = new Hero(this, {
+      this.hero = new Hero({
         x: 6,
         y: 2,
         height: 33,
         width: 32,
         img: this.images.hero,
-        ...heroPosition,
+        ...heroStoreInfo,
+        game: this,
       });
-      this.ui.layers[1] = [this.hero];
+      this.ui.setHerolayer(this.hero);
 
-      this.changeFloor(0);
-      this.gameStart();
+      this.changeFloor();
       this.bindControl();
+      this.gameStart();
     });
   }
 
-  changeFloor(i = 1) {
+  changeFloor(i = 0) {
     this.floorsIndex += i;
     this.floorsIndex = this.floorsIndex % this.floors.length;
     if (this.floorsIndex < 0) {
@@ -103,8 +105,8 @@ export default class Game {
     const floor = this.floors[this.floorsIndex];
     this.floor = floor;
     this.map = new Map(this, floor);
-    this.ui.layers[-1] = this.map.background;
-    this.ui.layers[0] = this.map.boxes;
+    this.ui.setBacklayer(this.map.backLayer);
+    this.ui.setBlocklayer(this.map.mainLayer);
   }
 
   gameStop() {
@@ -127,7 +129,7 @@ export default class Game {
   }
 
   move({ x, y }) {
-    const boxIndex = this.map.boxes.findIndex(
+    const boxIndex = this.map.mainLayer.findIndex(
       (box) => box.y === y && box.x === x
     );
     const events = this.floor.events;
@@ -136,7 +138,7 @@ export default class Game {
       console.log(event);
     }
     if (boxIndex !== -1) {
-      const box = this.map.boxes[boxIndex];
+      const box = this.map.mainLayer[boxIndex];
       const info = box.info;
       const item = this.items.items[info.id];
       // console.log(info);
@@ -148,7 +150,7 @@ export default class Game {
         const enemys = this.enemys;
         const lessHp = this.hero.attack(box);
         if (lessHp > 0) {
-          this.map.boxes.splice(this.map.boxes.indexOf(box), 1);
+          this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
           this.hero.set({ x, y });
           this.hero.battleInfo.hp = lessHp;
           console.log("击败", enemys[info.id].name, lessHp);
@@ -156,7 +158,7 @@ export default class Game {
           console.log("打不过", enemys[info.id].name);
         }
       } else if (["items"].includes(info.cls)) {
-        this.map.boxes.splice(this.map.boxes.indexOf(box), 1);
+        this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
         this.hero.set({ x, y });
         console.log("获得", item.name);
         if (item.cls === "use") {
@@ -181,7 +183,7 @@ export default class Game {
       } else if ((info.trigger = "openDoor")) {
         const key = info.id.replace("Door", "") + "Key";
         if (this.hero.keys[key] > 0) {
-          this.map.boxes.splice(this.map.boxes.indexOf(box), 1);
+          this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
           this.hero.set({ x, y });
           this.hero.keys[info.id]--;
         } else if (this.hero.keys[key] === 0) {
@@ -227,6 +229,13 @@ export default class Game {
           this.move({ x: dist.x, y: dist.y });
           break;
       }
+
+      const { x, y, offsetY, battleInfo, keys } = this.hero;
+
+      set("hero", { x, y, offsetY, battleInfo, keys });
+      // this.map.mainLayer.map(block => {
+      //   console.log(block)
+      // })
     };
 
     const dblclick = () => {};

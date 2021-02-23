@@ -1,15 +1,9 @@
-import Box from "./box";
+// 我方
+import Block from "./block";
 
-import { set } from "./utils";
-
-class Hero extends Box {
-  constructor(game, { x, y, img, offsetY = 0, offsetX = 0, height, width }) {
-    super(game, { x, y, img, offsetY, offsetX, height, width });
-
-    this.game = game;
-    this.baseX = 0;
-    this.baseY = -1;
-    this.hero = true;
+class Hero extends Block {
+  constructor({ game, ...others }) {
+    super({ maxAniFrame: 4, ...others });
     this.battleInfo = {
       atk: 10,
       def: 10,
@@ -20,11 +14,9 @@ class Hero extends Box {
       blueKey: 0,
       redKey: 0,
     };
+    this.game = game;
   }
 
-  calc({ tick4 }) {
-    this.offsetX = tick4;
-  }
   face({ offsetY, x, y }) {
     if (offsetY === undefined) {
       const Down = { x: 0, y: 1, offsetY: 0 },
@@ -43,11 +35,7 @@ class Hero extends Box {
       this.offsetY = offsetY;
     }
   }
-  set({ x, y }) {
-    set("hero", { x, y });
 
-    return Box.prototype.set.apply(this, arguments);
-  }
   getAttackResult(enemyInfo) {
     enemyInfo = Object.assign({}, enemyInfo);
     const battleInfo = this.battleInfo;
@@ -58,6 +46,7 @@ class Hero extends Box {
       Math.ceil(enemyInfo.hp / (battleInfo.atk - enemyInfo.def)) - 1;
     return battleInfo.hp - heroNeedNum * (enemyInfo.atk - battleInfo.def);
   }
+
   attack(enemy) {
     const enemyInfo = this.game.enemys[enemy.info.id];
     const lessHp = this.getAttackResult(enemyInfo);
