@@ -26,41 +26,40 @@ class UI {
     this.paints.clearRect(box.x * side, box.y * side, side, side);
   }
   drawText(box) {}
-  drawImage(box, tick) {
+  drawImage(box) {
     const side = this.config.side;
-    const { img, offsetX, offsetY, x, y } = box;
+    const { img, offsetX, offsetY, x, y, height, width } = box;
     this.paints.drawImage(
       img,
-      offsetX * side,
-      offsetY * side,
-      side,
-      side,
-      x * side,
-      y * side,
-      side,
-      side
+      offsetX * width,
+      offsetY * height,
+      width,
+      height,
+      x * side - (width - side) / 2, // 中间对齐
+      y * side - (height - side), // 脚着地
+      width,
+      height
     );
   }
-  drawType() {}
-  draw(tick) {
+  nextFrame(ticks) {
     this.clearRect();
-    this.paints.beginPath();
     Object.keys(this.layers)
       .sort((next, pre) => next - pre)
       .forEach((key) => {
-        this.layers[key].forEach((rows, y) => {
-          rows.forEach((box, i) => {
-            if (box) {
-              if (box.img) {
-                this.drawImage(box, tick);
-              } else {
-                this.drawBox(box);
-              }
-            }
-          });
+        this.layers[key].forEach((box, y) => {
+          this.paints.beginPath();
+          if (box.calc) {
+            box.calc(ticks);
+          }
+          if (box.img) {
+            this.drawImage(box);
+          } else {
+            debugger;
+            this.drawBox(box);
+          }
+          this.paints.closePath();
         });
       });
-    this.paints.closePath();
   }
 }
 

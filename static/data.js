@@ -94,17 +94,17 @@ var data_a1e2fb4a_e986_4524_b0da_9b7ba7c0874d =
 			"hp": 1000,
 			"manamax": -1,
 			"mana": 0,
-			"atk": 10000,
-			"def": 10000,
+			"atk": 11,
+			"def": 11,
 			"mdef": 0,
 			"money": 0,
 			"experience": 0,
 			"equipment": [],
 			"items": {
 				"keys": {
-					"yellowKey": 110,
-					"blueKey": 110,
-					"redKey": 110
+					"yellowKey": 0,
+					"blueKey": 0,
+					"redKey": 0
 				},
 				"constants": {
 					"book": 1

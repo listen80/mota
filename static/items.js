@@ -17,69 +17,55 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			"text": "可以打开一扇红门"
 		},
 		"redJewel": {
-			"cls": "items",
+			"cls": "use",
 			"name": "红宝石",
-			"text": "'，攻击+'+core.values.redJewel"
+			"text": "'，攻击+'+core.values.redJewel",
+			"effect": "hero:atk:3"
 		},
 		"blueJewel": {
-			"cls": "items",
+			"cls": "use",
 			"name": "蓝宝石",
-			"text": "'，防御+'+core.values.blueJewel"
+			"text": "'，防御+'+core.values.blueJewel",
+			"effect": "hero:def:3"
 		},
 		"greenJewel": {
-			"cls": "items",
+			"cls": "use",
 			"name": "绿宝石",
 			"text": "'，魔防+'+core.values.greenJewel"
 		},
 		"yellowJewel": {
-			"cls": "items",
+			"cls": "use",
 			"name": "黄宝石",
 			"text": "可以进行加点"
 		},
 		"redPotion": {
-			"cls": "items",
+			"cls": "use",
 			"name": "小血瓶",
-			"text": "'，生命+'+core.values.redPotion"
+			"text": "'，生命+'+core.values.redPotion",
+			"effect": "hero:hp:200"
 		},
 		"bluePotion": {
-			"cls": "items",
+			"cls": "use",
 			"name": "大血瓶",
-			"text": "'，生命+'+core.values.bluePotion"
-		},
-		"yellowPotion": {
-			"cls": "items",
-			"name": "黄血瓶",
-			"text": "'生命+'+core.values.yellowPotion"
-		},
-		"greenPotion": {
-			"cls": "items",
-			"name": "绿血瓶",
-			"text": "'，生命+'+core.values.greenPotion"
-		},
-		"sword0": {
-			"cls": "items",
-			"name": "破旧的剑",
-			"text": "一把已经生锈的剑",
-			"equip": {
-				"type": 0,
-				"atk": 0,
-				"animate": "sword"
-			}
+			"text": "'，生命+'+core.values.bluePotion",
+			"effect": "hero:hp:500"
 		},
 		"sword1": {
-			"cls": "items",
+			"cls": "use",
 			"name": "铁剑",
 			"text": "一把很普通的铁剑",
-			"equip": {
+			"effect": "hero:atk:500",
+			"equip2": {
 				"type": 0,
 				"atk": 10,
 				"animate": "sword"
 			}
 		},
 		"sword2": {
-			"cls": "items",
+			"cls": "use",
 			"name": "银剑",
 			"text": "一把很普通的银剑",
+			"effect": "hero:atk:500",
 			"equip": {
 				"type": 0,
 				"atk": 20,
@@ -87,9 +73,10 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"sword3": {
-			"cls": "items",
+			"cls": "use",
 			"name": "青锋剑",
 			"text": "一把很普通的骑士剑",
+			"effect": "hero:atk:500",
 			"equip": {
 				"type": 0,
 				"atk": 40,
@@ -97,7 +84,7 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"sword4": {
-			"cls": "items",
+			"cls": "use",
 			"name": "圣剑",
 			"text": "一把很普通的圣剑",
 			"equip": {
@@ -107,9 +94,10 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"sword5": {
-			"cls": "items",
+			"cls": "use",
 			"name": "星光神剑",
 			"text": "一把很普通的神圣剑",
+			"effect": "hero:atk:500",
 			"equip": {
 				"type": 0,
 				"atk": 100,
@@ -117,17 +105,19 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"shield0": {
-			"cls": "items",
+			"cls": "use",
 			"name": "破旧的盾",
 			"text": "一个很破旧的铁盾",
+			"effect": "hero:def:500",
 			"equip": {
 				"type": 1,
 				"def": 0
 			}
 		},
 		"shield1": {
-			"cls": "items",
+			"cls": "use",
 			"name": "铁盾",
+			"effect": "hero:def:500",
 			"text": "一个很普通的铁盾",
 			"equip": {
 				"type": 1,
@@ -135,8 +125,9 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"shield2": {
-			"cls": "items",
+			"cls": "use",
 			"name": "银盾",
+			"effect": "hero:def:500",
 			"text": "一个很普通的银盾",
 			"equip": {
 				"type": 1,
@@ -144,8 +135,9 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"shield3": {
-			"cls": "items",
+			"cls": "use",
 			"name": "黄金盾",
+			"effect": "hero:def:500",
 			"text": "一个很普通的骑士盾",
 			"equip": {
 				"type": 1,
@@ -153,8 +145,9 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"shield4": {
-			"cls": "items",
+			"cls": "use",
 			"name": "圣盾",
+			"effect": "hero:def:500",
 			"text": "一个很普通的圣盾",
 			"equip": {
 				"type": 1,
@@ -162,8 +155,9 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"shield5": {
-			"cls": "items",
+			"cls": "use",
 			"name": "光芒神盾",
+			"effect": "hero:def:500",
 			"text": "一个很普通的神圣盾",
 			"equip": {
 				"type": 1,
@@ -172,11 +166,11 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			}
 		},
 		"superPotion": {
-			"cls": "items",
+			"cls": "use",
 			"name": "圣水瓶"
 		},
 		"moneyPocket": {
-			"cls": "items",
+			"cls": "use",
 			"name": "金块"
 		},
 		"book": {
@@ -246,7 +240,7 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			"text": "可以炸掉勇士面前的怪物"
 		},
 		"centerFly": {
-			"cls": "items",
+			"cls": "use",
 			"name": "小飞羽",
 			"text": "可以飞向当前楼层中心对称的位置"
 		},
@@ -307,7 +301,7 @@ var items_296f5d02_12fd_4166_a7c1_b5e830c9ee3a =
 			"hideInReplay": true
 		},
 		"wand": {
-			"cls": "items",
+			"cls": "use",
 			"name": "新物品"
 		}
 	},

@@ -12,18 +12,20 @@ export const loadAll = (fn, list, callback) => {
   });
 };
 
-export const loadImage = (src, callback) => {
-  try {
-    var name = src;
-    if (name.indexOf(".") < 0) name = name + ".png";
-    var image = new Image();
-    image.onload = function () {
-      callback(image);
-    };
-    image.src = src;
-  } catch (e) {
-    main.log(e);
-  }
+export const loadImage = (src) => {
+  return new Promise(function (resolve, reject) {
+    try {
+      var name = src;
+      if (name.indexOf(".") < 0) name = name + ".png";
+      var image = new Image();
+      image.onload = function () {
+        resolve(image);
+      };
+      image.src = src;
+    } catch (e) {
+      reject(null);
+    }
+  });
 };
 
 export function loadScript(url, callback) {
@@ -79,17 +81,28 @@ export const http = function (
   else xhr.send();
 };
 
-export const loadJSON = function (url, success, type) {
-  http(
-    url,
-    (res) => {
-      try {
-        success(JSON.parse(res.replace(/.+=/, "")));
-      } catch (e) {
-        console.info(res.replace(/.+=/, ""));
-      }
-    },
-    "get"
-  );
+export const loadJSON = function (url) {
+  return new Promise((resolve, reject) => {
+    http(
+      url,
+      (res) => {
+        try {
+          resolve(JSON.parse(res.replace(/.+=/, "")));
+        } catch (e) {
+          console.info(res.replace(/.+=/, ""));
+          console.log(e);
+          reject(null);
+        }
+      },
+      "get"
+    );
+  });
 };
-export function loadText(url, callback) {}
+
+export function set(key, value) {
+  return localStorage.setItem(key, JSON.stringify(value));
+}
+
+export function get(key) {
+  return JSON.parse(localStorage.getItem(key));
+}

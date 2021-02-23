@@ -142,7 +142,7 @@ var icons_4665ee12_3a1f_44a4_bea3_0fccba634dc1 =
 		"npc4": 4
 	},
 	"enemys": {
-		"greenSlime": 4,
+		"greenSlime": 0,
 		"redSlime": 1,
 		"blackSlime": 2,
 		"slimelord": 3,
