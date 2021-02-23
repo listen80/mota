@@ -7,32 +7,37 @@ import Hero from "./Engine/roles/hero";
 import { loadImage, loadAll, loadJSON, get, set } from "./Engine/utils";
 export default class Game {
   constructor(config = {}) {
-    config = Object.assign(
-      {
-        el: document.body,
-        side: 32,
-        space: 4,
-        width: 13,
-        height: 13,
-      },
-      config
-    );
+    config = {
+      el: document.body,
+      side: 32,
+      space: 4,
+      width: 13,
+      height: 13,
+      ...config,
+    };
 
     this.tick = 0;
     this.config = config;
+
     this.floorsIndex = 0;
+
     if (config.keepPosition) {
       this.floorsIndex = get("floorsIndex");
     }
     window.__game__ = this;
 
     const dataList = ["data", "maps", "icons", "enemys", "events", "items"];
-    Promise.all(dataList.map((file) => loadJSON(`static/${file}.js`))).then(
-      (dataArr) => {
+    Promise.all(dataList.map((file) => loadJSON(`static/${file}.js`)))
+      .then((dataArr) => {
         dataList.forEach((key, i) => (this[key] = dataArr[i]));
-        this.loadFloorsDataAndImages(this.data);
-      }
-    );
+        return this.data;
+      })
+      .then((data) => {
+        return this.loadFloorsDataAndImages(data);
+      })
+      .then(function (data) {
+        // debugger
+      });
   }
 
   loadFloorsDataAndImages(data) {
@@ -59,28 +64,27 @@ export default class Game {
       data.main.floorIds.forEach((key, i) => (floors[key] = floors[i]));
     });
 
-    Promise.all([P1, P2]).then(() => {
-      this.ui = new UI(this.config);
-      let heroStoreInfo = {};
-      if (this.config.keepPosition) {
-        heroStoreInfo = get("hero");
-        console.log(heroStoreInfo);
-      }
-      this.hero = new Hero({
-        x: 6,
-        y: 2,
-        height: 33,
-        width: 32,
-        img: this.images.hero,
-        ...heroStoreInfo,
-        game: this,
-      });
-      this.ui.setHerolayer(this.hero);
-
-      this.changeFloor();
-      this.bindControl();
-      this.gameStart();
+    return Promise.all([P1, P2]).then(() => {
+      this.init();
+      return 11;
     });
+  }
+
+  init() {
+    this.ui = new UI(this.config);
+    this.hero = new Hero({
+      x: 6,
+      y: 2,
+      height: 33,
+      width: 32,
+      img: this.images.hero,
+      game: this,
+      ...(this.config.keepPosition ? get("hero") : {}),
+    });
+    this.ui.setHerolayer(this.hero);
+    this.changeFloor();
+    this.bindControl();
+    this.gameStart();
   }
 
   changeFloor(i = 0) {
@@ -163,10 +167,13 @@ export default class Game {
         console.log("获得", item.name);
         if (item.cls === "use") {
           if (item.effect) {
-            const effect = item.effect.split(":");
-            const [lead, attribute, num] = effect;
-            this[lead].battleInfo[attribute] += parseInt(num);
-            console.log(this[lead].battleInfo);
+            const getString = (effect) => {
+              effect = effect.split(":");
+              const [lead, attribute, num] = effect;
+              this[lead].battleInfo[attribute] += parseInt(num);
+              console.log(effect);
+            };
+            getString(item.effect);
           } else if (item.equip) {
             if (item.equip.type === 0) {
               this.hero.battleInfo.atk += item.equip.atk;
@@ -185,7 +192,7 @@ export default class Game {
         if (this.hero.keys[key] > 0) {
           this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
           this.hero.set({ x, y });
-          this.hero.keys[info.id]--;
+          this.hero.keys[key]--;
         } else if (this.hero.keys[key] === 0) {
           const item = this.items.items[key];
           console.log("没有", item.name);

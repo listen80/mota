@@ -88,7 +88,7 @@ var data_a1e2fb4a_e986_4524_b0da_9b7ba7c0874d =
 		"version": "Ver 1.12",
 		"floorId": "MT0",
 		"hero": {
-			"name": "勇士：",
+			"name": "啊帮",
 			"lv": 1,
 			"hpmax": 9999,
 			"hp": 1000,
