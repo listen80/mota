@@ -1,24 +1,28 @@
 // 地图生成
 
-import Block from "./roles/block";
+import Block from "./base/block";
+import Layer from "./Layer";
 
 const cache = {};
-class Map {
-  constructor(game, floor) {
-    const { floorId } = floor;
+export default class Map {
+  constructor({ resource }, map) {
+    const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0 } = map;
+    // if (floorId) {
+    //   if (cache[floorId]) {
+    //     return cache[floorId];
+    //   }
+    //   cache[floorId] = this;
+    // }
+    this.backLayer = new Layer({ offsetX });
+    this.mainLayer = new Layer({ offsetX });
+    this.topLayer = new Layer({ offsetX });
 
-    if (cache[floorId]) {
-      return cache[floorId];
-    }
-    cache[floorId] = this;
+    this.layers = [this.backLayer, this.mainLayer, this.topLayer];
 
-    this.mainLayer = [];
-    this.backLayer = [];
-
-    floor.map.forEach((line, y) => {
+    mapArray.forEach((line, y) => {
       line.forEach((value, x) => {
         if (value) {
-          const info = game.maps[value];
+          const info = resource.mapMapping[value];
           if (info) {
             const { cls, id } = info;
             // cls
@@ -34,13 +38,13 @@ class Map {
               items: 0,
               terrains: 0,
             };
-            this.mainLayer.push(
+            this.mainLayer.add(
               new Block({
                 x,
                 y,
                 info,
-                img: game.images[cls],
-                offsetY: game.icons[cls][id],
+                img: resource.images[cls],
+                offsetY: resource.iconMapping[cls][id],
                 maxAniFrame: keyFrames[cls],
               })
             );
@@ -48,17 +52,31 @@ class Map {
             console.error("未知的地图元素");
           }
         } else {
-          // 空地，只有背景
+          // 空地，显示背景
         }
-        this.backLayer.push(
+        this.backLayer.add(
           new Block({
-            img: game.images.terrains,
+            img: resource.images.terrains, // 用的是地形最上面一个
             y,
             x,
           })
         );
       });
     });
+
+    this.offsetX = offsetX * 32;
+    this.offsetY = offsetY * 32;
+    this.rotate = (rotate * Math.PI) / 2;
+  }
+  nextFrame(ui) {
+    const { offsetX, offsetY, rotate } = this;
+    ui.rotate(rotate, () => {
+      ui.translate({ offsetX, offsetY }, () => {
+        this.layers.map((layer) => layer.nextFrame(ui));
+      });
+    });
+  }
+  add(block) {
+    this.mainLayer.add(block);
   }
 }
-export default Map;

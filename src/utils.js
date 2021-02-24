@@ -87,10 +87,9 @@ export const loadJSON = function (url) {
       url,
       (res) => {
         try {
-          resolve(JSON.parse(res.replace(/.+=/, "")));
+          resolve(JSON.parse(res.replace(/^\s*[.\w]+=/, "")));
         } catch (e) {
-          console.info(res.replace(/.+=/, ""));
-          console.log(e);
+          console.error(url);
           reject(null);
         }
       },
@@ -105,4 +104,21 @@ export function set(key, value) {
 
 export function get(key) {
   return JSON.parse(localStorage.getItem(key));
+}
+
+export function deepFreeze(o) {
+  Object.freeze(o);
+
+  Object.getOwnPropertyNames(o).forEach(function (prop) {
+    if (
+      o.hasOwnProperty(prop) &&
+      o[prop] !== null &&
+      (typeof o[prop] === "object" || typeof o[prop] === "function") &&
+      !Object.isFrozen(o[prop])
+    ) {
+      deepFreeze(o[prop]);
+    }
+  });
+
+  return o;
 }

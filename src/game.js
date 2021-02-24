@@ -1,118 +1,76 @@
-// 模仿三国志曹操传 运气 敏姐 带兵
+// 模仿三国志曹操传 运气 敏捷 带兵
 // 物品 使用 放背包
 import Map from "./Engine/map";
 import UI from "./Engine/ui";
 import Hero from "./Engine/roles/hero";
-
-import { loadImage, loadAll, loadJSON, get, set } from "./Engine/utils";
-import Block from "./Engine/roles/block";
+import Animate from "./Engine/roles/animate";
+import loadResource from "./loadResource";
+import { get, set, deepFreeze } from "./utils";
+import { leftMenu } from "./leftMenu";
 export default class Game {
   constructor(config = {}) {
     config = {
       el: document.body,
       side: 32,
       space: 4,
-      width: 13,
+      width: 17,
       height: 13,
       ...config,
     };
 
-    this.tick = 0;
-    this.config = config;
-
-    this.floorsIndex = 0;
+    this.config = config; // 配置
+    this.resource = {}; // 加载好的数据图片等
+    this.tick = 0; // 时钟
+    this.map = null; // 通过new Map 生成的 对象
 
     if (config.keepPosition) {
       this.floorsIndex = get("floorsIndex");
     }
-    window.__game__ = this;
 
-    const dataList = ["data", "maps", "icons", "enemys", "events", "items"];
-    Promise.all(dataList.map((file) => loadJSON(`static/${file}.js`)))
-      .then((dataArr) => {
-        dataList.forEach((key, i) => (this[key] = dataArr[i]));
-        return this.data;
-      })
-      .then((data) => {
-        return this.loadFloorsDataAndImages(data);
-      })
-      .then(function (data) {
-        // debugger
-      });
-  }
-
-  loadFloorsDataAndImages(data) {
-    const imageList = [
-      "enemys",
-      "hero",
-      "items",
-      "npcs",
-      "terrains",
-      "animates",
-    ];
-
-    const P1 = Promise.all(
-      imageList.map((image) => loadImage(`static/images/${image}.png`))
-    ).then((images) => {
-      this.images = images;
-      imageList.forEach((key, i) => (images[key] = images[i]));
-    });
-
-    const P2 = Promise.all(
-      data.main.floorIds.map((floor) => loadJSON(`static/floors/${floor}.js`))
-    ).then((floors) => {
-      this.floors = floors;
-      data.main.floorIds.forEach((key, i) => (floors[key] = floors[i]));
-    });
-
-    return Promise.all([P1, P2]).then(() => {
+    loadResource(this.resource).then(() => {
+      deepFreeze(this.resource);
+      console.log(this);
       this.init();
-      return 11;
     });
   }
 
   init() {
-    this.ui = new UI(this.config);
-    this.hero = new Hero({
-      x: 6,
-      y: 2,
-      height: 33,
-      width: 32,
-      img: this.images.hero,
-      game: this,
-      // interval: 2,
-      ...(this.config.keepPosition ? get("hero") : {}),
-    });
-    this.ui.setHerolayer(this.hero);
+    this.gameData = {
+      mapsIndex: 0,
+    };
+
+    this.ui = new UI(this);
+    this.hero = new Hero(this);
+
     this.changeFloor();
     this.bindControl();
     this.gameStart();
   }
 
   changeFloor(i = 0) {
-    this.floorsIndex += i;
-    this.floorsIndex = this.floorsIndex % this.floors.length;
-    if (this.floorsIndex < 0) {
-      this.floorsIndex += this.floors.length;
+    const { gameData, resource } = this;
+    gameData.mapsIndex += i;
+    gameData.mapsIndex = gameData.mapsIndex % resource.maps.length;
+    if (gameData.mapsIndex < 0) {
+      gameData.mapsIndex += resource.maps.length;
     }
-    this.createMap(i);
-    if (i < 0) {
-      const [x, y] = this.floor.upFloor;
+    const map = resource.maps[gameData.mapsIndex];
+    // 配置文件
+    this.createMap(map);
+    // 兼容魔塔的字段
+    if (i < 0 && map.upFloor) {
+      const [x, y] = map.upFloor;
       this.hero.set({ x, y });
-    } else if (i > 0) {
-      const [x, y] = this.floor.downFloor;
+    } else if (i > 0 && map.downFloor) {
+      const [x, y] = map.downFloor;
       this.hero.set({ x, y });
     }
-    console.log(this.floor.name);
   }
 
-  createMap(i) {
-    set("floorsIndex", this.floorsIndex);
-    const floor = this.floors[this.floorsIndex];
-    this.floor = floor;
-    this.map = new Map(this, floor);
-    this.ui.setBacklayer(this.map.backLayer);
-    this.ui.setBlocklayer(this.map.mainLayer);
+  createMap(map) {
+    this.menuMap = new Map(this, leftMenu);
+    this.map = new Map(this, { ...map, ...{ offsetX: 4 } });
+    this.map.add(this.hero);
   }
 
   gameStop() {
@@ -123,50 +81,47 @@ export default class Game {
   gameStart() {
     this.ident = setInterval(() => {
       this.nextFrame();
-    }, 555);
+    }, 111);
   }
 
   nextFrame() {
+    const { ui } = this;
     this.tick++;
-    const tick2 = this.tick % 2,
-      tick3 = this.tick % 3,
-      tick4 = this.tick % 4;
-    this.ui.nextFrame({ tick2, tick3, tick4 });
+    this.menuMap.nextFrame(ui);
+    this.map.nextFrame(ui);
   }
 
   move({ x, y }) {
-    const boxIndex = this.map.mainLayer.findIndex(
-      (box) => box.y === y && box.x === x
-    );
-    const events = this.floor.events;
-    const event = events[[x, y]];
-    if (event) {
-      console.log(event);
-    }
-    if (boxIndex !== -1) {
-      const box = this.map.mainLayer[boxIndex];
-      const info = box.info;
-      const item = this.items.items[info.id];
-      // console.log(info);
+    const { map, resource } = this;
+    const { mainLayer } = map;
+    const block = mainLayer.find({ x, y });
+    if (block) {
+      const info = block.info;
+      if (!info) {
+        // 比如animate
+        return;
+      }
+
       if (info.id === "upFloor") {
         this.changeFloor(1);
       } else if (info.id === "downFloor") {
         this.changeFloor(-1);
       } else if (info.cls === "enemys") {
         const enemys = this.enemys;
-        const lessHp = this.hero.attack(box);
+        const item = this.items.items[info.id];
+        const lessHp = this.hero.attack(block);
         if (lessHp > 0) {
-          this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
+          blocks.splice(blocks.indexOf(block), 1);
           this.hero.set({ x, y });
           this.hero.battleInfo.hp = lessHp;
-          console.log("击败", enemys[info.id].name, lessHp);
+          this.ui.setMsg("击败", enemys[info.id].name);
         } else {
-          console.log("打不过", enemys[info.id].name);
+          this.ui.setMsg("打不过", enemys[info.id].name);
         }
-      } else if (["items"].includes(info.cls)) {
-        this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
+      } else if (info.cls === "items") {
+        blocks.splice(blocks.indexOf(block), 1);
         this.hero.set({ x, y });
-        console.log("获得", item.name);
+        this.ui.setMsg("获得", item.name);
         if (item.cls === "use") {
           if (item.effect) {
             const getString = (effect) => {
@@ -189,39 +144,26 @@ export default class Game {
           this.hero.keys[info.id]++;
           console.log(this.hero.keys);
         }
-      } else if ((info.trigger = "openDoor")) {
+      } else if (info.trigger === "openDoor") {
         const key = info.id.replace("Door", "") + "Key";
-        // console.log(box, info);
-
-        // console.log(key);
         if (this.hero.keys[key] > 0) {
-          const { x, y } = box;
-          const maxAniFrame = 4;
-          const offsetY = this.icons.animates[info.id];
-          const img = this.images.animates;
-          this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
-          const palyCount = 1;
-          const block = new Block({
-            x,
-            y,
-            maxAniFrame,
-            offsetY,
-            img,
-            info,
-            palyCount,
-            interval: 2,
-            callback: (data) => {
-              this.map.mainLayer.splice(this.map.mainLayer.indexOf(block), 1);
-              console.log(data);
-            },
-          });
-
-          this.map.mainLayer.push(block);
-          // this.hero.set({ x, y });
-          // this.hero.keys[key]--;w
+          // 开门
+          mainLayer.remove(block);
+          const { x, y } = block;
+          mainLayer.add(
+            new Animate({
+              x,
+              y,
+              playCount: 1,
+              offsetY: 4,
+              interval: 2,
+            })
+          );
+          debugger;
+          this.hero.keys[key]--;
         } else if (this.hero.keys[key] === 0) {
           const item = this.items.items[key];
-          console.log("没有", item.name);
+          this.ui.setMsg("没有", item.name);
         } else {
           // console.log(info, "非红蓝黄门");
         }
@@ -266,14 +208,28 @@ export default class Game {
       const { x, y, offsetY, battleInfo, keys } = this.hero;
 
       set("hero", { x, y, offsetY, battleInfo, keys });
-      // this.map.mainLayer.map(block => {
-      //   console.log(block)
-      // })
     };
 
     const dblclick = () => {};
     document.addEventListener("keydown", keydown);
     document.addEventListener("dblclick", dblclick);
+  }
+
+  getText(str) {
+    let obj = this;
+    try {
+      return str.replace(/\{([^}]+)\}/, (all, some) => {
+        let arr = some.split(/\./);
+        for (let i = 0; i < arr.length; i++) {
+          const key = arr[i];
+          obj = obj[key];
+        }
+        return obj;
+      });
+    } catch (e) {
+      console.log(e);
+      return str;
+    }
   }
 }
 

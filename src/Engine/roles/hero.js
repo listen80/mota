@@ -1,9 +1,26 @@
 // 我方
-import Block from "./block";
+import { get, set } from "../../utils";
 
-class Hero extends Block {
-  constructor({ game, battleInfo, keys, ...others }) {
-    super({ maxAniFrame: 4, ...others });
+import Block from "../base/block";
+
+export default class Hero extends Block {
+  constructor({
+    config,
+    resource,
+    battleInfo,
+    keys,
+    x = 6,
+    y = 2,
+    ...others
+  } = {}) {
+    const position = {
+      x,
+      y,
+      height: 33,
+      img: resource.images.hero,
+    };
+    super({ maxAniFrame: 4, ...others, ...position });
+
     this.battleInfo = {
       atk: 10,
       def: 10,
@@ -11,11 +28,13 @@ class Hero extends Block {
       ...battleInfo,
     };
     this.keys = {
-      yellowKey: 0,
-      blueKey: 0,
-      redKey: 0,
+      yellowKey: 110,
+      blueKey: 111,
+      redKey: 110,
       ...keys,
     };
+    this.coin = 1e3;
+    this.exp = 88;
     this.game = game;
   }
 
@@ -55,4 +74,3 @@ class Hero extends Block {
     return lessHp;
   }
 }
-export default Hero;

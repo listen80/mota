@@ -7,14 +7,15 @@ export default class Block {
     img,
     offsetY = 0,
     offsetX = 0,
-    info,
+    info = null,
     width = 32,
     height = 32,
+
     maxAniFrame = 0,
-    palyCount = 0,
-    callback,
+    playCount = 0,
     interval = 25,
-    frame = 0,
+    frame = -1,
+    msg = "",
   }) {
     this.img = img;
 
@@ -31,8 +32,9 @@ export default class Block {
     this.interval = interval;
     this.tick = 0;
     this.frame = frame;
-    this.palyCount = palyCount;
-    this.callback = callback;
+    this.playCount = playCount;
+
+    this.msg = msg;
   }
   getDist({ x, y }) {
     return {
@@ -51,40 +53,22 @@ export default class Block {
     this.y = y;
   }
   calc() {
-    if (this.interval === 2) {
-      // debugger;
-    }
     if (this.maxAniFrame) {
-      // if (this.tick === this.interval) {
-      this.tick = 0;
+      this.frame += 1;
 
       if (this.frame === this.maxAniFrame) {
         this.frame = 0;
-        this.died = true;
-        // if (this.palyCount) {
-        //   this.palyCount--;
-        //   if (this.palyCount === 0) {
-        //     this.died = true;
-        //   }
-        // }
+        if (this.playCount) {
+          this.died = true;
+        }
       }
 
-      this.frame += 1;
-      // if (this.frame === this.maxAniFrame - 1) {
-      //   if (this.palyCount) {
-      //     this.palyCount--;
-      //     if (this.palyCount === 0) {
-      //       this.died = true;
-      //     }
-      //   }
-      // }
-
       this.offsetX = this.frame;
-      // }
-      // this.tick++;
     }
-    if (this.interval === 2) {
-      console.log(this.frame);
-    }
+  }
+
+  draw(ui) {
+    // this.calc();
+    ui.drawBlock(this);
   }
 }
