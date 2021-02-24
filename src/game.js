@@ -5,6 +5,7 @@ import UI from "./Engine/ui";
 import Hero from "./Engine/roles/hero";
 
 import { loadImage, loadAll, loadJSON, get, set } from "./Engine/utils";
+import Block from "./Engine/roles/block";
 export default class Game {
   constructor(config = {}) {
     config = {
@@ -79,6 +80,7 @@ export default class Game {
       width: 32,
       img: this.images.hero,
       game: this,
+      // interval: 2,
       ...(this.config.keepPosition ? get("hero") : {}),
     });
     this.ui.setHerolayer(this.hero);
@@ -121,7 +123,7 @@ export default class Game {
   gameStart() {
     this.ident = setInterval(() => {
       this.nextFrame();
-    }, 166);
+    }, 555);
   }
 
   nextFrame() {
@@ -189,10 +191,34 @@ export default class Game {
         }
       } else if ((info.trigger = "openDoor")) {
         const key = info.id.replace("Door", "") + "Key";
+        // console.log(box, info);
+
+        // console.log(key);
         if (this.hero.keys[key] > 0) {
+          const { x, y } = box;
+          const maxAniFrame = 4;
+          const offsetY = this.icons.animates[info.id];
+          const img = this.images.animates;
           this.map.mainLayer.splice(this.map.mainLayer.indexOf(box), 1);
-          this.hero.set({ x, y });
-          this.hero.keys[key]--;
+          const palyCount = 1;
+          const block = new Block({
+            x,
+            y,
+            maxAniFrame,
+            offsetY,
+            img,
+            info,
+            palyCount,
+            interval: 2,
+            callback: (data) => {
+              this.map.mainLayer.splice(this.map.mainLayer.indexOf(block), 1);
+              console.log(data);
+            },
+          });
+
+          this.map.mainLayer.push(block);
+          // this.hero.set({ x, y });
+          // this.hero.keys[key]--;w
         } else if (this.hero.keys[key] === 0) {
           const item = this.items.items[key];
           console.log("没有", item.name);

@@ -30,7 +30,7 @@ class Map {
             const keyFrames = {
               enemys: 2,
               npcs: 2,
-              animates: 2,
+              animates: 4,
               items: 0,
               terrains: 0,
             };

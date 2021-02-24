@@ -11,6 +11,10 @@ export default class Block {
     width = 32,
     height = 32,
     maxAniFrame = 0,
+    palyCount = 0,
+    callback,
+    interval = 25,
+    frame = 0,
   }) {
     this.img = img;
 
@@ -24,6 +28,11 @@ export default class Block {
     this.info = info;
 
     this.maxAniFrame = maxAniFrame;
+    this.interval = interval;
+    this.tick = 0;
+    this.frame = frame;
+    this.palyCount = palyCount;
+    this.callback = callback;
   }
   getDist({ x, y }) {
     return {
@@ -41,9 +50,41 @@ export default class Block {
     this.x = x;
     this.y = y;
   }
-  calc(ticks) {
+  calc() {
+    if (this.interval === 2) {
+      // debugger;
+    }
     if (this.maxAniFrame) {
-      this.offsetX = ticks["tick" + this.maxAniFrame];
+      // if (this.tick === this.interval) {
+      this.tick = 0;
+
+      if (this.frame === this.maxAniFrame) {
+        this.frame = 0;
+        this.died = true;
+        // if (this.palyCount) {
+        //   this.palyCount--;
+        //   if (this.palyCount === 0) {
+        //     this.died = true;
+        //   }
+        // }
+      }
+
+      this.frame += 1;
+      // if (this.frame === this.maxAniFrame - 1) {
+      //   if (this.palyCount) {
+      //     this.palyCount--;
+      //     if (this.palyCount === 0) {
+      //       this.died = true;
+      //     }
+      //   }
+      // }
+
+      this.offsetX = this.frame;
+      // }
+      // this.tick++;
+    }
+    if (this.interval === 2) {
+      console.log(this.frame);
     }
   }
 }

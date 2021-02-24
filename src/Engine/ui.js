@@ -49,15 +49,22 @@ class UI {
       height
     );
   }
-  nextFrame(ticks) {
+  nextFrame() {
     this.clearRect();
     Object.keys(this.layers)
       .sort((next, pre) => next - pre)
       .forEach((key) => {
-        this.layers[key].forEach((box, y) => {
+        const layer = this.layers[key];
+        let len = layer.length;
+        while (len--) {
+          const box = layer[len];
+          if (box.died) {
+            console.log("remove")
+            layer.splice(len, 1);
+          }
           this.paints.beginPath();
           if (box.calc) {
-            box.calc(ticks);
+            box.calc();
           }
           if (box.img) {
             this.drawImage(box);
@@ -66,7 +73,7 @@ class UI {
             this.drawBox(box);
           }
           this.paints.closePath();
-        });
+        }
       });
   }
 }
