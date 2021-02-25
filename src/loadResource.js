@@ -10,10 +10,11 @@ const dataList = [
   "itemMapping",
   "npcMapping",
   "animateMapping",
-  "iconMapping",
+  "terrainsMapping",
 ];
 
-const getAll = (context) => {
+const getAll = () => {
+  const context = {};
   return Promise.all(dataList.map((file) => loadJSON(`static/${file}.json`)))
     .then((dataArr) => {
       dataList.forEach((key, i) => (context[key] = dataArr[i]));
@@ -45,6 +46,9 @@ const getAll = (context) => {
         context.data.maps.forEach((key, i) => (maps[key] = maps[i]));
       });
       return Promise.all([P1, P2]);
+    })
+    .then(() => {
+      return context;
     });
 };
 

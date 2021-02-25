@@ -1,11 +1,17 @@
 // 地图生成
 
 import Block from "./base/block";
+import Enemy from "./roles/Enemy";
+import Terrains from "./roles/Terrains";
+import AnimateTerrains from "./roles/AnimateTerrains";
+import Text from "./roles/Text";
+import Item from "./roles/Item";
+import Npc from "./roles/Npc";
 import Layer from "./Layer";
 
 const cache = {};
 export default class Map {
-  constructor({ resource }, map) {
+  constructor(game, map, textMap) {
     const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0 } = map;
     // if (floorId) {
     //   if (cache[floorId]) {
@@ -18,34 +24,37 @@ export default class Map {
     this.topLayer = new Layer({ offsetX });
 
     this.layers = [this.backLayer, this.mainLayer, this.topLayer];
-
+    if (textMap) {
+      this.textLayer = new Layer({ offsetY });
+      this.layers.push(this.textLayer);
+    }
+    const { resource } = game;
     mapArray.forEach((line, y) => {
       line.forEach((value, x) => {
         if (value) {
           const info = resource.mapMapping[value];
           if (info) {
             const { cls, id } = info;
-            // cls
-            // terrains 墙 不可达到之类
-            // items 物品
-            // npcs npc 有动画 2帧
-            // enemys 敌人 有动画 2帧
-            // animates 动画类 当然有动画 4帧
-            const keyFrames = {
-              enemys: 2,
-              npcs: 2,
-              animates: 4,
-              items: 0,
-              terrains: 0,
-            };
+            let Role = null;
+            if (cls === "animates-terrains") {
+              Role = AnimateTerrains;
+            } else if (cls === "terrains") {
+              Role = Terrains;
+            } else if (cls === "npcs") {
+              Role = Npc;
+            } else if (cls === "enemys") {
+              Role = Enemy;
+            } else if (cls === "items") {
+              Role = Item;
+            } else {
+              console.error("未知的地图cls");
+            }
             this.mainLayer.add(
-              new Block({
+              new Role(game, {
                 x,
                 y,
+                id,
                 info,
-                img: resource.images[cls],
-                offsetY: resource.iconMapping[cls][id],
-                maxAniFrame: keyFrames[cls],
               })
             );
           } else {
@@ -56,11 +65,20 @@ export default class Map {
         }
         this.backLayer.add(
           new Block({
-            img: resource.images.terrains, // 用的是地形最上面一个
+            img: resource.images.terrains, // 图片用的是地形最上面一个
             y,
             x,
           })
         );
+        if (textMap && typeof textMap[y][x] === "string") {
+          this.textLayer.add(
+            new Text(game, {
+              msg: textMap[y][x],
+              x,
+              y,
+            })
+          );
+        }
       });
     });
 

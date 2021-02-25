@@ -103,7 +103,11 @@ export function set(key, value) {
 }
 
 export function get(key) {
-  return JSON.parse(localStorage.getItem(key));
+  try {
+    return JSON.parse(localStorage.getItem(key));
+  } catch (e) {
+    return null;
+  }
 }
 
 export function deepFreeze(o) {

@@ -79,29 +79,6 @@
     "name": "24",
     "version": "Ver 1.12",
     "floorId": "MT0",
-    "hero": {
-      "name": "啊帮",
-      "lv": 1,
-      "hpmax": 9999,
-      "hp": 1000,
-      "manamax": -1,
-      "mana": 0,
-      "atk": 11,
-      "def": 11,
-      "mdef": 0,
-      "money": 0,
-      "experience": 0,
-      "equipment": [],
-      "items": {
-        "keys": { "yellowKey": 0, "blueKey": 0, "redKey": 0 },
-        "constants": { "book": 1 },
-        "tools": {},
-        "equips": {}
-      },
-      "loc": { "direction": "down", "x": 6, "y": 10 },
-      "flags": {},
-      "steps": 0
-    },
     "startCanvas": [],
     "startText": [
       { "type": "pauseBgm" },
@@ -371,5 +348,66 @@
     "MT23e",
     "MT23s",
     "MT_1"
-  ]
+  ],
+  "leftMenu": {
+    "floorId": "leftMenu",
+    "map": [
+      [3, 3, 3, 3],
+      [3, 0, 0, 0],
+      [3, 0, 0, 0],
+      [3, 0, 0, 0],
+      [3, 0, 0, 0],
+      [3, 0, 0, 0],
+      [3, 0, 0, 0],
+      [3, 21, 0, 0],
+      [3, 22, 0, 0],
+      [3, 23, 0, 0],
+      [3, 0, 0, 0],
+      [3, 0, 0, 0],
+      [3, 3, 3, 3]
+    ]
+  },
+  "leftText": [
+    [0, 0, 0, 0],
+    [0, "等级", 0, "{hero.lv}"],
+    [0, "生命", 0, "{hero.hp}"],
+    [0, "攻击", 0, "{hero.atk}"],
+    [0, "防御", 0, "{hero.def}"],
+    [0, "金币", 0, "{hero.money}"],
+    [0, "经验", 0, "{hero.exp}"],
+    [0, 0, 0, "{hero.items.yellowKey}"],
+    [0, 0, 0, "{hero.items.blueKey}"],
+    [0, 0, 0, "{hero.items.redKey}"],
+    [0, 0, 0, 0],
+    [0, 0, "{gameData.map.title}", 0],
+    [0, 0, 0, 0]
+  ],
+  "hero": {
+    "name": "啊帮",
+    "lv": 1,
+    "mdef": 0,
+    "money": 0,
+    "exp": 0,
+    "x": 6,
+    "y": 3,
+    "equipment": [],
+    "atk": 10,
+    "def": 10,
+    "hp": 1000,
+    "hpmax": 999999,
+    "maxAniFrame": 4,
+    "items": {
+      "yellowKey": 0,
+      "blueKey": 0,
+      "redKey": 0,
+      "constants": { "book": 1 },
+      "tools": {},
+      "equips": {}
+    },
+    "direction": "up",
+    "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
+    "height": 33,
+    "width": 32
+  },
+  "config": {}
 }

@@ -2,8 +2,8 @@
 
 export default class Block {
   constructor({
-    x,
-    y,
+    x = 0,
+    y = 0,
     img,
     offsetY = 0,
     offsetX = 0,
@@ -15,7 +15,6 @@ export default class Block {
     playCount = 0,
     interval = 25,
     frame = -1,
-    msg = "",
   }) {
     this.img = img;
 
@@ -33,8 +32,6 @@ export default class Block {
     this.tick = 0;
     this.frame = frame;
     this.playCount = playCount;
-
-    this.msg = msg;
   }
   getDist({ x, y }) {
     return {
@@ -55,7 +52,7 @@ export default class Block {
   calc() {
     if (this.maxAniFrame) {
       this.frame += 1;
-
+      
       if (this.frame === this.maxAniFrame) {
         this.frame = 0;
         if (this.playCount) {
@@ -68,7 +65,6 @@ export default class Block {
   }
 
   draw(ui) {
-    // this.calc();
     ui.drawBlock(this);
   }
 }

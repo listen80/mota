@@ -12,7 +12,7 @@ export default class Layer {
   }
 
   add(block) {
-    this.blocks.push(block);
+    this.blocks.unshift(block);
   }
 
   find({ x, y }) {
@@ -30,8 +30,8 @@ export default class Layer {
           blocks.splice(len, 1);
           continue;
         }
-        block.draw(ui);
       }
+      block.draw(ui);
     }
   }
 }

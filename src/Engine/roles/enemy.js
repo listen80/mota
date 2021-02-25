@@ -1,9 +1,16 @@
-// 我方
-import Block from "./block";
+import Block from "../base/block";
 
 export default class Enemy extends Block {
-  constructor({ ...others }) {
-    super({ maxAniFrame: 2, ...others });
-    this.game = game;
+  constructor({ hero, resource }, { id, ...others }) {
+    const img = resource.images.enemys;
+    const offsetY = resource.enemyMapping[id].offsetY;
+    super({ img, offsetY, maxAniFrame: 2, ...others });
+
+    this.detailInfo = resource.enemyMapping[id];
+    this.hero = hero;
+  }
+  calc() {
+    const lessHp = this.hero.attack(this);
+    Block.prototype.calc.apply(this, arguments);
   }
 }
