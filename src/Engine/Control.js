@@ -1,4 +1,3 @@
-
 export default class Control {
   constructor() {
     this.KEY_MAP = {
@@ -7,8 +6,8 @@ export default class Control {
       KeyA: "left",
       KeyD: "right",
     };
-    this.restore()
-    this.bind()
+    this.restore();
+    this.bind();
   }
 
   bind() {
@@ -34,12 +33,15 @@ export default class Control {
       case "Esc":
         this.cancel = true;
         break;
+      case "KeyF":
+        this.cheat = true;
     }
-  }
+  };
   restore() {
-    this.direction = false
+    this.direction = false;
     this.confirm = false;
     this.cancel = false;
+    this.cheat = true;
   }
   destroy() {
     document.removeEventListener("keydown", this.keydown);

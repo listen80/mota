@@ -13,8 +13,9 @@ export default class Block {
 
     maxAniFrame = 0,
     playCount = 0,
-    interval = 25,
+    interval = 23,
     frame = -1,
+    tick = -1
   }) {
     this.img = img;
 
@@ -33,6 +34,8 @@ export default class Block {
     this.tick = 0;
     this.frame = frame;
     this.playCount = playCount;
+
+    this.tick = tick;
   }
   getDist({ x, y }) {
     return {
@@ -51,16 +54,21 @@ export default class Block {
   }
   calc() {
     if (this.maxAniFrame) {
-      this.frame += 1;
+      this.tick++
+      
+      if (this.tick % this.interval === 0) {
+        
+        this.frame += 1;
 
-      if (this.frame === this.maxAniFrame) {
-        this.frame = 0;
-        if (this.playCount) {
-          this.died = true;
+        if (this.frame === this.maxAniFrame) {
+          this.frame = 0;
+          if (this.playCount) {
+            this.died = true;
+          }
         }
+  
+        this.offsetX = this.frame;
       }
-
-      this.offsetX = this.frame;
     }
   }
   destroy() {

@@ -3,7 +3,13 @@ import { get, set } from "../../utils/utils";
 import Block from "../Base/Block";
 
 export default class Hero extends Block {
-  constructor({ resource }, config, control) {
+  constructor(game, config) {
+    if (true) {
+      config = Object.assign(
+        config,
+        get("hero", { x, y, direction, atk, def, hp, items })
+      );
+    }
     const {
       direction = "up",
       x = 6,
@@ -22,6 +28,7 @@ export default class Hero extends Block {
     } = config;
     super(config);
     this.name = name;
+
     this.atk = atk;
     this.def = def;
     this.hp = hp;
@@ -38,15 +45,12 @@ export default class Hero extends Block {
       redKey: 0,
       ...items,
     };
-
-    this.control = control;
+    this.game = game;
   }
 
   face(direction) {
     this.direction = direction;
     this.offsetY = this.facesOffseY[direction];
-    console.log(this.offsetY)
-    return;
   }
 
   judgeFace({ x, y }) {
@@ -59,7 +63,7 @@ export default class Hero extends Block {
         return true;
       }
     });
-    return find
+    return find;
   }
 
   getAttackResult(battleInfo, enemyInfo) {
@@ -80,22 +84,21 @@ export default class Hero extends Block {
     this.money += money;
   }
   getItem(some) {
-    Object.keys(some).forEach(v => {
+    Object.keys(some).forEach((v) => {
       this.items[v] += some[v];
-    })
+    });
   }
   removeItem(id, cost = 1) {
     if (this.items[id] >= cost) {
       this.items[id] -= cost;
-      return true
+      return true;
     } else {
       return false;
     }
   }
-  calc(ui) {
-    const { x, y, atk, def, hp, items } = this;
-    set("hero", { x, y, direction, atk, def, hp, items });
-    const direction = this.control.direction
+  calc() {
+    const { control } = this.game;
+    const { direction } = control;
 
     const DirToArr = {
       down: { x: 0, y: 1 },
@@ -104,31 +107,30 @@ export default class Hero extends Block {
       up: { x: 0, y: -1 },
     };
     if (direction) {
-      this.face(this.control.direction);
+      this.face(direction);
       const dist = this.getDist(DirToArr[direction]);
-      this.set(dist);
+      this.move(dist);
+      const { x, y, atk, def, hp, items } = this;
+      set("hero", { x, y, direction, atk, def, hp, items });
     }
-    console.log(this.offsetY, this.offsetX)
-    Block.prototype.calc.apply(this, arguments)
+    Block.prototype.calc.apply(this, arguments);
   }
   move() {
-    const { map, hero } = this;
+    const { game } = this;
+    const { map, hero } = game;
     const { mainLayer, config } = map;
     const block = mainLayer.find({ x, y });
     const events = config.events[[x, y]];
     if (events) {
-      return
       events.forEach((event) => {
         const { type, who, act } = event;
         if (type === "eval") {
           act.reduce((who, s) => {
             const { opt, arg } = s;
-            console.log(s, who);
-            console.log(who[opt]);
             return who[opt](arg);
           }, this[who]);
         }
-        console.log(delete this.map.e[[x, y]]);
+        delete this.map.e[[x, y]];
       });
     } else if (block) {
       const info = block.info;
@@ -168,18 +170,27 @@ export default class Hero extends Block {
     // 1. 移除静态地形 门
     // 2. 创建动画地kaimen形 开门
     // 3. 对应钥匙减1
-    const { map, blocksInfo, ui, hero } = this;
+    const { map, blocksInfo, ui, hero } = this.game;
     const { mainLayer } = map;
-    const { info } = block;
+    const { info, x, y } = block;
     const { id, cls, trigger, need } = info;
 
     if (trigger === "openDoor") {
       if (hero.removeItem(need)) {
         // 开门
         block.destroy();
-        const { x, y } = block;
         const { img, maxAniFrame, offsetY } = blocksInfo.animates.list[id];
-        mainLayer.add(new Block({ x, y, img, maxAniFrame, offsetY, playCount: 1 }));
+        mainLayer.add(
+          new Block({
+            x,
+            y,
+            img,
+            maxAniFrame,
+            offsetY,
+            playCount: 1,
+            interval: 4,
+          })
+        );
       } else {
         const item = blocksInfo.items.list[need];
         ui.alert(hero.name, "没有", item.name);
@@ -187,10 +198,13 @@ export default class Hero extends Block {
     }
 
     if (trigger === "upFloor") {
-      this.mapChange(12);
+      const config = map.config;
+      console.log(config.changeFloor);
+      hero.set({ x, y });
+      game.mapChange(12);
     }
     if (trigger === "downFloor") {
-      this.mapChange(22);
+      game.mapChange(22);
     }
   }
   handleTerrains(block) {
@@ -205,12 +219,12 @@ export default class Hero extends Block {
     // console.log("handleNpcs");
   }
   handleEnemys(block) {
-    const { map, blocksInfo, ui, hero } = this;
+    const { map, blocksInfo, ui, hero } = this.game;
     const { mainLayer } = map;
     const { x, y, info } = block;
-    const { id } = info
+    const { id } = info;
     const enemyInfo = blocksInfo.enemys.list[id];
-    const lessHp = this.hero.attack(enemyInfo);
+    const lessHp = hero.attack(enemyInfo);
     if (lessHp > 0) {
       mainLayer.remove(block);
       hero.set({ x, y });
@@ -223,7 +237,7 @@ export default class Hero extends Block {
   }
 
   handleItem(block) {
-    const { map, blocksInfo, ui, hero } = this;
+    const { map, blocksInfo, ui, hero } = this.game;
     const { mainLayer } = map;
     const { info, x, y } = block;
     const { id, cls, trigger } = info;
@@ -237,13 +251,13 @@ export default class Hero extends Block {
         const getString = (effect) => {
           effect = effect.split(":");
           const [lead, attribute, num] = effect;
-          this[lead][attribute] += parseInt(num);
+          game[lead][attribute] += parseInt(num);
           const fanyi = { atk: "攻击", def: "防御", hp: "生命" };
           console.log(
-            this[lead].name +
-            fanyi[attribute] +
-            (num > 0 ? "增加" : "减少") +
-            num
+            game[lead].name +
+              fanyi[attribute] +
+              (num > 0 ? "增加" : "减少") +
+              num
           );
         };
         getString(item.effect);
@@ -263,15 +277,31 @@ export default class Hero extends Block {
   }
 
   move({ x, y }) {
-    const { map, hero } = this;
+    const game = this.game;
+    const { map, hero, mapsInfo } = game;
     const { mainLayer, config } = map;
     const block = mainLayer.find({ x, y });
     const events = config.events[[x, y]];
+    const portal = config.portal[[x, y]];
+    // debugger
+    if (portal) {
+      const [id, x, y] = portal;
+      if (id === ":before") {
+        const find = mapsInfo.list.findIndex((m) => m.id === map.config.id);
+        game.mapChange(find - 1);
+      } else if (id === ":next") {
+        const find = mapsInfo.list.findIndex((m) => m.id === map.config.id);
+        game.mapChange(find + 1);
+      } else {
+        game.mapChange(id);
+        hero.set({ x, y });
+      }
+    }
     if (events) {
-      return
       events.forEach((event) => {
         const { type, who, act } = event;
         if (type === "eval") {
+          debugger;
           act.reduce((who, s) => {
             const { opt, arg } = s;
             console.log(s, who);

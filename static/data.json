@@ -331,18 +331,8 @@
       },
       "85": { "cls": "terrains", "id": "specialDoor" },
       "86": { "cls": "terrains", "id": "steelDoor" },
-      "87": {
-        "cls": "terrains",
-        "id": "upFloor",
-        "trigger": "upFloor",
-        "noPass": false
-      },
-      "88": {
-        "cls": "terrains",
-        "id": "downFloor",
-        "trigger": "downFloor",
-        "noPass": false
-      },
+      "87": { "cls": "terrains", "id": "upFloor", "noPass": false },
+      "88": { "cls": "terrains", "id": "downFloor", "noPass": false },
       "89": { "cls": "animates", "id": "portal", "noPass": false },
       "90": { "cls": "animates", "id": "starPortal", "noPass": false },
       "91": { "cls": "animates", "id": "upPortal", "noPass": false },
@@ -507,22 +497,22 @@
       "262": { "cls": "enemy48", "id": "elemental" },
       "263": { "cls": "enemy48", "id": "steelGuard" },
       "264": { "cls": "enemy48", "id": "evilBat" },
-      "999": { "cls": "icons", "id": "exp" },
-      "998": { "cls": "text", "id": "生命" },
-      "997": { "cls": "text", "id": "攻击" },
-      "996": { "cls": "text", "id": "防御" },
-      "995": { "cls": "text", "id": "金币" },
-      "994": { "cls": "text", "id": "经验" },
-      "993": { "cls": "text", "id": "{hero.lv}" },
-      "992": { "cls": "text", "id": "{hero.hp}" },
-      "991": { "cls": "text", "id": "{hero.atk}" },
-      "990": { "cls": "text", "id": "{hero.def}" },
-      "989": { "cls": "text", "id": "{hero.money}" },
-      "988": { "cls": "text", "id": "{hero.exp}" },
-      "987": { "cls": "text", "id": "{hero.items.yellowKey}" },
-      "986": { "cls": "text", "id": "{hero.items.blueKey}" },
+      "976": { "cls": "text", "id": "{map.config.title}" },
       "985": { "cls": "text", "id": "{hero.items.redKey}" },
-      "976": { "cls": "text", "id": "{map.config.title}" }
+      "986": { "cls": "text", "id": "{hero.items.blueKey}" },
+      "987": { "cls": "text", "id": "{hero.items.yellowKey}" },
+      "988": { "cls": "text", "id": "{hero.exp}" },
+      "989": { "cls": "text", "id": "{hero.money}" },
+      "990": { "cls": "text", "id": "{hero.def}" },
+      "991": { "cls": "text", "id": "{hero.atk}" },
+      "992": { "cls": "text", "id": "{hero.hp}" },
+      "993": { "cls": "text", "id": "{hero.lv}" },
+      "994": { "cls": "text", "id": "经验" },
+      "995": { "cls": "text", "id": "金币" },
+      "996": { "cls": "text", "id": "防御" },
+      "997": { "cls": "text", "id": "攻击" },
+      "998": { "cls": "text", "id": "生命" },
+      "999": { "cls": "icons", "id": "exp" }
     },
     "list": [
       {
@@ -558,16 +548,10 @@
           "6,9": [
             {
               "type": "eval",
-              "who": "mapClsObj",
+              "who": "map",
               "act": [
-                {
-                  "opt": "get",
-                  "arg": { "x": 6, "y": 9 }
-                },
-                {
-                  "opt": "set",
-                  "arg": { "x": 5, "y": 9 }
-                }
+                { "opt": "get", "arg": { "x": 6, "y": 9 } },
+                { "opt": "set", "arg": { "x": 5, "y": 9 } }
               ]
             },
             {
@@ -726,11 +710,7 @@
                       "floorId": "MT20",
                       "time": 0
                     },
-                    {
-                      "type": "setValue",
-                      "name": "item:cross",
-                      "value": "0"
-                    },
+                    { "type": "setValue", "name": "item:cross", "value": "0" },
                     {
                       "type": "setValue",
                       "name": "status:hp",
@@ -753,9 +733,6 @@
             }
           ]
         },
-        "changeFloor": {
-          "6,1": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -766,7 +743,8 @@
         "height": 13,
         "eachArrive": [],
         "bgm": "prologue.mp3",
-        "upFloor": [6, 2]
+        "upFloor": [6, 2],
+        "portal": { "6,1": ["1", 6, 10] }
       },
       {
         "id": "1",
@@ -785,10 +763,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "1,1": { "floorId": ":next", "stair": "downFloor" },
-          "6,11": { "floorId": ":before", "stair": "upFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {
           "2,11": [
@@ -818,7 +792,8 @@
         "fgmap": [],
         "downFloor": [6, 10],
         "upFloor": [2, 1],
-        "bgm": "area1.mp3"
+        "bgm": "area1.mp3",
+        "portal": { "1,1": ["2", 1, 2], "6,11": ["0", 6, 2] }
       },
       {
         "id": "2",
@@ -881,10 +856,6 @@
             }
           ]
         },
-        "changeFloor": {
-          "1,1": { "floorId": ":before", "stair": "upFloor" },
-          "1,11": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {
           "9,7": [
             { "type": "openDoor", "loc": [8, 8], "async": true },
@@ -913,7 +884,8 @@
         "fgmap": [],
         "bgm": "area1.mp3",
         "upFloor": [1, 10],
-        "downFloor": [1, 2]
+        "downFloor": [1, 2],
+        "portal": { "1,1": ["1", 2, 1], "1,11": ["3", 2, 11] }
       },
       {
         "id": "3",
@@ -936,10 +908,6 @@
             "\t[商店老板,blueShop]\b[down]嗨，你好，英雄的勇士，\n这里是怪物商店，这里告诉你一些操作方法：使用大键盘上的V和K可以在菜单中进行选择，使用大键盘上的Enter或是Space键可以用来确认你的选择！\n同时，在商人或神秘老人处进行交易也是一样的操作方法！\n知道了吗？勇士！",
             { "type": "openShop", "id": "moneyShop1" }
           ]
-        },
-        "changeFloor": {
-          "1,11": { "floorId": ":before", "stair": "upFloor" },
-          "11,11": { "floorId": ":next", "stair": "downFloor" }
         },
         "afterBattle": {},
         "afterGetItem": {},
@@ -964,7 +932,8 @@
         "fgmap": [],
         "upFloor": [11, 10],
         "downFloor": [2, 11],
-        "bgm": "area1.mp3"
+        "bgm": "area1.mp3",
+        "portal": { "1,11": ["2", 1, 10], "11,11": ["4", 11, 10] }
       },
       {
         "id": "4",
@@ -993,11 +962,7 @@
                 "\t[thief]\b[down]太好了，这个东西果然是在这里。",
                 { "type": "playSound", "name": "dialogue.mp3" },
                 "\t[thief]\b[down]好吧，我这就去帮你修好第十八层的路面。",
-                {
-                  "type": "setValue",
-                  "name": "item:icePickaxe",
-                  "value": "0"
-                },
+                { "type": "setValue", "name": "item:icePickaxe", "value": "0" },
                 { "type": "hide", "time": 0 },
                 {
                   "type": "hide",
@@ -1015,10 +980,6 @@
             },
             { "type": "playSound", "name": "dialogue.mp3" }
           ]
-        },
-        "changeFloor": {
-          "11,11": { "floorId": ":before", "stair": "upFloor" },
-          "1,11": { "floorId": ":next", "stair": "downFloor" }
         },
         "afterBattle": {
           "6,4": [
@@ -1085,7 +1046,8 @@
         "bgmap": [],
         "fgmap": [],
         "upFloor": [1, 10],
-        "downFloor": [11, 10]
+        "downFloor": [11, 10],
+        "portal": { "11,11": ["3", 11, 10], "1,11": ["5", 1, 10] }
       },
       {
         "id": "5",
@@ -1110,10 +1072,6 @@
           ],
           "11,4": [{ "type": "openShop", "id": "keyShop1" }]
         },
-        "changeFloor": {
-          "1,11": { "floorId": ":before", "stair": "upFloor" },
-          "10,11": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -1137,7 +1095,8 @@
         "bgmap": [],
         "fgmap": [],
         "upFloor": [10, 10],
-        "downFloor": [1, 10]
+        "downFloor": [1, 10],
+        "portal": { "1,11": ["4", 1, 10], "10,11": ["6", 10, 10] }
       },
       {
         "id": "6",
@@ -1156,10 +1115,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "10,11": { "floorId": ":before", "stair": "upFloor" },
-          "5,11": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -1183,7 +1138,8 @@
         "bgmap": [],
         "fgmap": [],
         "upFloor": [6, 11],
-        "downFloor": [10, 10]
+        "downFloor": [10, 10],
+        "portal": { "10,11": ["5", 10, 10], "5,11": ["7", 6, 11] }
       },
       {
         "id": "7",
@@ -1202,10 +1158,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "5,11": { "floorId": ":before", "stair": "upFloor" },
-          "1,1": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": { "4,5": [{ "type": "openDoor", "loc": [5, 5] }] },
         "afterGetItem": {
           "6,5": [
@@ -1241,7 +1193,8 @@
         "bgmap": [],
         "fgmap": [],
         "upFloor": [2, 1],
-        "downFloor": [6, 11]
+        "downFloor": [6, 11],
+        "portal": { "5,11": ["6", 6, 11], "1,1": ["8", 1, 2] }
       },
       {
         "id": "8",
@@ -1260,10 +1213,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "1,1": { "floorId": ":before", "stair": "upFloor" },
-          "7,5": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -1287,7 +1236,8 @@
         "fgmap": [],
         "upFloor": [8, 5],
         "downFloor": [1, 2],
-        "bgm": "area2.mp3"
+        "bgm": "area2.mp3",
+        "portal": { "1,1": ["7", 2, 1], "7,5": ["9", 7, 4] }
       },
       {
         "id": "9",
@@ -1306,10 +1256,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "7,7": { "floorId": ":next", "stair": "downFloor" },
-          "7,5": { "floorId": ":before", "stair": "upFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {
           "1,1": [
@@ -1339,7 +1285,8 @@
         "fgmap": [],
         "upFloor": [7, 8],
         "downFloor": [7, 4],
-        "bgm": "area2.mp3"
+        "bgm": "area2.mp3",
+        "portal": { "7,7": ["10", 5, 7], "7,5": ["8", 8, 5] }
       },
       {
         "id": "10",
@@ -1358,10 +1305,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "6,7": { "floorId": ":before", "stair": "upFloor" },
-          "1,11": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -1385,7 +1328,8 @@
         "fgmap": [],
         "upFloor": [1, 10],
         "downFloor": [5, 7],
-        "bgm": "area2.mp3"
+        "bgm": "area2.mp3",
+        "portal": { "6,7": ["9", 7, 8], "1,11": ["11", 2, 11] }
       },
       {
         "id": "11",
@@ -1404,10 +1348,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": { "6,9": [{ "type": "openShop", "id": "moneyShop2" }] },
-        "changeFloor": {
-          "1,11": { "floorId": ":before", "stair": "upFloor" },
-          "11,11": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -1431,7 +1371,8 @@
         "fgmap": [],
         "upFloor": [10, 11],
         "downFloor": [2, 11],
-        "bgm": "area2.mp3"
+        "bgm": "area2.mp3",
+        "portal": { "1,11": ["10", 1, 10], "11,11": ["12", 10, 11] }
       },
       {
         "id": "12",
@@ -1450,10 +1391,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": { "1,1": [{ "type": "openShop", "id": "keyShop2" }] },
-        "changeFloor": {
-          "1,11": { "floorId": ":next", "stair": "downFloor" },
-          "11,11": { "floorId": ":before", "stair": "upFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {
           "11,1": [
@@ -1501,7 +1438,8 @@
         "fgmap": [],
         "upFloor": [2, 11],
         "downFloor": [10, 11],
-        "bgm": "area2.mp3"
+        "bgm": "area2.mp3",
+        "portal": { "1,11": ["13", 2, 11], "11,11": ["11", 10, 11] }
       },
       {
         "id": "13",
@@ -1541,10 +1479,6 @@
           },
           "5,7": [{ "type": "openShop", "id": "expShop2" }]
         },
-        "changeFloor": {
-          "6,11": { "floorId": ":next", "stair": "downFloor" },
-          "1,11": { "floorId": ":before", "stair": "upFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": { "3,4": [{ "type": "openDoor", "loc": [4, 7] }] },
@@ -1568,7 +1502,8 @@
         "fgmap": [],
         "upFloor": [5, 11],
         "downFloor": [2, 11],
-        "bgm": "area2.mp3"
+        "bgm": "area2.mp3",
+        "portal": { "6,11": ["14", 6, 10], "1,11": ["12", 2, 11] }
       },
       {
         "id": "14",
@@ -1587,10 +1522,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "5,1": { "floorId": ":next", "stair": "downFloor" },
-          "6,11": { "floorId": ":before", "stair": "upFloor" }
-        },
         "afterBattle": {
           "6,6": [
             { "type": "moveHero", "time": 125, "steps": ["up"] },
@@ -1619,7 +1550,8 @@
         "fgmap": [],
         "upFloor": [6, 1],
         "downFloor": [6, 10],
-        "bgm": "area2.mp3"
+        "bgm": "area2.mp3",
+        "portal": { "5,1": ["15", 4, 1], "6,11": ["13", 5, 11] }
       },
       {
         "id": "15",
@@ -1695,21 +1627,13 @@
                 "\t[woman]\b[down]好，成交！",
                 { "type": "tip", "text": "得到星光盾，防御加120！" },
                 { "type": "addValue", "name": "status:def", "value": "120" },
-                {
-                  "type": "addValue",
-                  "name": "status:money",
-                  "value": "-500"
-                },
+                { "type": "addValue", "name": "status:money", "value": "-500" },
                 { "type": "playSound", "name": "unlockCtrl.mp3" },
                 { "type": "hide", "time": 0 }
               ]
             },
             { "type": "playSound", "name": "dialogue.mp3" }
           ]
-        },
-        "changeFloor": {
-          "5,1": { "floorId": ":before", "stair": "upFloor" },
-          "7,1": { "floorId": ":next", "stair": "downFloor" }
         },
         "afterBattle": {},
         "afterGetItem": {},
@@ -1734,7 +1658,8 @@
         "fgmap": [],
         "upFloor": [8, 1],
         "downFloor": [4, 1],
-        "bgm": "area3.mp3"
+        "bgm": "area3.mp3",
+        "portal": { "5,1": ["14", 6, 1], "7,1": ["16", 6, 1] }
       },
       {
         "id": "16",
@@ -1797,10 +1722,6 @@
             }
           ]
         },
-        "changeFloor": {
-          "7,1": { "floorId": ":before", "stair": "upFloor" },
-          "6,8": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": { "6,6": [{ "type": "updateEnemys" }] },
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -1824,7 +1745,8 @@
         "fgmap": [],
         "upFloor": [6, 7],
         "downFloor": [6, 1],
-        "bgm": "area3.mp3"
+        "bgm": "area3.mp3",
+        "portal": { "7,1": ["15", 8, 1], "6,8": ["17", 6, 9] }
       },
       {
         "id": "17",
@@ -1843,10 +1765,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "6,8": { "floorId": ":before", "stair": "upFloor" },
-          "1,11": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -1870,7 +1788,8 @@
         "fgmap": [],
         "upFloor": [2, 11],
         "downFloor": [6, 9],
-        "bgm": "area3.mp3"
+        "bgm": "area3.mp3",
+        "portal": { "6,8": ["16", 6, 7], "1,11": ["18", 2, 11] }
       },
       {
         "id": "18",
@@ -1905,9 +1824,6 @@
             ]
           },
           "6,5": ["\t[princess]\b[up]请一定要杀死大魔王！"]
-        },
-        "changeFloor": {
-          "1,11": { "floorId": ":before", "stair": "upFloor" }
         },
         "afterBattle": {},
         "afterGetItem": {},
@@ -1973,7 +1889,8 @@
         "fgmap": [],
         "upFloor": [10, 11],
         "downFloor": [2, 11],
-        "bgm": "area3.mp3"
+        "bgm": "area3.mp3",
+        "portal": { "1,11": ["17", 2, 11] }
       },
       {
         "id": "19",
@@ -2010,10 +1927,6 @@
               { "type": "hide", "time": 0 }
             ]
           }
-        },
-        "changeFloor": {
-          "6,4": { "floorId": ":next", "stair": "downFloor" },
-          "11,11": { "floorId": ":before", "stair": "upFloor" }
         },
         "afterBattle": {
           "3,6": [
@@ -2054,7 +1967,8 @@
         "fgmap": [],
         "bgm": "startText.mp3",
         "upFloor": [6, 5],
-        "downFloor": [10, 11]
+        "downFloor": [10, 11],
+        "portal": { "6,4": ["20", 6, 5], "11,11": ["18", 10, 11] }
       },
       {
         "id": "20",
@@ -2088,9 +2002,6 @@
               }
             ]
           }
-        },
-        "changeFloor": {
-          "6,4": { "floorId": ":before", "stair": "upFloor" }
         },
         "afterBattle": {},
         "afterGetItem": {},
@@ -2151,7 +2062,8 @@
         "fgmap": [],
         "bgm": "startText.mp3",
         "downFloor": [6, 5],
-        "upFloor": [6, 7]
+        "upFloor": [6, 7],
+        "portal": { "6,4": ["19", 6, 5] }
       },
       {
         "id": "21",
@@ -2170,10 +2082,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "6,8": { "floorId": ":before", "stair": "upFloor" },
-          "6,1": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {
           "6,2": [
             "\t[冥灵魔王：,vampire]啊……\n怎么可能，我怎么可能会被你打败呢！",
@@ -2228,7 +2136,8 @@
         "fgmap": [],
         "bgm": "startText.mp3",
         "downFloor": [6, 6],
-        "upFloor": [6, 3]
+        "upFloor": [6, 3],
+        "portal": { "6,8": ["20", 6, 7], "6,1": ["22", 6, 6] }
       },
       {
         "id": "22",
@@ -2337,12 +2246,6 @@
             { "type": "playSound", "name": "unlockCtrl.mp3" }
           ]
         },
-        "changeFloor": {
-          "6,1": { "floorId": ":before", "stair": "upFloor" },
-          "1,6": { "floorId": ":next", "stair": "downFloor" },
-          "11,6": { "floorId": "MT23e", "stair": "downFloor" },
-          "6,11": { "floorId": "MT23s", "stair": "downFloor" }
-        },
         "afterBattle": {},
         "afterGetItem": {},
         "afterOpenDoor": {},
@@ -2366,7 +2269,13 @@
         "fgmap": [],
         "bgm": "startText.mp3",
         "downFloor": [6, 6],
-        "upFloor": [6, 6]
+        "upFloor": [6, 6],
+        "portal": {
+          "6,1": ["21", 6, 3],
+          "1,6": ["23", 10, 6],
+          "11,6": ["MT23e", 0, 0],
+          "6,11": ["MT23s", 0, 0]
+        }
       },
       {
         "id": "23",
@@ -2386,9 +2295,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {
-          "11,6": { "floorId": ":before", "stair": "upFloor" }
-        },
         "afterBattle": {
           "3,6": [
             { "type": "moveHero", "time": 125, "steps": ["right"] },
@@ -2424,7 +2330,8 @@
         "bgmap": [],
         "fgmap": [],
         "downFloor": [10, 6],
-        "upFloor": [10, 6]
+        "upFloor": [10, 6],
+        "portal": { "11,6": ["22", 6, 6] }
       },
       {
         "id": "24",
@@ -2444,7 +2351,6 @@
         "eachArrive": [{ "type": "pauseBgm" }, { "type": "resumeBgm" }],
         "parallelDo": "",
         "events": {},
-        "changeFloor": { "1,6": { "floorId": "MT22", "stair": "upFloor" } },
         "afterBattle": {
           "9,6": [
             { "type": "moveHero", "time": 125, "steps": ["left"] },
@@ -2480,7 +2386,8 @@
         "bgmap": [],
         "fgmap": [],
         "downFloor": [2, 6],
-        "upFloor": [2, 6]
+        "upFloor": [2, 6],
+        "portal": { "1,6": ["MT22", 0, 0] }
       },
       {
         "id": "25",
@@ -2539,10 +2446,6 @@
             ]
           }
         },
-        "changeFloor": {
-          "6,1": { "floorId": "MT22", "stair": "upFloor" },
-          "6,7": { "floorId": ":next", "stair": "downFloor" }
-        },
         "afterBattle": {
           "6,9": [
             { "type": "moveHero", "time": 125, "steps": ["up"] },
@@ -2570,7 +2473,8 @@
         "bgmap": [],
         "fgmap": [],
         "downFloor": [6, 2],
-        "upFloor": [6, 2]
+        "upFloor": [6, 2],
+        "portal": { "6,1": ["MT22", 0, 0], "6,7": ["26", 6, 11] }
       },
       {
         "id": "26",
@@ -2590,7 +2494,6 @@
         "eachArrive": [],
         "parallelDo": "",
         "events": {},
-        "changeFloor": {},
         "afterBattle": {
           "6,4": [
             { "type": "hideStatusBar" },
@@ -2681,7 +2584,8 @@
         "bgmap": [],
         "fgmap": [],
         "upFloor": null,
-        "downFloor": [6, 11]
+        "downFloor": [6, 11],
+        "portal": {}
       }
     ]
   },

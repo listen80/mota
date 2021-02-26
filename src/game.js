@@ -6,6 +6,7 @@ import Control from "./Engine/Control";
 import Hero from "./Engine/Roles/Hero";
 import loder from "./utils/loader";
 import Block from "./Engine/Base/Block";
+import { set, get } from "./utils/utils";
 export default class Game {
   constructor() {
     const config = {
@@ -31,8 +32,12 @@ export default class Game {
     document.title = main.firstData.title;
     this.ui = new UI(this);
     this.control = new Control();
-    this.hero = new Hero(this, this.blocksInfo.heros.list.ab, this.control);
-    this.mapChange(main.firstData.mapId);
+    this.hero = new Hero(this, this.blocksInfo.heros.list.ab);
+    let mapId = main.firstData.mapId;
+    if (true) {
+      mapId = get("mapId") || mapId;
+    }
+    this.mapChange(mapId);
     this.gameStart();
   }
 
@@ -40,6 +45,9 @@ export default class Game {
     const { mapsInfo } = this;
     const map = mapsInfo.list[id];
     if (map) {
+      if (true) {
+        set("mapId", id);
+      }
       this.createMap(map);
     }
   }
@@ -57,7 +65,7 @@ export default class Game {
   gameStart() {
     this.ident = setInterval(() => {
       this.nextFrame();
-    }, 166);
+    }, 16);
   }
 
   nextFrame() {

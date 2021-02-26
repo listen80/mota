@@ -1,17 +1,3 @@
-export const loadAll = (fn, list, callback) => {
-  let i = 0;
-  const imageList = list.slice();
-  list.forEach((src, index) => {
-    fn(src, (img) => {
-      i++;
-      imageList[index] = img;
-      if (i === list.length) {
-        callback(imageList);
-      }
-    });
-  });
-};
-
 export const loadImage = (src) => {
   return new Promise(function (resolve, reject) {
     try {
