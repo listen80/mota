@@ -3,7 +3,7 @@ import { get, set } from "../../utils/utils";
 import Block from "../Base/Block";
 
 export default class Hero extends Block {
-  constructor(game, config) {
+  constructor(game, config, control) {
     if (true) {
       config = Object.assign(
         config,
@@ -23,6 +23,7 @@ export default class Hero extends Block {
       hp = 1000,
       hpmax = 999999,
       exp = 0,
+      follower = null,
     } = config;
     super(config);
     this.name = name;
@@ -43,7 +44,10 @@ export default class Hero extends Block {
       redKey: 0,
       ...items,
     };
+    this.follower = follower;
     this.game = game;
+    this.control = control;
+    this.hero = true;
   }
 
   face(direction) {
@@ -98,51 +102,36 @@ export default class Hero extends Block {
     }
   }
   calc() {
-    const { control } = this.game;
-    const { direction } = control;
+    const { control } = this;
 
-    const DirToArr = {
-      down: { x: 0, y: 1 },
-      left: { x: -1, y: 0 },
-      right: { x: 1, y: 0 },
-      up: { x: 0, y: -1 },
-    };
-    if (direction) {
-      this.face(direction);
-      const dist = this.getDist(DirToArr[direction]);
-      this.move(dist);
-      const { x, y, atk, def, hp, items } = this;
-      set("hero", { x, y, direction, atk, def, hp, items });
-    }
-    Block.prototype.calc.apply(this, arguments);
-  }
-  move() {
-    const { game } = this;
-    const { map, hero } = game;
-    const { mainLayer, config } = map;
-    const block = mainLayer.find({ x, y });
-    const events = config.events[[x, y]];
-    if (events) {
-      events.forEach((event) => {
-        const { type, who, act } = event;
-        if (type === "eval") {
-          act.reduce((who, s) => {
-            const { opt, arg } = s;
-            return who[opt](arg);
-          }, this[who]);
+    if (control) {
+      const { direction } = control;
+
+      const DirToArr = {
+        down: { x: 0, y: 1 },
+        left: { x: -1, y: 0 },
+        right: { x: 1, y: 0 },
+        up: { x: 0, y: -1 },
+      };
+      if (direction) {
+        this.face(direction);
+        debugger;
+        const dist = this.getDist(DirToArr[direction]);
+        const { x: originX, y: originY, direction: d, follower } = this;
+        if (this.move(dist)) {
+          if (follower) {
+            follower.set({ x: originX, y: originY });
+            follower.face(direction);
+          }
         }
-        delete this.map.e[[x, y]];
-      });
-    } else if (block) {
-      const info = block.info;
-      if (info) {
-        // 没有info, 比如animate, 门打开的动作等, 一个动画，播放一次
-        // 没有其他钩子了，不需要
-        return this.moveInfoBlock(block);
+
+        // 新的状态
+        const { x, y, atk, def, hp, items } = this;
+        set("hero", { x, y, direction, atk, def, hp, items });
       }
-    } else {
-      hero.set({ x, y });
     }
+
+    Block.prototype.calc.apply(this, arguments);
   }
 
   moveInfoBlock(block, info) {
@@ -304,7 +293,7 @@ export default class Hero extends Block {
             return who[opt](arg);
           }, this[who]);
         }
-        console.log(delete this.map.e[[x, y]]);
+        delete this.map.e[[x, y]];
       });
     } else if (block) {
       const info = block.info;
@@ -312,9 +301,12 @@ export default class Hero extends Block {
         // 没有info, 比如animate, 门打开的动作等, 一个动画，播放一次
         // 没有其他钩子了，不需要
         return this.moveInfoBlock(block);
+      } else if (block.hero) {
+        hero.set({ x, y });
       }
     } else {
       hero.set({ x, y });
     }
+    return true;
   }
 }

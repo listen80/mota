@@ -145,7 +145,7 @@
           "commonEvent": "回收钥匙商店"
         }
       ],
-      "heros": ["ab"]
+      "heros": ["ab", "al", "af"]
     },
     "values": {
       "lavaDamage": 100,
@@ -3884,6 +3884,64 @@
           "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
           "height": 33,
           "width": 32
+        },
+        {
+          "id": "al",
+          "name": "啊亮",
+          "lv": 1,
+          "mdef": 0,
+          "money": 0,
+          "exp": 0,
+          "x": 6,
+          "y": 10,
+          "equipment": [],
+          "atk": 10,
+          "def": 10,
+          "hp": 1000,
+          "hpmax": 999999,
+          "maxAniFrame": 4,
+          "items": {
+            "yellowKey": 0,
+            "blueKey": 0,
+            "redKey": 0,
+            "constants": { "book": 1 },
+            "tools": {},
+            "equips": {}
+          },
+          "direction": "up",
+          "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
+          "height": 33,
+          "width": 32,
+          "imgSrc": "al"
+        },
+        {
+          "id": "af",
+          "name": "啊福",
+          "lv": 1,
+          "mdef": 0,
+          "money": 0,
+          "exp": 0,
+          "x": 6,
+          "y": 10,
+          "equipment": [],
+          "atk": 10,
+          "def": 10,
+          "hp": 1000,
+          "hpmax": 999999,
+          "maxAniFrame": 4,
+          "items": {
+            "yellowKey": 0,
+            "blueKey": 0,
+            "redKey": 0,
+            "constants": { "book": 1 },
+            "tools": {},
+            "equips": {}
+          },
+          "direction": "up",
+          "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
+          "height": 33,
+          "width": 32,
+          "imgSrc": "af"
         }
       ]
     }

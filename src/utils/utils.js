@@ -2,7 +2,6 @@ export const loadImage = (src) => {
   return new Promise(function (resolve, reject) {
     try {
       var name = src;
-      if (name.indexOf(".") < 0) name = name + ".png";
       var image = new Image();
       image.onload = function () {
         resolve(image);

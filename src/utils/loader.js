@@ -8,31 +8,41 @@ const loadResource = () => {
     //     if (lineNo === 1) {
     //       lineArr[14] = 1000
     //     }
-       
+
     //     return map
     //   }, map)
     // });
 
     // console.log(JSON.stringify(data))
-    return Promise.all(
-      Object.keys(data.blocksInfo).map((key) => {
-        const image = data.blocksInfo[key].imgSrc;
-        const src = `${baseURL}/images/${image}.png`;
+    const images = [];
+    const KeyMap = {};
+    Object.keys(data.blocksInfo).forEach((key) => {
+      const imgSrc = data.blocksInfo[key].imgSrc;
+      KeyMap[imgSrc] = null;
+      data.blocksInfo[key].list.forEach((item) => {
+        if (item.imgSrc) {
+          KeyMap[item.imgSrc] = null;
+        }
+      });
+    });
 
-        return loadImage(src);
-      })
+    console.log(KeyMap);
+    return Promise.all(
+      Object.keys(KeyMap).map((imgSrc) =>
+        loadImage(`${baseURL}/images/${imgSrc}.png`)
+      )
     ).then((images) => {
-      Object.keys(data.blocksInfo).map((key, resIndex) => {
+      Object.keys(KeyMap).forEach(
+        (key, index) => (KeyMap[key] = images[index])
+      );
+      Object.keys(data.blocksInfo).forEach((key, resIndex) => {
         const top = data.blocksInfo[key];
-        const img = images[resIndex];
+
         for (let x in top.list) {
-          const res = top.list[x];
-          res.img = img;
+          let res = top.list[x];
           top.list[res.id] = res;
-          const { maxAniFrame } = top;
-          if (res.maxAniFrame === undefined) {
-            res.maxAniFrame = maxAniFrame;
-          }
+          res.img = KeyMap[res.imgSrc || top.imgSrc];
+          res = Object.assign({}, top, res);
         }
       });
       return data;

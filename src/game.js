@@ -19,6 +19,7 @@ export default class Game {
     this.config = config; // 配置
     this.tick = 0; // 时钟
     this.map = null; // 通过new Map 生成的 对象
+    this.heros = [];
     loder().then((data) => {
       Object.assign(this, data);
       // blocksInfo mapsInfo main sounds
@@ -32,7 +33,16 @@ export default class Game {
     document.title = main.firstData.title;
     this.ui = new UI(this);
     this.control = new Control();
-    this.hero = new Hero(this, this.blocksInfo.heros.list.ab);
+    this.hero = new Hero(this, this.blocksInfo.heros.list.ab, this.control);
+    main.firstData.heros.reduce((pre, heroId, i) => {
+      const heroConfig = this.blocksInfo.heros.list[heroId];
+      let hero = new Hero(this, heroConfig, pre ? null : this.control);
+      this.heros.push(hero);
+      if (pre) {
+        pre.follower = hero;
+      }
+      return hero;
+    }, null);
     let mapId = main.firstData.mapId;
     if (true) {
       mapId = get("mapId") || mapId;
@@ -54,7 +64,7 @@ export default class Game {
 
   createMap(map) {
     this.map = new Map(this, { ...map });
-    this.map.add(this.hero);
+    this.heros.forEach((hero) => this.map.add(hero));
   }
 
   gameStop() {
