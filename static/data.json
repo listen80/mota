@@ -1,37 +1,4001 @@
 {
   "main": {
-    "floorIds": [
-      "MT0",
-      "MT1",
-      "MT2",
-      "MT3",
-      "MT4",
-      "MT5",
-      "MT6",
-      "MT7",
-      "MT8",
-      "MT9",
-      "MT10",
-      "MT11",
-      "MT12",
-      "MT13",
-      "MT14",
-      "MT15",
-      "MT16",
-      "MT17",
-      "MT18",
-      "MT19",
-      "MT20",
-      "MT21",
-      "MT22",
-      "MT23w",
-      "MT23e",
-      "MT23s",
-      "MT_1"
-    ],
-    "images": ["winskin.png"],
-    "tilesets": [],
-    "animates": [],
+    "firstData": {
+      "title": "啊亮冒险记",
+      "name": "24",
+      "version": "Ver 1.12",
+      "mapId": "1",
+      "startCanvas": [],
+      "startText": [
+        { "type": "pauseBgm" },
+        { "type": "hideStatusBar" },
+        {
+          "type": "confirm",
+          "default": true,
+          "text": "是否观看片头？（四十秒）",
+          "yes": [
+            { "type": "setVolume", "value": 0, "time": 0 },
+            { "type": "playBgm", "name": "startText.mp3" },
+            { "type": "setVolume", "value": 100, "time": 40000, "async": true },
+            {
+              "type": "scrollText",
+              "text": "这是一个很古老的故事\n在很久很久以前，在遥远的西方大地上，\n有着这样一个王国，\n王国虽小但全国的人们都生活得非常幸福和快乐。\n突然有一天，从天空飞来一群可怕的怪物，\n它们来到皇宫，抢走了国王唯一的女儿。\n第二天，国王便向全国下达了紧急令，\n只要谁能将公主给找回来，他便将王位让给他。\n于是，全国的勇士们都出发了。\n他们的足迹走遍了全国的各个角落，\n可一点儿线索都没有找到，时间很快就过去了一个月。\n终于，在国王命令下达的第三十一天，\n一个从远方归来的人告诉国王，\n说在海边的一座小岛上，曾看到一群怪物出现过。\n勇士们又出发了，可是，却没有一个人可以回来，\n有幸回来的，都再也不敢去了。\n而我们的故事，便是从这里开始……",
+              "time": 40,
+              "lineHeight": 2
+            }
+          ],
+          "no": [
+            {
+              "type": "function",
+              "function": "function(){\ncore.addItem('yellowKey');\ncore.addItem('blueKey');\ncore.addItem('redKey');\ncore.hideBlock(6, 9, 'MT0');\ncore.setBlock('fairy', 5, 9, 'MT0')\n}"
+            }
+          ]
+        },
+        {
+          "type": "setText",
+          "title": [255, 255, 255, 1],
+          "background": [0, 0, 0, 1]
+        }
+      ],
+      "shops": [
+        {
+          "id": "moneyShop1",
+          "name": " ",
+          "icon": "blueShop",
+          "textInList": "三楼商店",
+          "commonTimes": true,
+          "mustEnable": false,
+          "use": "money",
+          "need": "25",
+          "text": "想要增加你的能力吗？\\n如果你有25个金币，你可以任意选择一项：",
+          "choices": [
+            { "text": "增加800点生命", "effect": "status:hp+=800" },
+            { "text": "增加4点攻击", "effect": "status:atk+=4" },
+            { "text": "增加4点防御", "effect": "status:def+=4" }
+          ]
+        },
+        {
+          "id": "moneyShop2",
+          "name": " ",
+          "icon": "blueShop",
+          "textInList": "11楼商店",
+          "commonTimes": true,
+          "mustEnable": false,
+          "use": "money",
+          "need": "100",
+          "text": "想要增加你的能力吗？\\n如果你有100个金币，\\n你可以任意选择一项：",
+          "choices": [
+            { "text": "增加4000点生命", "effect": "status:hp+=4000" },
+            { "text": "增加20点攻击", "effect": "status:atk+=20" },
+            { "text": "增加20点防御", "effect": "status:def+=20" }
+          ]
+        },
+        {
+          "id": "expShop1",
+          "name": " ",
+          "icon": "man",
+          "textInList": "五楼老人",
+          "commonTimes": true,
+          "mustEnable": false,
+          "use": "experience",
+          "need": "-1",
+          "text": "你好，英雄的人类，只要你有足够的经验，我就可以让你变得更强大：",
+          "choices": [
+            {
+              "text": "提升一级",
+              "need": "100",
+              "effect": "status:lv+=1;status:hp+=1000;status:atk+=7;status:def+=7"
+            },
+            { "text": "增加攻击5", "need": "30", "effect": "status:atk+=5" },
+            { "text": "增加防御5", "need": "30", "effect": "status:def+=5" }
+          ]
+        },
+        {
+          "id": "expShop2",
+          "name": " ",
+          "icon": "man",
+          "textInList": "13楼老人",
+          "commonTimes": true,
+          "mustEnable": false,
+          "use": "experience",
+          "need": "-1",
+          "text": "你好，英雄的人类，只要你有足够的经验，我就可以让你变得更强大：",
+          "choices": [
+            {
+              "text": "提升三级",
+              "need": "270",
+              "effect": "status:lv+=3;status:hp+=3000;status:atk+=20;status:def+=20"
+            },
+            { "text": "增加攻击17", "need": "95", "effect": "status:atk+=17" },
+            { "text": "增加防御17", "need": "95", "effect": "status:def+=17" }
+          ]
+        },
+        {
+          "id": "keyShop1",
+          "name": " ",
+          "icon": "woman",
+          "textInList": "购入钥匙",
+          "commonTimes": true,
+          "mustEnable": false,
+          "use": "money",
+          "need": "-1",
+          "text": "相信你一定有特殊的需要，只要你有金币，我就可以帮你：",
+          "choices": [
+            {
+              "text": "购买1把黄钥匙",
+              "need": "10",
+              "effect": "item:yellowKey+=1"
+            },
+            {
+              "text": "购买1把蓝钥匙",
+              "need": "50",
+              "effect": "item:blueKey+=1"
+            },
+            {
+              "text": "购买1把红钥匙",
+              "need": "100",
+              "effect": "item:redKey+=1"
+            }
+          ]
+        },
+        {
+          "id": "keyShop2",
+          "textInList": "卖出钥匙",
+          "mustEnable": false,
+          "commonEvent": "回收钥匙商店"
+        }
+      ],
+      "heros": ["ab"]
+    },
+    "values": {
+      "lavaDamage": 100,
+      "poisonDamage": 10,
+      "weakValue": 20,
+      "redJewel": 3,
+      "blueJewel": 3,
+      "greenJewel": 5,
+      "redPotion": 200,
+      "bluePotion": 500,
+      "yellowPotion": 500,
+      "greenPotion": 800,
+      "breakArmor": 0.9,
+      "counterAttack": 0.1,
+      "purify": 3,
+      "hatred": 2,
+      "moveSpeed": 125,
+      "animateSpeed": 300,
+      "floorChangeTime": 100
+    },
+    "flags": {
+      "enableFloor": true,
+      "enableName": false,
+      "enableLv": true,
+      "enableHPMax": false,
+      "enableMana": false,
+      "enableMDef": false,
+      "enableMoney": true,
+      "enableExperience": true,
+      "enableLevelUp": false,
+      "levelUpLeftMode": false,
+      "enableKeys": true,
+      "enablePZF": false,
+      "enableDebuff": false,
+      "enableSkill": false,
+      "flyNearStair": false,
+      "flyRecordPosition": false,
+      "pickaxeFourDirections": false,
+      "bombFourDirections": false,
+      "snowFourDirections": false,
+      "bigKeyIsBox": true,
+      "steelDoorWithoutKey": false,
+      "itemFirstText": false,
+      "equipment": false,
+      "equipboxButton": false,
+      "iconInEquipbox": false,
+      "enableAddPoint": false,
+      "enableNegativeDamage": false,
+      "hatredDecrease": true,
+      "betweenAttackCeil": false,
+      "betweenAttackMax": false,
+      "useLoop": false,
+      "startUsingCanvas": false,
+      "startDirectly": true,
+      "statusCanvas": false,
+      "statusCanvasRowsOnMobile": 3,
+      "displayEnemyDamage": true,
+      "displayCritical": true,
+      "displayExtraDamage": false,
+      "enableGentleClick": true,
+      "potionWhileRouting": false,
+      "ignoreChangeFloor": false,
+      "canGoDeadZone": false,
+      "enableMoveDirectly": true,
+      "enableDisabledShop": true,
+      "disableShopOnDamage": false,
+      "checkConsole": false
+    }
+  },
+  "mapsInfo": {
+    "mapMapping": {
+      "1": { "cls": "terrains", "id": "yellowWall", "canBreak": true },
+      "2": { "cls": "terrains", "id": "whiteWall", "canBreak": true },
+      "3": { "cls": "terrains", "id": "blueWall", "canBreak": true },
+      "4": { "cls": "animates", "id": "star", "noPass": true },
+      "5": { "cls": "animates", "id": "lava", "noPass": true },
+      "6": { "cls": "terrains", "id": "ice" },
+      "7": { "cls": "terrains", "id": "blueShop-left" },
+      "8": { "cls": "terrains", "id": "blueShop-right" },
+      "9": { "cls": "terrains", "id": "pinkShop-left" },
+      "10": { "cls": "terrains", "id": "pinkShop-right" },
+      "11": {
+        "cls": "animates",
+        "id": "lavaNet",
+        "noPass": false,
+        "trigger": "passNet"
+      },
+      "12": {
+        "cls": "animates",
+        "id": "poisonNet",
+        "noPass": false,
+        "trigger": "passNet"
+      },
+      "13": {
+        "cls": "animates",
+        "id": "weakNet",
+        "noPass": false,
+        "trigger": "passNet"
+      },
+      "14": {
+        "cls": "animates",
+        "id": "curseNet",
+        "noPass": false,
+        "trigger": "passNet"
+      },
+      "15": { "cls": "animates", "id": "blueWater", "noPass": true },
+      "16": { "cls": "animates", "id": "water", "noPass": true },
+      "20": { "cls": "autotile", "id": "autotile", "noPass": true },
+      "21": { "cls": "items", "id": "yellowKey" },
+      "22": { "cls": "items", "id": "blueKey" },
+      "23": { "cls": "items", "id": "redKey" },
+      "24": { "cls": "items", "id": "greenKey" },
+      "25": { "cls": "items", "id": "steelKey" },
+      "26": { "cls": "items", "id": "bigKey" },
+      "27": { "cls": "items", "id": "redJewel" },
+      "28": { "cls": "items", "id": "blueJewel" },
+      "29": { "cls": "items", "id": "greenJewel" },
+      "30": { "cls": "items", "id": "yellowJewel" },
+      "31": { "cls": "items", "id": "redPotion" },
+      "32": { "cls": "items", "id": "bluePotion" },
+      "33": { "cls": "items", "id": "greenPotion" },
+      "34": { "cls": "items", "id": "yellowPotion" },
+      "35": { "cls": "items", "id": "sword1" },
+      "36": { "cls": "items", "id": "shield1" },
+      "37": { "cls": "items", "id": "sword2" },
+      "38": { "cls": "items", "id": "shield2" },
+      "39": { "cls": "items", "id": "sword3" },
+      "40": { "cls": "items", "id": "shield3" },
+      "41": { "cls": "items", "id": "sword4" },
+      "42": { "cls": "items", "id": "shield4" },
+      "43": { "cls": "items", "id": "sword5" },
+      "44": { "cls": "items", "id": "shield5" },
+      "45": { "cls": "items", "id": "book" },
+      "46": { "cls": "items", "id": "fly" },
+      "47": { "cls": "items", "id": "pickaxe" },
+      "48": { "cls": "items", "id": "icePickaxe" },
+      "49": { "cls": "items", "id": "bomb" },
+      "50": { "cls": "items", "id": "centerFly" },
+      "51": { "cls": "items", "id": "upFly" },
+      "52": { "cls": "items", "id": "downFly" },
+      "53": { "cls": "items", "id": "coin" },
+      "54": { "cls": "items", "id": "snow" },
+      "55": { "cls": "items", "id": "cross" },
+      "56": { "cls": "items", "id": "superPotion" },
+      "57": { "cls": "items", "id": "earthquake" },
+      "58": { "cls": "items", "id": "poisonWine" },
+      "59": { "cls": "items", "id": "weakWine" },
+      "60": { "cls": "items", "id": "curseWine" },
+      "61": { "cls": "items", "id": "superWine" },
+      "62": { "cls": "items", "id": "knife" },
+      "63": { "cls": "items", "id": "moneyPocket" },
+      "64": { "cls": "items", "id": "shoes" },
+      "65": { "cls": "items", "id": "hammer" },
+      "68": { "cls": "items", "id": "lifeWand" },
+      "69": { "cls": "items", "id": "jumpShoes" },
+      "70": { "cls": "items", "id": "sword0" },
+      "71": { "cls": "items", "id": "shield0" },
+      "72": { "cls": "items", "id": "skill1" },
+      "73": { "cls": "items", "id": "wand" },
+      "81": {
+        "cls": "terrains",
+        "id": "yellowDoor",
+        "trigger": "openDoor",
+        "need": "yellowKey"
+      },
+      "82": {
+        "cls": "terrains",
+        "id": "blueDoor",
+        "trigger": "openDoor",
+        "need": "blueKey"
+      },
+      "83": {
+        "cls": "terrains",
+        "id": "redDoor",
+        "trigger": "openDoor",
+        "need": "redKey"
+      },
+      "84": {
+        "cls": "terrains",
+        "id": "greenDoor",
+        "trigger": "openDoor",
+        "need": "greenKey"
+      },
+      "85": { "cls": "terrains", "id": "specialDoor" },
+      "86": { "cls": "terrains", "id": "steelDoor" },
+      "87": {
+        "cls": "terrains",
+        "id": "upFloor",
+        "trigger": "upFloor",
+        "noPass": false
+      },
+      "88": {
+        "cls": "terrains",
+        "id": "downFloor",
+        "trigger": "downFloor",
+        "noPass": false
+      },
+      "89": { "cls": "animates", "id": "portal", "noPass": false },
+      "90": { "cls": "animates", "id": "starPortal", "noPass": false },
+      "91": { "cls": "animates", "id": "upPortal", "noPass": false },
+      "92": { "cls": "animates", "id": "leftPortal", "noPass": false },
+      "93": { "cls": "animates", "id": "downPortal", "noPass": false },
+      "94": { "cls": "animates", "id": "rightPortal", "noPass": false },
+      "101": { "cls": "animates", "id": "crystalUp" },
+      "102": { "cls": "animates", "id": "crystalBottom" },
+      "103": { "cls": "animates", "id": "fire" },
+      "104": { "cls": "animates", "id": "switch" },
+      "121": { "cls": "npcs", "id": "man", "name": "神秘老人：" },
+      "122": { "cls": "npcs", "id": "woman", "name": "商人：" },
+      "123": { "cls": "npcs", "id": "thief", "name": "小偷：" },
+      "124": { "cls": "npcs", "id": "fairy", "name": "仙子：" },
+      "125": { "cls": "npcs", "id": "magician" },
+      "126": { "cls": "npcs", "id": "womanMagician" },
+      "127": { "cls": "npcs", "id": "oldMan" },
+      "128": { "cls": "npcs", "id": "child" },
+      "129": { "cls": "npcs", "id": "wood" },
+      "130": { "cls": "npcs", "id": "pinkShop" },
+      "131": { "cls": "npcs", "id": "blueShop" },
+      "132": { "cls": "npcs", "id": "princess", "name": "公主：" },
+      "133": { "cls": "npc48", "id": "npc0" },
+      "134": { "cls": "npc48", "id": "npc1" },
+      "135": { "cls": "npc48", "id": "npc2" },
+      "136": { "cls": "npc48", "id": "npc3" },
+      "137": { "cls": "npc48", "id": "npc4" },
+      "151": { "cls": "autotile", "id": "autotile1", "noPass": true },
+      "152": { "cls": "autotile", "id": "autotile2", "noPass": true },
+      "153": { "cls": "autotile", "id": "autotile3", "noPass": true },
+      "161": {
+        "cls": "terrains",
+        "id": "arrowUp",
+        "noPass": false,
+        "cannotOut": ["left", "right", "down"],
+        "cannotIn": ["down"]
+      },
+      "162": {
+        "cls": "terrains",
+        "id": "arrowDown",
+        "noPass": false,
+        "cannotOut": ["left", "right", "up"],
+        "cannotIn": ["up"]
+      },
+      "163": {
+        "cls": "terrains",
+        "id": "arrowLeft",
+        "noPass": false,
+        "cannotOut": ["up", "down", "right"],
+        "cannotIn": ["right"]
+      },
+      "164": {
+        "cls": "terrains",
+        "id": "arrowRight",
+        "noPass": false,
+        "cannotOut": ["up", "down", "left"],
+        "cannotIn": ["left"]
+      },
+      "165": {
+        "cls": "terrains",
+        "id": "light",
+        "trigger": "changeLight",
+        "noPass": false
+      },
+      "166": { "cls": "terrains", "id": "darkLight", "noPass": true },
+      "167": {
+        "cls": "terrains",
+        "id": "ski",
+        "trigger": "ski",
+        "noPass": false
+      },
+      "168": { "cls": "terrains", "id": "flower", "noPass": false },
+      "169": {
+        "cls": "terrains",
+        "id": "box",
+        "trigger": "pushBox",
+        "noPass": true
+      },
+      "170": {
+        "cls": "terrains",
+        "id": "boxed",
+        "trigger": "pushBox",
+        "noPass": true
+      },
+      "181": { "cls": "npcs", "id": "wlt" },
+      "182": { "cls": "npcs", "id": "wt" },
+      "183": { "cls": "npcs", "id": "wrt" },
+      "184": { "cls": "npcs", "id": "wl" },
+      "185": { "cls": "npcs", "id": "wc" },
+      "186": { "cls": "npcs", "id": "wr" },
+      "187": { "cls": "npcs", "id": "wlb" },
+      "188": { "cls": "npcs", "id": "wrb" },
+      "189": { "cls": "npcs", "id": "dlt" },
+      "190": { "cls": "npcs", "id": "dt" },
+      "191": { "cls": "npcs", "id": "drt" },
+      "192": { "cls": "npcs", "id": "dl" },
+      "193": { "cls": "npcs", "id": "dc" },
+      "194": { "cls": "npcs", "id": "dr" },
+      "195": { "cls": "npcs", "id": "dlb" },
+      "196": { "cls": "npcs", "id": "drb" },
+      "201": { "cls": "enemys", "id": "greenSlime" },
+      "202": { "cls": "enemys", "id": "redSlime" },
+      "203": { "cls": "enemys", "id": "blackSlime" },
+      "204": { "cls": "enemys", "id": "slimelord" },
+      "205": { "cls": "enemys", "id": "bat" },
+      "206": { "cls": "enemys", "id": "bigBat" },
+      "207": { "cls": "enemys", "id": "redBat" },
+      "208": { "cls": "enemys", "id": "vampire" },
+      "209": { "cls": "enemys", "id": "skeleton" },
+      "210": { "cls": "enemys", "id": "skeletonSoilder" },
+      "211": { "cls": "enemys", "id": "skeletonCaptain" },
+      "212": { "cls": "enemys", "id": "ghostSkeleton" },
+      "213": { "cls": "enemys", "id": "zombie" },
+      "214": { "cls": "enemys", "id": "zombieKnight" },
+      "215": { "cls": "enemys", "id": "rock" },
+      "216": { "cls": "enemys", "id": "slimeMan" },
+      "217": { "cls": "enemys", "id": "bluePriest" },
+      "218": { "cls": "enemys", "id": "redPriest" },
+      "219": { "cls": "enemys", "id": "brownWizard" },
+      "220": { "cls": "enemys", "id": "redWizard" },
+      "221": { "cls": "enemys", "id": "yellowGuard" },
+      "222": { "cls": "enemys", "id": "blueGuard" },
+      "223": { "cls": "enemys", "id": "redGuard" },
+      "224": { "cls": "enemys", "id": "swordsman" },
+      "225": { "cls": "enemys", "id": "soldier" },
+      "226": { "cls": "enemys", "id": "yellowKnight" },
+      "227": { "cls": "enemys", "id": "redKnight" },
+      "228": { "cls": "enemys", "id": "darkKnight" },
+      "229": { "cls": "enemys", "id": "blackKing" },
+      "230": { "cls": "enemys", "id": "yellowKing" },
+      "231": { "cls": "enemys", "id": "greenKing" },
+      "232": { "cls": "enemys", "id": "blueKnight" },
+      "233": { "cls": "enemys", "id": "goldSlime" },
+      "234": { "cls": "enemys", "id": "poisonSkeleton" },
+      "235": { "cls": "enemys", "id": "poisonBat" },
+      "236": { "cls": "enemys", "id": "steelRock" },
+      "237": { "cls": "enemys", "id": "skeletonPriest" },
+      "238": { "cls": "enemys", "id": "skeletonKing" },
+      "239": { "cls": "enemys", "id": "skeletonWizard" },
+      "240": { "cls": "enemys", "id": "redSkeletonCaption" },
+      "241": { "cls": "enemys", "id": "badHero" },
+      "242": { "cls": "enemys", "id": "demon" },
+      "243": { "cls": "enemys", "id": "demonPriest" },
+      "244": { "cls": "enemys", "id": "goldHornSlime" },
+      "245": { "cls": "enemys", "id": "redKing" },
+      "246": { "cls": "enemys", "id": "whiteKing" },
+      "247": { "cls": "enemys", "id": "blackMagician" },
+      "248": { "cls": "enemys", "id": "silverSlime" },
+      "249": { "cls": "enemys", "id": "swordEmperor" },
+      "250": { "cls": "enemys", "id": "whiteHornSlime" },
+      "251": { "cls": "enemys", "id": "badPrincess" },
+      "252": { "cls": "enemys", "id": "badFairy" },
+      "253": { "cls": "enemys", "id": "grayPriest" },
+      "254": { "cls": "enemys", "id": "redSwordsman" },
+      "255": { "cls": "enemys", "id": "whiteGhost" },
+      "256": { "cls": "enemys", "id": "poisonZombie" },
+      "257": { "cls": "enemys", "id": "magicDragon" },
+      "258": { "cls": "enemys", "id": "octopus" },
+      "259": { "cls": "enemys", "id": "darkFairy" },
+      "260": { "cls": "enemys", "id": "greenKnight" },
+      "261": { "cls": "enemy48", "id": "angel" },
+      "262": { "cls": "enemy48", "id": "elemental" },
+      "263": { "cls": "enemy48", "id": "steelGuard" },
+      "264": { "cls": "enemy48", "id": "evilBat" },
+      "999": { "cls": "icons", "id": "exp" },
+      "998": { "cls": "text", "id": "生命" },
+      "997": { "cls": "text", "id": "攻击" },
+      "996": { "cls": "text", "id": "防御" },
+      "995": { "cls": "text", "id": "金币" },
+      "994": { "cls": "text", "id": "经验" },
+      "993": { "cls": "text", "id": "{hero.lv}" },
+      "992": { "cls": "text", "id": "{hero.hp}" },
+      "991": { "cls": "text", "id": "{hero.atk}" },
+      "990": { "cls": "text", "id": "{hero.def}" },
+      "989": { "cls": "text", "id": "{hero.money}" },
+      "988": { "cls": "text", "id": "{hero.exp}" },
+      "987": { "cls": "text", "id": "{hero.items.yellowKey}" },
+      "986": { "cls": "text", "id": "{hero.items.blueKey}" },
+      "985": { "cls": "text", "id": "{hero.items.redKey}" },
+      "976": { "cls": "text", "id": "{map.config.title}" }
+    },
+    "list": [
+      {
+        "id": "0",
+        "floorId": "MT0",
+        "mapId": "MT0",
+        "title": "序章",
+        "name": "序章",
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "defaultGround": "ground",
+        "images": [],
+        "item_ratio": 1,
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 1, 4, 4, 4, 1, 87, 1, 4, 4, 4, 1, 3, 999, 0, 993, 3],
+          [3, 1, 4, 4, 4, 1, 0, 1, 4, 4, 4, 1, 3, 998, 0, 992, 3],
+          [3, 1, 4, 4, 4, 1, 0, 1, 4, 4, 4, 1, 3, 997, 0, 991, 3],
+          [3, 1, 4, 4, 4, 1, 0, 1, 4, 4, 4, 1, 3, 996, 0, 990, 3],
+          [3, 1, 4, 4, 4, 1, 0, 1, 4, 4, 4, 1, 3, 995, 0, 989, 3],
+          [3, 1, 4, 4, 4, 1, 0, 1, 4, 4, 4, 1, 3, 994, 0, 988, 3],
+          [3, 1, 1, 4, 4, 1, 0, 1, 4, 4, 1, 1, 3, 21, 0, 987, 3],
+          [3, 1, 1, 1, 1, 1, 81, 1, 1, 1, 1, 1, 3, 22, 0, 986, 3],
+          [3, 5, 1, 5, 1, 0, 124, 0, 1, 5, 1, 5, 3, 23, 0, 985, 3],
+          [3, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 3, 0, 0, 0, 3],
+          [3, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "firstArrive": [],
+        "parallelDo": "",
+        "events": {
+          "6,9": [
+            {
+              "type": "eval",
+              "who": "mapClsObj",
+              "act": [
+                {
+                  "opt": "get",
+                  "arg": { "x": 6, "y": 9 }
+                },
+                {
+                  "opt": "set",
+                  "arg": { "x": 5, "y": 9 }
+                }
+              ]
+            },
+            {
+              "type": "eval",
+              "who": "hero",
+              "act": [
+                {
+                  "opt": "getItem",
+                  "arg": { "yellowKey": 6, "blueKey": 10, "redKey": 1 }
+                }
+              ]
+            }
+          ]
+        },
+        "event": {
+          "6,9": [
+            "\t[hero]\b[hero]……",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]你醒了！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]……\n你是谁，我在哪里？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]我是这里的仙子，刚才你被这里的小怪打昏了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]……\n剑，剑，我的剑呢？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]你的剑被他们抢走了，我只来得及将你救出来。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]那，公主呢？我是来救公主的。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]公主还在里面，你这样进去是打不过里面的小怪的。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]那我怎么办，我答应了国王一定要把公主救出来的。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]那我现在应该怎么办呢？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]放心吧，我把我的力量借给你，你就可以打赢那些小怪了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]不过，你得先帮我去找一样东西，找到了再来这里找我。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]找东西？找什么东西？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]是一个十字架，中间有一颗红色的宝石。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]那个东西有什么用吗？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]我本是这座塔的守护者，可不久前，从北方来了一批恶魔，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]他们占领了这座塔，并将我的魔力封在了这个十字架里面，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]如果你能将它带出塔来，那我的魔力便会慢慢地恢复，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]到那时我便可以把力量借给你去救出公主了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]要记住：只有用我的魔力才可以打开二十一层的门。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]……\n好吧，我试试看。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]刚才我去看过了，你的剑被放在三楼，你的盾在五楼上，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]而那个十字架被放在七楼。要到七楼，你得先取回你的剑和盾。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]另外，在塔里的其他楼层上，还有一些存放了好几百年的宝剑和宝物，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]如果得到它们，对于你对付这里面的怪物将有很大的帮助。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]……\n可是，我怎么进去呢？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]我这里有三把钥匙，你先拿去，在塔里面还有很多这样的钥匙，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[fairy]\b[up]你一定要珍惜使用。勇敢地去吧，勇士！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            { "type": "playSound", "name": "unlockCtrl.mp3" },
+            { "type": "setBlock", "number": "fairy", "loc": [[5, 9]] },
+            { "type": "hide", "time": 0 },
+            {
+              "type": "function",
+              "function": "function(){\ncore.addItem('yellowKey');core.addItem('blueKey');core.addItem('redKey');\n}"
+            }
+          ],
+          "5,9": [
+            {
+              "type": "if",
+              "condition": "flag:16==1",
+              "true": [
+                "\t[fairy]\b[up]嗯？！你手里的那个东西是什么？",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]这个？这是一个老人交给我的，是他叫我带它来找你的。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]他说你知道它的来历和作用。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]这个东西是仙界的圣物\n名叫“灵之杖”，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]是很久以前的一个圣者留下的。它们一共有三个，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]分别镶着红、绿、蓝三种颜色的宝石。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]你现在拿着的是镶有一颗蓝宝石的“冰之灵杖”",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]应该还有一个镶有绿宝石的“心之灵杖”",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]和镶有红宝石的“炎之灵杖”。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]在这座塔的下面，封印着一只魔界的世兽，名叫“血影”，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]这三把“灵之杖”就是封印的钥匙。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]封印钥匙？",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]每一个“灵之杖”里面\n都有着很强的魔法力量，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]如果被恶魔得到了将会使它的力量倍增。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]如果被恶魔将它们三个找齐的话，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]那么“血影”的封印便会解除！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]勇士，你还是快去把我要的东西找来吧，等我恢复了魔力，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[up]我就可以帮你将“灵之杖”中的魔力都开放出来！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                { "type": "playSound", "name": "unlockCtrl.mp3" },
+                { "type": "setValue", "name": "flag:16", "value": "0" },
+                { "type": "setValue", "name": "flag:22", "value": "1" }
+              ],
+              "false": [
+                {
+                  "type": "if",
+                  "condition": "item:cross",
+                  "true": [
+                    "\t[hero]\b[hero]仙子，我已经将那个十字架找到了。",
+                    { "type": "playSound", "name": "dialogue.mp3" },
+                    "\t[fairy]\b[up]你做得很好。\n那么，现在我就开始授与你更强的力量！",
+                    { "type": "playSound", "name": "dialogue.mp3" },
+                    "\t[fairy]\b[up]咪啦哆咪哗……",
+                    { "type": "playSound", "name": "dialogue.mp3" },
+                    "\t[fairy]\b[up]好了，我已经将你现在的能力提升了！",
+                    { "type": "playSound", "name": "dialogue.mp3" },
+                    "\t[fairy]\b[up]记住：如果你没有足够的实力的话，不要去第二十一层！",
+                    { "type": "playSound", "name": "dialogue.mp3" },
+                    "\t[fairy]\b[up]在那一层里，你所有宝物的法力都会失去作用！",
+                    { "type": "playSound", "name": "dialogue.mp3" },
+                    {
+                      "type": "if",
+                      "condition": "flag:22",
+                      "true": [
+                        "\t[fairy]\b[up]快走吧，杀死魔王后，来第二十二层上找我！",
+                        { "type": "playSound", "name": "dialogue.mp3" }
+                      ]
+                    },
+                    { "type": "playSound", "name": "unlockCtrl.mp3" },
+                    { "type": "hide", "time": 0 },
+                    {
+                      "type": "show",
+                      "loc": [[6, 8]],
+                      "floorId": "MT20",
+                      "time": 0
+                    },
+                    {
+                      "type": "setValue",
+                      "name": "item:cross",
+                      "value": "0"
+                    },
+                    {
+                      "type": "setValue",
+                      "name": "status:hp",
+                      "value": "status:hp*4/3"
+                    },
+                    {
+                      "type": "setValue",
+                      "name": "status:atk",
+                      "value": "status:atk*4/3"
+                    },
+                    {
+                      "type": "setValue",
+                      "name": "status:def",
+                      "value": "status:def*4/3"
+                    }
+                  ],
+                  "false": ["\t[fairy]\b[up]勇敢地去吧，勇士！"]
+                }
+              ]
+            }
+          ]
+        },
+        "changeFloor": {
+          "6,1": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "bgmap": [],
+        "fgmap": [],
+        "width": 13,
+        "height": 13,
+        "eachArrive": [],
+        "bgm": "prologue.mp3",
+        "upFloor": [6, 2]
+      },
+      {
+        "id": "1",
+        "floorId": "MT1",
+        "title": "第1层",
+        "name": "第1层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "1,1": { "floorId": ":next", "stair": "downFloor" },
+          "6,11": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {
+          "2,11": [
+            { "type": "setText", "align": "center" },
+            "\t[圣光徽]该宝物可以查看怪物的基本情况。使用时按下键盘上的X键即可查看。",
+            { "type": "setText", "align": "left" }
+          ]
+        },
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 87, 0, 21, 201, 202, 201, 0, 0, 0, 0, 0, 3, 999, 0, 993, 3],
+          [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 3, 998, 0, 992, 3],
+          [3, 31, 0, 209, 81, 0, 1, 31, 21, 31, 1, 0, 3, 997, 0, 991, 3],
+          [3, 21, 209, 27, 1, 0, 1, 31, 21, 31, 1, 0, 3, 996, 0, 990, 3],
+          [3, 1, 81, 1, 1, 0, 1, 1, 1, 203, 1, 0, 3, 995, 0, 989, 3],
+          [3, 21, 210, 0, 1, 0, 81, 217, 201, 205, 1, 0, 3, 994, 0, 988, 3],
+          [3, 28, 0, 22, 1, 0, 1, 1, 1, 1, 1, 0, 3, 21, 0, 987, 3],
+          [3, 1, 81, 1, 1, 0, 0, 0, 0, 0, 0, 0, 3, 22, 0, 986, 3],
+          [3, 0, 210, 0, 1, 1, 83, 1, 1, 1, 81, 1, 3, 23, 0, 985, 3],
+          [3, 31, 32, 21, 1, 23, 0, 0, 1, 21, 213, 22, 3, 0, 0, 0, 3],
+          [3, 31, 45, 21, 1, 0, 88, 0, 1, 21, 21, 21, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "downFloor": [6, 10],
+        "upFloor": [2, 1],
+        "bgm": "area1.mp3"
+      },
+      {
+        "id": "2",
+        "floorId": "MT2",
+        "title": "第2层",
+        "name": "第2层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "8,11": [
+            "\t[hero]\b[hero]您已经得救了！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[man]\b[up]哦，我的孩子，真是太感谢你了！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[man]\b[up]这个地方又脏又坏，我真的是快呆不下去了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]快走吧，我还得救走被关在这里的公主。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[man]\b[up]哦，你是来救公主的，为了表示对你的感谢，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[man]\b[up]这个东西就送给你吧，这还是我年青的时候用过的。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[man]\b[up]拿着它去解救公主吧！",
+            { "type": "setValue", "name": "item:sword3", "value": "1" },
+            { "type": "playSound", "name": "dialogue.mp3", "stop": true },
+            { "type": "playSound", "name": "unlockCtrl.mp3" },
+            { "type": "hide", "time": 0 }
+          ],
+          "10,11": [
+            "\t[hero]\b[hero]您已经得救了！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[up]哦，是嘛！真是太感谢你了！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[up]我是个商人，不知为什么被抓到这里来了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]快走吧，现在您已经自由了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[up]哦，对对对，我已经自由了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[up]那这个东西就给你吧，本来我是准备卖钱的。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[up]相信它对你一定很有帮助！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            { "type": "playSound", "name": "unlockCtrl.mp3" },
+            { "type": "addValue", "name": "status:def", "value": "30" },
+            { "type": "hide", "time": 0 },
+            {
+              "type": "autoText",
+              "text": "\t[得到钢盾，防御加30！] ",
+              "time": 500
+            }
+          ]
+        },
+        "changeFloor": {
+          "1,1": { "floorId": ":before", "stair": "upFloor" },
+          "1,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {
+          "9,7": [
+            { "type": "openDoor", "loc": [8, 8], "async": true },
+            { "type": "openDoor", "loc": [10, 8] }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 88, 1, 0, 227, 0, 1, 27, 28, 21, 23, 1, 3, 999, 0, 993, 3],
+          [3, 0, 1, 28, 1, 32, 1, 27, 28, 21, 22, 1, 3, 998, 0, 992, 3],
+          [3, 0, 1, 21, 1, 21, 1, 27, 28, 21, 226, 1, 3, 997, 0, 991, 3],
+          [3, 0, 1, 21, 1, 21, 1, 1, 1, 1, 81, 1, 3, 996, 0, 990, 3],
+          [3, 0, 1, 0, 1, 0, 0, 0, 81, 0, 0, 1, 3, 995, 0, 989, 3],
+          [3, 0, 1, 81, 1, 1, 81, 1, 1, 81, 1, 1, 3, 994, 0, 988, 3],
+          [3, 0, 85, 0, 0, 0, 0, 1, 0, 226, 0, 1, 3, 21, 0, 987, 3],
+          [3, 0, 1, 81, 1, 1, 82, 1, 86, 1, 86, 1, 3, 22, 0, 986, 3],
+          [3, 0, 1, 21, 1, 32, 31, 1, 0, 1, 0, 1, 3, 23, 0, 985, 3],
+          [3, 0, 1, 21, 1, 32, 31, 1, 0, 1, 0, 1, 3, 0, 0, 0, 3],
+          [3, 87, 1, 27, 1, 32, 31, 1, 121, 1, 122, 1, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "bgm": "area1.mp3",
+        "upFloor": [1, 10],
+        "downFloor": [1, 2]
+      },
+      {
+        "id": "3",
+        "floorId": "MT3",
+        "title": "第3层",
+        "name": "第3层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "6,1": [
+            "\t[商店老板,blueShop]\b[down]嗨，你好，英雄的勇士，\n这里是怪物商店，这里告诉你一些操作方法：使用大键盘上的V和K可以在菜单中进行选择，使用大键盘上的Enter或是Space键可以用来确认你的选择！\n同时，在商人或神秘老人处进行交易也是一样的操作方法！\n知道了吗？勇士！",
+            { "type": "openShop", "id": "moneyShop1" }
+          ]
+        },
+        "changeFloor": {
+          "1,11": { "floorId": ":before", "stair": "upFloor" },
+          "11,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 35, 202, 21, 1, 7, 131, 8, 1, 1, 1, 1, 3, 999, 0, 993, 3],
+          [3, 202, 21, 0, 1, 0, 0, 0, 1, 0, 205, 0, 3, 998, 0, 992, 3],
+          [3, 21, 209, 0, 1, 1, 81, 1, 1, 0, 1, 0, 3, 997, 0, 991, 3],
+          [3, 1, 81, 1, 1, 0, 209, 0, 1, 21, 1, 202, 3, 996, 0, 990, 3],
+          [3, 0, 0, 0, 1, 1, 1, 0, 1, 21, 1, 205, 3, 995, 0, 989, 3],
+          [3, 201, 1, 0, 205, 202, 205, 0, 1, 21, 1, 202, 3, 994, 0, 988, 3],
+          [3, 201, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 3, 21, 0, 987, 3],
+          [3, 0, 0, 0, 0, 0, 1, 1, 81, 1, 1, 0, 3, 22, 0, 986, 3],
+          [3, 1, 1, 1, 1, 205, 1, 202, 0, 202, 1, 0, 3, 23, 0, 985, 3],
+          [3, 1, 0, 0, 0, 0, 1, 27, 205, 21, 1, 0, 3, 0, 0, 0, 3],
+          [3, 88, 0, 1, 1, 1, 1, 28, 32, 21, 1, 87, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [11, 10],
+        "downFloor": [2, 11],
+        "bgm": "area1.mp3"
+      },
+      {
+        "id": "4",
+        "floorId": "MT4",
+        "title": "第4层",
+        "name": "第4层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "6,1": [
+            {
+              "type": "if",
+              "condition": "item:icePickaxe",
+              "true": [
+                "\t[hero]\b[hero]哈，快看，我找到了什么！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down]太好了，这个东西果然是在这里。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down]好吧，我这就去帮你修好第十八层的路面。",
+                {
+                  "type": "setValue",
+                  "name": "item:icePickaxe",
+                  "value": "0"
+                },
+                { "type": "hide", "time": 0 },
+                {
+                  "type": "hide",
+                  "loc": [
+                    [6, 9],
+                    [6, 10]
+                  ],
+                  "floorId": "MT18",
+                  "time": 0
+                }
+              ],
+              "false": [
+                "\t[thief]\b[down]如果你找到那个铁锒头的话，还是来这里找我！"
+              ]
+            },
+            { "type": "playSound", "name": "dialogue.mp3" }
+          ]
+        },
+        "changeFloor": {
+          "11,11": { "floorId": ":before", "stair": "upFloor" },
+          "1,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {
+          "6,4": [
+            { "type": "moveHero", "time": 125, "steps": ["forward"] },
+            { "type": "openDoor", "loc": [6, 3] },
+            { "type": "openDoor", "loc": [2, 7], "floorId": "MT2" },
+            { "type": "moveHero", "time": 125, "steps": ["up", "up"] },
+            {
+              "type": "if",
+              "condition": "!item:icePickaxe",
+              "true": [
+                "\t[hero]\b[hero]你已经得救了！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]啊，那真是太好了，我又可以在这里面寻宝了！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]哦，还没有自我介绍，我叫杰克，是这附近有名的小偷，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]什么金银财宝我样样都偷过。不过这次运气可不是太好，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]刚进来就被抓了。现在你帮我打开了门，那我就帮你做一件事吧。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]快走吧，外面还有很多怪物，我可能顾不上你。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]不，不，不会有事的。\n快说吧，叫我做什么？",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]……\n你会开门吗？",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]那当然。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]那就请你帮我打开第二层的门吧！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]那个简单，不过，如果你能帮我找到一把嵌了红宝石的铁锒头的话，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]我还帮你打通第十八层的路。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]嵌了红宝石的铁锒头？\n好吧，我帮你找找。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[thief]\b[down,6,1]非常地感谢。一会我便会将第二层的门打开。",
+                { "type": "playSound", "name": "dialogue.mp3" }
+              ]
+            },
+            { "type": "trigger", "loc": [6, 1] }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 0, 203, 0, 1, 0, 123, 0, 1, 0, 203, 0, 3, 999, 0, 993, 3],
+          [3, 81, 1, 81, 1, 0, 0, 0, 1, 81, 1, 81, 3, 998, 0, 992, 3],
+          [3, 0, 1, 0, 1, 1, 86, 1, 1, 0, 1, 0, 3, 997, 0, 991, 3],
+          [3, 0, 1, 209, 1, 206, 207, 206, 1, 209, 1, 0, 3, 996, 0, 990, 3],
+          [3, 205, 1, 31, 1, 28, 206, 28, 1, 31, 1, 205, 3, 995, 0, 989, 3],
+          [3, 205, 1, 31, 1, 1, 83, 1, 1, 31, 1, 205, 3, 994, 0, 988, 3],
+          [3, 202, 1, 0, 1, 213, 221, 213, 1, 0, 1, 202, 3, 21, 0, 987, 3],
+          [3, 0, 1, 0, 1, 27, 213, 27, 1, 0, 1, 0, 3, 22, 0, 986, 3],
+          [3, 0, 1, 0, 1, 1, 82, 1, 1, 0, 1, 0, 3, 23, 0, 985, 3],
+          [3, 0, 1, 0, 1, 21, 0, 21, 1, 0, 1, 0, 3, 0, 0, 0, 3],
+          [3, 87, 1, 0, 203, 0, 0, 0, 203, 0, 1, 88, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgm": "area1.mp3",
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [1, 10],
+        "downFloor": [11, 10]
+      },
+      {
+        "id": "5",
+        "floorId": "MT5",
+        "title": "第5层",
+        "name": "第5层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "2,8": [
+            { "type": "changePos", "direction": "down" },
+            { "type": "openShop", "id": "expShop1" }
+          ],
+          "11,4": [{ "type": "openShop", "id": "keyShop1" }]
+        },
+        "changeFloor": {
+          "1,11": { "floorId": ":before", "stair": "upFloor" },
+          "10,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 26, 1, 31, 1, 32, 217, 0, 0, 217, 21, 22, 3, 999, 0, 993, 3],
+          [3, 0, 1, 27, 1, 217, 0, 0, 0, 0, 217, 21, 3, 998, 0, 992, 3],
+          [3, 206, 1, 0, 1, 210, 0, 1, 1, 81, 1, 1, 3, 997, 0, 991, 3],
+          [3, 0, 81, 217, 1, 36, 210, 1, 0, 213, 210, 122, 3, 996, 0, 990, 3],
+          [3, 206, 1, 0, 1, 1, 1, 1, 0, 0, 0, 210, 3, 995, 0, 989, 3],
+          [3, 27, 1, 0, 0, 0, 205, 209, 0, 0, 0, 0, 3, 994, 0, 988, 3],
+          [3, 28, 1, 1, 203, 1, 1, 1, 1, 0, 0, 0, 3, 21, 0, 987, 3],
+          [3, 0, 121, 1, 203, 1, 0, 0, 0, 213, 221, 0, 3, 22, 0, 986, 3],
+          [3, 1, 1, 1, 205, 1, 81, 1, 82, 1, 81, 1, 3, 23, 0, 985, 3],
+          [3, 0, 0, 1, 0, 1, 205, 1, 28, 81, 0, 1, 3, 0, 0, 0, 3],
+          [3, 88, 0, 205, 0, 0, 0, 1, 21, 1, 87, 1, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgm": "area1.mp3",
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [10, 10],
+        "downFloor": [1, 10]
+      },
+      {
+        "id": "6",
+        "floorId": "MT6",
+        "title": "第6层",
+        "name": "第6层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "10,11": { "floorId": ":before", "stair": "upFloor" },
+          "5,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 50, 211, 1, 28, 1, 21, 204, 63, 1, 32, 32, 3, 999, 0, 993, 3],
+          [3, 211, 21, 1, 27, 1, 0, 21, 204, 1, 215, 32, 3, 998, 0, 992, 3],
+          [3, 21, 207, 82, 0, 82, 207, 0, 21, 1, 0, 215, 3, 997, 0, 991, 3],
+          [3, 0, 0, 1, 221, 1, 0, 0, 0, 1, 220, 0, 3, 996, 0, 990, 3],
+          [3, 1, 1, 1, 83, 1, 1, 1, 1, 1, 81, 1, 3, 995, 0, 989, 3],
+          [3, 0, 0, 218, 0, 21, 21, 21, 0, 218, 0, 0, 3, 994, 0, 988, 3],
+          [3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 21, 0, 987, 3],
+          [3, 0, 1, 206, 81, 206, 0, 0, 0, 0, 0, 1, 3, 22, 0, 986, 3],
+          [3, 0, 1, 81, 1, 81, 1, 1, 1, 1, 82, 1, 3, 23, 0, 985, 3],
+          [3, 0, 1, 206, 1, 0, 0, 1, 1, 0, 0, 1, 3, 0, 0, 0, 3],
+          [3, 0, 0, 0, 1, 87, 0, 81, 81, 0, 88, 1, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgm": "area1.mp3",
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [6, 11],
+        "downFloor": [10, 10]
+      },
+      {
+        "id": "7",
+        "floorId": "MT7",
+        "title": "第7层",
+        "name": "第7层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "5,11": { "floorId": ":before", "stair": "upFloor" },
+          "1,1": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": { "4,5": [{ "type": "openDoor", "loc": [5, 5] }] },
+        "afterGetItem": {
+          "6,5": [
+            {
+              "type": "setBlock",
+              "number": "1",
+              "loc": [[5, 5]],
+              "floorId": "MT16"
+            },
+            { "type": "setText", "align": "center" },
+            "\t[幸运十字架]把它交给序章中的仙子，可以将自身的所有能力提升三分之一（攻击、防御和生命值）。",
+            { "type": "setText", "align": "left" }
+          ]
+        },
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 87, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 3, 999, 0, 993, 3],
+          [3, 1, 1, 0, 207, 1, 82, 1, 211, 0, 1, 1, 3, 998, 0, 992, 3],
+          [3, 1, 0, 207, 28, 1, 246, 1, 27, 211, 0, 1, 3, 997, 0, 991, 3],
+          [3, 0, 0, 1, 1, 1, 86, 1, 1, 1, 0, 0, 3, 996, 0, 990, 3],
+          [3, 0, 0, 82, 246, 86, 55, 86, 246, 82, 0, 0, 3, 995, 0, 989, 3],
+          [3, 0, 1, 1, 1, 1, 86, 1, 1, 1, 1, 0, 3, 994, 0, 988, 3],
+          [3, 0, 1, 31, 27, 1, 246, 1, 28, 31, 1, 0, 3, 21, 0, 987, 3],
+          [3, 0, 1, 21, 31, 1, 82, 1, 31, 21, 1, 0, 3, 22, 0, 986, 3],
+          [3, 0, 1, 1, 22, 22, 32, 22, 22, 1, 1, 0, 3, 23, 0, 985, 3],
+          [3, 0, 0, 1, 1, 1, 83, 1, 1, 1, 0, 0, 3, 0, 0, 0, 3],
+          [3, 1, 0, 0, 81, 88, 0, 0, 81, 0, 0, 1, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgm": "area1.mp3",
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [2, 1],
+        "downFloor": [6, 11]
+      },
+      {
+        "id": "8",
+        "floorId": "MT8",
+        "title": "第8层",
+        "name": "第8层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "1,1": { "floorId": ":before", "stair": "upFloor" },
+          "7,5": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 88, 1, 0, 0, 0, 0, 1, 0, 21, 211, 0, 3, 999, 0, 993, 3],
+          [3, 0, 1, 0, 1, 1, 81, 1, 81, 1, 1, 0, 3, 998, 0, 992, 3],
+          [3, 0, 1, 0, 1, 0, 0, 82, 0, 0, 1, 27, 3, 997, 0, 991, 3],
+          [3, 0, 1, 0, 1, 219, 1, 1, 1, 206, 1, 203, 3, 996, 0, 990, 3],
+          [3, 206, 1, 0, 1, 31, 1, 87, 0, 0, 1, 203, 3, 995, 0, 989, 3],
+          [3, 207, 1, 28, 1, 31, 1, 1, 1, 1, 1, 0, 3, 994, 0, 988, 3],
+          [3, 206, 1, 203, 1, 0, 0, 0, 1, 0, 207, 0, 3, 21, 0, 987, 3],
+          [3, 0, 1, 203, 1, 1, 1, 221, 1, 81, 1, 1, 3, 22, 0, 986, 3],
+          [3, 0, 1, 0, 211, 0, 1, 211, 1, 0, 0, 0, 3, 23, 0, 985, 3],
+          [3, 0, 1, 1, 1, 81, 1, 0, 1, 1, 1, 0, 3, 0, 0, 0, 3],
+          [3, 0, 0, 219, 0, 0, 1, 0, 204, 246, 204, 0, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [8, 5],
+        "downFloor": [1, 2],
+        "bgm": "area2.mp3"
+      },
+      {
+        "id": "9",
+        "floorId": "MT9",
+        "title": "第9层",
+        "name": "第9层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "7,7": { "floorId": ":next", "stair": "downFloor" },
+          "7,5": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {
+          "1,1": [
+            { "type": "setText", "align": "center" },
+            "\t[风之罗盘]该宝物可以随意在已经走过的楼层间自由上下。主角可使用G键在已经走过的楼层间进行跳跃。",
+            { "type": "setText", "align": "left" }
+          ]
+        },
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 46, 21, 0, 1, 1, 1, 0, 0, 0, 1, 0, 3, 999, 0, 993, 3],
+          [3, 21, 0, 214, 81, 0, 0, 0, 1, 0, 81, 211, 3, 998, 0, 992, 3],
+          [3, 1, 81, 1, 1, 0, 1, 1, 1, 0, 1, 21, 3, 997, 0, 991, 3],
+          [3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 21, 3, 996, 0, 990, 3],
+          [3, 0, 0, 0, 83, 0, 1, 88, 1, 0, 1, 31, 3, 995, 0, 989, 3],
+          [3, 1, 82, 1, 1, 0, 1, 1, 1, 0, 1, 1, 3, 994, 0, 988, 3],
+          [3, 28, 220, 27, 1, 219, 1, 87, 1, 0, 1, 31, 3, 21, 0, 987, 3],
+          [3, 1, 81, 1, 1, 0, 0, 0, 81, 0, 1, 21, 3, 22, 0, 986, 3],
+          [3, 211, 31, 211, 1, 1, 82, 1, 1, 0, 1, 21, 3, 23, 0, 985, 3],
+          [3, 22, 211, 31, 1, 215, 219, 215, 1, 0, 81, 211, 3, 0, 0, 0, 3],
+          [3, 39, 22, 211, 81, 32, 215, 32, 1, 0, 1, 0, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [7, 8],
+        "downFloor": [7, 4],
+        "bgm": "area2.mp3"
+      },
+      {
+        "id": "10",
+        "floorId": "MT10",
+        "title": "第10层",
+        "name": "第10层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [{ "type": "openDoor", "loc": [4, 7] }],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "6,7": { "floorId": ":before", "stair": "upFloor" },
+          "1,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 0, 1, 1, 28, 214, 1, 214, 27, 1, 1, 0, 3, 999, 0, 993, 3],
+          [3, 0, 0, 1, 1, 81, 1, 81, 1, 1, 0, 220, 3, 998, 0, 992, 3],
+          [3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 220, 32, 3, 997, 0, 991, 3],
+          [3, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 3, 996, 0, 990, 3],
+          [3, 206, 1, 0, 0, 21, 21, 21, 0, 0, 1, 21, 3, 995, 0, 989, 3],
+          [3, 207, 1, 0, 1, 1, 1, 1, 81, 1, 1, 21, 3, 994, 0, 988, 3],
+          [3, 206, 1, 0, 86, 0, 88, 1, 0, 81, 207, 0, 3, 21, 0, 987, 3],
+          [3, 0, 1, 1, 1, 1, 1, 1, 81, 1, 1, 0, 3, 22, 0, 986, 3],
+          [3, 0, 1, 31, 28, 27, 1, 0, 207, 0, 1, 21, 3, 23, 0, 985, 3],
+          [3, 0, 1, 31, 28, 27, 83, 219, 1, 219, 1, 21, 3, 0, 0, 0, 3],
+          [3, 87, 1, 31, 28, 27, 1, 22, 1, 22, 1, 31, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [1, 10],
+        "downFloor": [5, 7],
+        "bgm": "area2.mp3"
+      },
+      {
+        "id": "11",
+        "floorId": "MT11",
+        "title": "第11层",
+        "name": "第11层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": { "6,9": [{ "type": "openShop", "id": "moneyShop2" }] },
+        "changeFloor": {
+          "1,11": { "floorId": ":before", "stair": "upFloor" },
+          "11,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 31, 1, 21, 1, 22, 1, 23, 1, 32, 40, 32, 3, 999, 0, 993, 3],
+          [3, 31, 1, 21, 1, 22, 1, 23, 1, 222, 223, 222, 3, 998, 0, 992, 3],
+          [3, 31, 1, 21, 1, 22, 1, 23, 1, 0, 222, 0, 3, 997, 0, 991, 3],
+          [3, 81, 1, 81, 1, 81, 1, 81, 1, 1, 82, 1, 3, 996, 0, 990, 3],
+          [3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 995, 0, 989, 3],
+          [3, 81, 1, 1, 82, 1, 1, 1, 82, 1, 1, 81, 3, 994, 0, 988, 3],
+          [3, 28, 1, 0, 222, 32, 224, 32, 222, 0, 1, 27, 3, 21, 0, 987, 3],
+          [3, 28, 1, 214, 1, 1, 1, 1, 1, 214, 1, 27, 3, 22, 0, 986, 3],
+          [3, 28, 1, 214, 1, 7, 131, 8, 1, 214, 1, 27, 3, 23, 0, 985, 3],
+          [3, 1, 1, 83, 1, 31, 0, 31, 1, 83, 1, 1, 3, 0, 0, 0, 3],
+          [3, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 87, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [10, 11],
+        "downFloor": [2, 11],
+        "bgm": "area2.mp3"
+      },
+      {
+        "id": "12",
+        "floorId": "MT12",
+        "title": "第12层",
+        "name": "第12层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": { "1,1": [{ "type": "openShop", "id": "keyShop2" }] },
+        "changeFloor": {
+          "1,11": { "floorId": ":next", "stair": "downFloor" },
+          "11,11": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {
+          "11,1": [
+            { "type": "setText", "align": "center" },
+            "\t[星光神锒]把它交给第四层的小偷，小偷便会用它打开第十八层的隐藏地面（你就可以救出公主了）。",
+            { "type": "setText", "align": "left" }
+          ]
+        },
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 122, 28, 1, 0, 226, 227, 226, 0, 1, 32, 48, 3, 999, 0, 993, 3],
+          [3, 27, 0, 1, 0, 1, 81, 1, 0, 1, 0, 32, 3, 998, 0, 992, 3],
+          [3, 0, 0, 1, 0, 1, 227, 1, 0, 1, 0, 0, 3, 997, 0, 991, 3],
+          [3, 0, 224, 1, 0, 1, 21, 1, 0, 1, 228, 0, 3, 996, 0, 990, 3],
+          [3, 224, 225, 1, 0, 1, 21, 1, 0, 1, 247, 228, 3, 995, 0, 989, 3],
+          [3, 1, 82, 1, 0, 1, 31, 1, 0, 1, 82, 1, 3, 994, 0, 988, 3],
+          [3, 0, 0, 0, 0, 1, 31, 1, 0, 0, 0, 0, 3, 21, 0, 987, 3],
+          [3, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 3, 22, 0, 986, 3],
+          [
+            3,
+            28,
+            224,
+            81,
+            222,
+            222,
+            223,
+            222,
+            222,
+            81,
+            224,
+            27,
+            3,
+            23,
+            0,
+            985,
+            3
+          ],
+          [3, 1, 1, 1, 1, 1, 82, 1, 1, 1, 1, 1, 3, 0, 0, 0, 3],
+          [3, 87, 0, 0, 0, 0, 0, 0, 0, 0, 0, 88, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [2, 11],
+        "downFloor": [10, 11],
+        "bgm": "area2.mp3"
+      },
+      {
+        "id": "13",
+        "floorId": "MT13",
+        "title": "第13层",
+        "name": "第13层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "8,11": {
+            "trigger": null,
+            "enable": true,
+            "noPass": true,
+            "displayDamage": false,
+            "data": [
+              { "type": "addValue", "name": "status:lv", "value": "3" },
+              { "type": "addValue", "name": "status:hp", "value": "3000" },
+              { "type": "addValue", "name": "status:atk", "value": "30" },
+              { "type": "addValue", "name": "status:def", "value": "30" },
+              { "type": "playSound", "name": "item.mp3" },
+              { "type": "hide", "time": 0 },
+              {
+                "type": "autoText",
+                "text": "\t[得到大飞羽，等级提升三级！] ",
+                "time": 500
+              }
+            ]
+          },
+          "5,7": [{ "type": "openShop", "id": "expShop2" }]
+        },
+        "changeFloor": {
+          "6,11": { "floorId": ":next", "stair": "downFloor" },
+          "1,11": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": { "3,4": [{ "type": "openDoor", "loc": [4, 7] }] },
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 0, 224, 0, 0, 0, 0, 0, 1, 0, 225, 0, 3, 999, 0, 993, 3],
+          [3, 0, 1, 1, 1, 1, 1, 81, 1, 0, 1, 0, 3, 998, 0, 992, 3],
+          [3, 0, 1, 0, 0, 222, 0, 0, 1, 0, 1, 0, 3, 997, 0, 991, 3],
+          [3, 32, 1, 83, 1, 1, 1, 0, 1, 0, 1, 0, 3, 996, 0, 990, 3],
+          [3, 226, 1, 0, 0, 225, 1, 222, 1, 27, 1, 0, 3, 995, 0, 989, 3],
+          [3, 227, 1, 0, 212, 86, 1, 223, 1, 27, 1, 0, 3, 994, 0, 988, 3],
+          [3, 226, 1, 225, 86, 121, 1, 222, 1, 27, 1, 28, 3, 21, 0, 987, 3],
+          [3, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 28, 3, 22, 0, 986, 3],
+          [3, 0, 226, 0, 1, 0, 0, 0, 225, 0, 1, 28, 3, 23, 0, 985, 3],
+          [3, 1, 1, 0, 1, 32, 1, 1, 1, 1, 1, 0, 3, 0, 0, 0, 3],
+          [3, 88, 0, 0, 82, 0, 87, 1, 125, 212, 81, 0, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [5, 11],
+        "downFloor": [2, 11],
+        "bgm": "area2.mp3"
+      },
+      {
+        "id": "14",
+        "floorId": "MT14",
+        "title": "第14层",
+        "name": "第14层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "5,1": { "floorId": ":next", "stair": "downFloor" },
+          "6,11": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {
+          "6,6": [
+            { "type": "moveHero", "time": 125, "steps": ["up"] },
+            { "type": "openDoor", "loc": [6, 5] }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 1, 0, 228, 26, 87, 0, 0, 0, 0, 0, 1, 3, 999, 0, 993, 3],
+          [3, 1, 0, 32, 1, 1, 1, 1, 1, 32, 0, 1, 3, 998, 0, 992, 3],
+          [3, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 3, 997, 0, 991, 3],
+          [3, 1, 0, 1, 1, 1, 56, 1, 1, 1, 0, 1, 3, 996, 0, 990, 3],
+          [3, 1, 0, 1, 1, 1, 86, 1, 1, 1, 0, 1, 3, 995, 0, 989, 3],
+          [3, 1, 0, 31, 1, 1, 225, 1, 1, 31, 0, 1, 3, 994, 0, 988, 3],
+          [3, 1, 0, 4, 4, 1, 212, 1, 4, 4, 0, 1, 3, 21, 0, 987, 3],
+          [3, 1, 0, 4, 4, 1, 225, 1, 4, 4, 0, 1, 3, 22, 0, 986, 3],
+          [3, 1, 0, 4, 4, 1, 82, 1, 4, 4, 0, 1, 3, 23, 0, 985, 3],
+          [3, 1, 222, 223, 222, 82, 0, 82, 222, 223, 222, 1, 3, 0, 0, 0, 3],
+          [3, 1, 1, 1, 1, 1, 88, 1, 1, 1, 1, 1, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [6, 1],
+        "downFloor": [6, 10],
+        "bgm": "area2.mp3"
+      },
+      {
+        "id": "15",
+        "floorId": "MT15",
+        "title": "第15层",
+        "name": "第15层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "5,4": [
+            "\t[man]\b[down]你好，勇敢的孩子，你终于来到这里了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[man]\b[down]我将给你一个非常好的宝物，它可以使你的攻击力提升120点，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[man]\b[down]但这必须用你的500点经验来进行交换，考虑一下子吧！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            {
+              "type": "if",
+              "condition": "status:experience<500",
+              "true": [
+                "\t[hero]\b[hero]这，可我现在还没有那么多的经验。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[man]\b[down]那等你的经验够了而且想要的时候再来吧！"
+              ],
+              "false": [
+                "\t[hero]\b[hero]好吧，那就将那把剑给我吧！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[man]\b[down]那好吧，这把剑就给你了！",
+                { "type": "tip", "text": "得到圣光剑，攻击加120！" },
+                { "type": "addValue", "name": "status:atk", "value": "120" },
+                {
+                  "type": "addValue",
+                  "name": "status:experience",
+                  "value": "-500"
+                },
+                { "type": "playSound", "name": "unlockCtrl.mp3" },
+                { "type": "hide", "time": 0 }
+              ]
+            },
+            { "type": "playSound", "name": "dialogue.mp3" }
+          ],
+          "7,4": [
+            "\t[woman]\b[down]啊哈，欢迎你的到来！\n我这里有一件对你来说非常好的宝物，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[down]只要你出的起钱，我就卖给你。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[hero]什么宝物？要多少钱？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[down]是这个游戏里最好的盾牌，防御值可以增加120点，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[woman]\b[down]而你只要出500个金币就可以买下。怎么样？你有500个金币吗？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            {
+              "type": "if",
+              "condition": "status:money<500",
+              "true": [
+                "\t[hero]\b[hero]这，可我现在还没有那么多的金币。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[woman]\b[down]那等你的金币够了而且想要的时候再来吧！"
+              ],
+              "false": [
+                "\t[hero]\b[hero]我有500个金币。",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[woman]\b[down]好，成交！",
+                { "type": "tip", "text": "得到星光盾，防御加120！" },
+                { "type": "addValue", "name": "status:def", "value": "120" },
+                {
+                  "type": "addValue",
+                  "name": "status:money",
+                  "value": "-500"
+                },
+                { "type": "playSound", "name": "unlockCtrl.mp3" },
+                { "type": "hide", "time": 0 }
+              ]
+            },
+            { "type": "playSound", "name": "dialogue.mp3" }
+          ]
+        },
+        "changeFloor": {
+          "5,1": { "floorId": ":before", "stair": "upFloor" },
+          "7,1": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 0, 0, 0, 0, 88, 4, 87, 0, 0, 0, 0, 3, 999, 0, 993, 3],
+          [3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 3, 998, 0, 992, 3],
+          [3, 0, 4, 4, 1, 1, 1, 1, 1, 4, 4, 0, 3, 997, 0, 991, 3],
+          [3, 0, 4, 1, 1, 121, 1, 122, 1, 1, 4, 0, 3, 996, 0, 990, 3],
+          [3, 0, 4, 1, 1, 28, 1, 28, 1, 1, 4, 0, 3, 995, 0, 989, 3],
+          [3, 0, 4, 1, 1, 27, 1, 27, 1, 1, 4, 0, 3, 994, 0, 988, 3],
+          [3, 0, 4, 4, 1, 0, 1, 0, 1, 4, 4, 0, 3, 21, 0, 987, 3],
+          [3, 0, 4, 4, 1, 81, 1, 81, 1, 4, 4, 0, 3, 22, 0, 986, 3],
+          [3, 0, 4, 4, 4, 0, 0, 0, 4, 4, 4, 0, 3, 23, 0, 985, 3],
+          [3, 0, 4, 4, 4, 4, 83, 4, 4, 4, 4, 0, 3, 0, 0, 0, 3],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [8, 1],
+        "downFloor": [4, 1],
+        "bgm": "area3.mp3"
+      },
+      {
+        "id": "16",
+        "floorId": "MT16",
+        "title": "第16层",
+        "name": "第16层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "6,5": {
+            "trigger": null,
+            "enable": true,
+            "noPass": true,
+            "displayDamage": false,
+            "data": [
+              "\t[hero]\b[hero]……",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              "\t[redKing]\b[down,6,6]停止吧，愚蠢的人类！",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              "\t[hero]\b[hero]该停止的是你！魔王。快说，公主关在哪里？",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              "\t[redKing]\b[down,6,6]等你打赢我再说吧！",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              { "type": "hide", "time": 0 }
+            ]
+          },
+          "5,5": [
+            {
+              "type": "if",
+              "condition": "core.getBlockCls(5,5)=='npcs'",
+              "true": [
+                "\t[man]\b[down]年青人，你终于来了！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]您怎么了？",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[man]\b[down]我已经快封不住它了，请你将这个东西交给彩蝶仙子，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[man]\b[down]她会告诉你这是什么东西，有什么用的！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[man]\b[down]快去吧，再迟就来不及了！",
+                { "type": "hide", "time": 0 },
+                { "type": "playSound", "name": "dialogue.mp3" },
+                { "type": "playSound", "name": "unlockCtrl.mp3" },
+                { "type": "setValue", "name": "flag:16", "value": "1" },
+                {
+                  "type": "autoText",
+                  "text": "\t[得到神秘宝物！]\b[down,hero] ",
+                  "time": 500
+                }
+              ]
+            }
+          ]
+        },
+        "changeFloor": {
+          "7,1": { "floorId": ":before", "stair": "upFloor" },
+          "6,8": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": { "6,6": [{ "type": "updateEnemys" }] },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 4, 4, 4, 4, 4, 0, 88, 4, 4, 4, 4, 3, 999, 0, 993, 3],
+          [3, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 3, 998, 0, 992, 3],
+          [3, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 3, 997, 0, 991, 3],
+          [3, 4, 4, 4, 4, 1, 83, 1, 4, 4, 4, 4, 3, 996, 0, 990, 3],
+          [3, 4, 4, 4, 1, 121, 0, 1, 1, 4, 4, 4, 3, 995, 0, 989, 3],
+          [3, 4, 4, 4, 1, 1, 245, 1, 1, 4, 4, 4, 3, 994, 0, 988, 3],
+          [3, 4, 4, 4, 1, 1, 0, 1, 1, 4, 4, 4, 3, 21, 0, 987, 3],
+          [3, 4, 4, 4, 1, 1, 87, 1, 1, 4, 4, 4, 3, 22, 0, 986, 3],
+          [3, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 3, 23, 0, 985, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 0, 0, 0, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [6, 7],
+        "downFloor": [6, 1],
+        "bgm": "area3.mp3"
+      },
+      {
+        "id": "17",
+        "floorId": "MT17",
+        "title": "第17层",
+        "name": "第17层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "6,8": { "floorId": ":before", "stair": "upFloor" },
+          "1,11": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 4, 228, 212, 0, 0, 0, 0, 0, 0, 0, 228, 3, 999, 0, 993, 3],
+          [3, 4, 212, 4, 4, 4, 4, 4, 4, 4, 4, 0, 3, 998, 0, 992, 3],
+          [3, 4, 0, 4, 228, 0, 0, 0, 0, 0, 0, 228, 3, 997, 0, 991, 3],
+          [3, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 3, 996, 0, 990, 3],
+          [3, 4, 0, 4, 0, 4, 228, 0, 0, 0, 228, 4, 3, 995, 0, 989, 3],
+          [3, 4, 0, 4, 228, 0, 0, 4, 4, 4, 0, 4, 3, 994, 0, 988, 3],
+          [3, 4, 0, 4, 4, 4, 4, 4, 228, 0, 228, 4, 3, 21, 0, 987, 3],
+          [3, 4, 212, 4, 4, 4, 88, 4, 0, 4, 4, 4, 3, 22, 0, 986, 3],
+          [3, 4, 228, 212, 0, 216, 0, 4, 228, 0, 0, 228, 3, 23, 0, 985, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 3, 0, 0, 0, 3],
+          [3, 87, 0, 216, 0, 0, 0, 0, 0, 0, 0, 228, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [2, 11],
+        "downFloor": [6, 9],
+        "bgm": "area3.mp3"
+      },
+      {
+        "id": "18",
+        "floorId": "MT18",
+        "title": "第18层",
+        "name": "第18层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "11,11": {
+            "trigger": null,
+            "enable": false,
+            "noPass": false,
+            "displayDamage": false,
+            "data": [
+              {
+                "type": "changeFloor",
+                "floorId": "MT19",
+                "loc": [10, 11],
+                "direction": "down",
+                "time": 100
+              }
+            ]
+          },
+          "6,5": ["\t[princess]\b[up]请一定要杀死大魔王！"]
+        },
+        "changeFloor": {
+          "1,11": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {
+          "6,7": [
+            { "type": "moveHero", "time": 125, "steps": ["up"] },
+            { "type": "openDoor", "loc": [6, 6] },
+            { "type": "moveHero", "time": 125, "steps": ["up"] },
+            "\t[hero]\b[down,hero]公主！你得救了！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]啊，你是来救我的吗？",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[down,hero]是的，我是奉国王的命令来救你的。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[down,hero]请你快随我出去吧！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]不，我还不想走。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[down,hero]为什么，这里面到处都是恶魔。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]正是因为这里面到处都是恶魔，所以才不可以就这样出去，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]我要看着那个恶魔被杀死！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]英雄的勇士，如果你能够将那个大恶魔杀死，",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]我就和你一起出去！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[down,hero]大恶魔？我已经杀死了一个魔王！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]大恶魔在这座塔的最顶层，你杀死的可能是一个小队长之类的恶魔",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[hero]\b[down,hero]好，那你等着，等我杀了那个恶魔再来这里找你！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]大恶魔比你刚才杀死的那个厉害多了。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]而且他还会变身，变身后的魔王他的攻击力",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]和防御力都会提升至少一半以上，你得小心！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[princess]\b[up,6,5]请一定要杀死大魔王！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            { "type": "show", "loc": [[11, 11]], "time": 0 }
+          ]
+        },
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 999, 0, 993, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 998, 0, 992, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 997, 0, 991, 3],
+          [3, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 3, 996, 0, 990, 3],
+          [3, 4, 4, 4, 1, 1, 132, 1, 1, 4, 4, 4, 3, 995, 0, 989, 3],
+          [3, 4, 4, 4, 1, 1, 86, 1, 1, 4, 4, 4, 3, 994, 0, 988, 3],
+          [3, 4, 4, 4, 1, 1, 83, 1, 1, 4, 4, 4, 3, 21, 0, 987, 3],
+          [3, 4, 4, 4, 4, 1, 83, 1, 4, 4, 4, 4, 3, 22, 0, 986, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 23, 0, 985, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 0, 0, 0, 3],
+          [3, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 87, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": [10, 11],
+        "downFloor": [2, 11],
+        "bgm": "area3.mp3"
+      },
+      {
+        "id": "19",
+        "floorId": "MT19",
+        "title": "第19层",
+        "name": "第19层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "6,8": {
+            "trigger": null,
+            "enable": true,
+            "noPass": true,
+            "displayDamage": false,
+            "data": [
+              "\t[hero]\b[hero]大魔头，你的死期到了！",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              "\t[冥灵魔王：,vampire]\b[up,6,7]哈哈哈……\n你也真是有意思，",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              "\t[冥灵魔王：,vampire]\b[up,6,7]别以为蝶仙那家伙给了你力量你就可以打败我，",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              "\t[冥灵魔王：,vampire]\b[up,6,7]想打败我你还早着呢！",
+              { "type": "playSound", "name": "dialogue.mp3" },
+              "\t[hero]\b[hero]废话少说，去死吧！",
+              { "type": "hide", "time": 0 }
+            ]
+          }
+        },
+        "changeFloor": {
+          "6,4": { "floorId": ":next", "stair": "downFloor" },
+          "11,11": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {
+          "3,6": [
+            { "type": "moveHero", "time": 125, "steps": ["down"] },
+            { "type": "openDoor", "loc": [3, 7] }
+          ],
+          "9,6": [
+            { "type": "moveHero", "time": 125, "steps": ["down"] },
+            { "type": "openDoor", "loc": [9, 7] }
+          ],
+          "6,7": [
+            "\t[冥灵魔王：,vampire]看不出你还有两下子，有本领的话来21楼。",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[冥灵魔王：,vampire]在那里，你就可以见识到我真正的实力了！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            { "type": "updateEnemys" }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 999, 0, 993, 3],
+          [3, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 3, 998, 0, 992, 3],
+          [3, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 3, 997, 0, 991, 3],
+          [3, 0, 4, 0, 4, 4, 87, 4, 4, 0, 4, 0, 3, 996, 0, 990, 3],
+          [3, 0, 4, 0, 4, 4, 0, 4, 4, 0, 4, 0, 3, 995, 0, 989, 3],
+          [3, 0, 4, 245, 4, 4, 0, 4, 4, 245, 4, 0, 3, 994, 0, 988, 3],
+          [3, 0, 4, 86, 4, 4, 208, 4, 4, 86, 4, 0, 3, 21, 0, 987, 3],
+          [3, 0, 4, 43, 4, 4, 0, 4, 4, 44, 4, 0, 3, 22, 0, 986, 3],
+          [3, 0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 0, 3, 23, 0, 985, 3],
+          [3, 0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 0, 3, 0, 0, 0, 3],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 88, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "bgm": "startText.mp3",
+        "upFloor": [6, 5],
+        "downFloor": [10, 11]
+      },
+      {
+        "id": "20",
+        "floorId": "MT20",
+        "title": "第20层",
+        "name": "第20层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "6,8": {
+            "trigger": null,
+            "enable": false,
+            "noPass": false,
+            "displayDamage": false,
+            "data": [
+              {
+                "type": "changeFloor",
+                "floorId": "MT21",
+                "loc": [6, 6],
+                "direction": "down",
+                "time": 100
+              }
+            ]
+          }
+        },
+        "changeFloor": {
+          "6,4": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [
+            3,
+            216,
+            27,
+            246,
+            31,
+            212,
+            23,
+            212,
+            31,
+            246,
+            27,
+            216,
+            3,
+            999,
+            0,
+            993,
+            3
+          ],
+          [3, 32, 4, 21, 4, 22, 4, 22, 4, 21, 4, 32, 3, 998, 0, 992, 3],
+          [3, 4, 28, 246, 0, 228, 0, 228, 0, 246, 28, 4, 3, 997, 0, 991, 3],
+          [3, 31, 4, 21, 4, 0, 88, 0, 4, 21, 4, 31, 3, 996, 0, 990, 3],
+          [3, 212, 22, 228, 0, 0, 0, 0, 0, 228, 22, 212, 3, 995, 0, 989, 3],
+          [3, 23, 4, 0, 4, 0, 4, 0, 4, 0, 4, 23, 3, 994, 0, 988, 3],
+          [3, 212, 22, 228, 0, 0, 0, 0, 0, 228, 22, 212, 3, 21, 0, 987, 3],
+          [3, 31, 4, 21, 4, 0, 87, 0, 4, 21, 4, 31, 3, 22, 0, 986, 3],
+          [3, 4, 28, 246, 0, 228, 0, 228, 0, 246, 28, 4, 3, 23, 0, 985, 3],
+          [3, 32, 4, 21, 4, 22, 4, 22, 4, 21, 4, 32, 3, 0, 0, 0, 3],
+          [
+            3,
+            216,
+            27,
+            246,
+            31,
+            212,
+            23,
+            212,
+            31,
+            246,
+            27,
+            216,
+            3,
+            0,
+            976,
+            0,
+            3
+          ],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "bgm": "startText.mp3",
+        "downFloor": [6, 5],
+        "upFloor": [6, 7]
+      },
+      {
+        "id": "21",
+        "floorId": "MT21",
+        "title": "第21层",
+        "name": "第21层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": false,
+        "canUseQuickShop": false,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "6,8": { "floorId": ":before", "stair": "upFloor" },
+          "6,1": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {
+          "6,2": [
+            "\t[冥灵魔王：,vampire]啊……\n怎么可能，我怎么可能会被你打败呢！",
+            { "type": "playSound", "name": "dialogue.mp3" },
+            "\t[冥灵魔王：,vampire]不，不要这样…………",
+            {
+              "type": "if",
+              "condition": "flag:22==0",
+              "true": [
+                { "type": "hideStatusBar" },
+                { "type": "playSound", "name": "door.mp3" },
+                { "type": "setCurtain", "color": [0, 0, 0, 1], "time": 0 },
+                {
+                  "type": "setValue",
+                  "name": "status:hp",
+                  "value": "10088-status:atk-status:def"
+                },
+                {
+                  "type": "scrollText",
+                  "text": "大魔头被杀死了,公主也被救出了塔,蝶仙的精力也恢复了\n当勇士和公主一起走出塔来的时候，\n国王也带着军队来到了岛外。一切都是那么地平常。\n回国后，国王为勇士和公主举行了隆重而且盛大的婚礼，\n并且宣布由勇士继承国王的位置。\n从此以后，勇士和公主就幸福地生活在一起了",
+                  "time": 30000,
+                  "lineHeight": 5
+                },
+                { "type": "win", "reason": "通关21层魔塔(LowAD)" }
+              ]
+            },
+            { "type": "updateEnemys" },
+            { "type": "playSound", "name": "dialogue.mp3" },
+            { "type": "setBlock", "number": "upFloor", "loc": [[6, 1]] },
+            { "type": "hide", "loc": [[6, 7]], "time": 0 }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 999, 0, 993, 3],
+          [3, 4, 4, 0, 0, 4, 208, 4, 0, 0, 4, 4, 3, 998, 0, 992, 3],
+          [3, 4, 0, 0, 4, 4, 247, 4, 4, 0, 0, 4, 3, 997, 0, 991, 3],
+          [3, 4, 0, 0, 0, 4, 247, 4, 0, 0, 0, 4, 3, 996, 0, 990, 3],
+          [3, 4, 4, 0, 0, 0, 0, 0, 0, 0, 4, 4, 3, 995, 0, 989, 3],
+          [3, 4, 4, 0, 0, 0, 0, 0, 0, 0, 4, 4, 3, 994, 0, 988, 3],
+          [3, 4, 4, 4, 0, 0, 4, 0, 0, 4, 4, 4, 3, 21, 0, 987, 3],
+          [3, 4, 4, 4, 4, 86, 88, 86, 4, 4, 4, 4, 3, 22, 0, 986, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 23, 0, 985, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 0, 0, 0, 3],
+          [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "bgm": "startText.mp3",
+        "downFloor": [6, 6],
+        "upFloor": [6, 3]
+      },
+      {
+        "id": "22",
+        "floorId": "MT22",
+        "title": "第22层",
+        "name": "第22层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "7,3": [
+            {
+              "type": "if",
+              "condition": "core.getBlock(5,6,'MT23w')||core.getBlock(7,6,'MT23e')",
+              "true": [
+                "\t[fairy]\b[down]做得很好。现在你已经将那个可恶的冥灵魔王给杀了，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]快去找另外的两个“灵杖”吧，找齐了以后再来找我！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]要记住，如果我不把封印解开的话，最底层的怪物你是杀不了的！"
+              ],
+              "false": [
+                "\t[hero]\b[hero]快看，我全部都找到了，我找齐所有了！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]嗯，不错，现在我们可以接触这里面的封印了！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]那就让我们开始吧！\n神之“灵杖”呀，",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]放射出你们的魔力吧！\n哈哩咪哆唏咪啦~~~~~~~~~",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[hero]\b[hero]……\n（又来了！）",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]……\n好了，我已经将它们三个“灵之杖”的魔力都开放出来了！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]公主就由我来救出去，你快去最底层杀了那个大魔头吧！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]要记住，如果没有万分的把握，一定不要去开最后那扇花形门！",
+                { "type": "playSound", "name": "dialogue.mp3" },
+                "\t[fairy]\b[down]一旦进去了，你将不能再回来！",
+                {
+                  "type": "setBlock",
+                  "number": "181",
+                  "loc": [[5, 2]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "182",
+                  "loc": [[6, 2]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "183",
+                  "loc": [[7, 2]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "184",
+                  "loc": [[5, 3]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "185",
+                  "loc": [[6, 3]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "186",
+                  "loc": [[7, 3]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "187",
+                  "loc": [[5, 4]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "octopus",
+                  "loc": [[6, 4]],
+                  "floorId": "MT_1"
+                },
+                {
+                  "type": "setBlock",
+                  "number": "188",
+                  "loc": [[7, 4]],
+                  "floorId": "MT_1"
+                },
+                { "type": "hide", "time": 0 }
+              ]
+            },
+            { "type": "playSound", "name": "dialogue.mp3" },
+            { "type": "playSound", "name": "unlockCtrl.mp3" }
+          ]
+        },
+        "changeFloor": {
+          "6,1": { "floorId": ":before", "stair": "upFloor" },
+          "1,6": { "floorId": ":next", "stair": "downFloor" },
+          "11,6": { "floorId": "MT23e", "stair": "downFloor" },
+          "6,11": { "floorId": "MT23s", "stair": "downFloor" }
+        },
+        "afterBattle": {},
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 4, 4, 4, 4, 4, 88, 4, 4, 4, 4, 4, 3, 999, 0, 993, 3],
+          [3, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 3, 998, 0, 992, 3],
+          [3, 4, 4, 4, 4, 0, 0, 124, 4, 4, 4, 4, 3, 997, 0, 991, 3],
+          [3, 86, 86, 86, 4, 4, 83, 4, 4, 86, 86, 86, 3, 996, 0, 990, 3],
+          [3, 27, 27, 86, 4, 4, 63, 4, 4, 86, 28, 28, 3, 995, 0, 989, 3],
+          [3, 87, 27, 228, 83, 63, 0, 63, 83, 228, 28, 87, 3, 994, 0, 988, 3],
+          [3, 27, 27, 86, 4, 4, 63, 4, 4, 86, 28, 28, 3, 21, 0, 987, 3],
+          [3, 86, 86, 86, 4, 4, 83, 4, 4, 86, 86, 86, 3, 22, 0, 986, 3],
+          [3, 4, 4, 4, 86, 86, 228, 86, 86, 4, 4, 4, 3, 23, 0, 985, 3],
+          [3, 4, 4, 4, 86, 32, 32, 32, 86, 4, 4, 4, 3, 0, 0, 0, 3],
+          [3, 4, 4, 4, 86, 32, 87, 32, 86, 4, 4, 4, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "bgm": "startText.mp3",
+        "downFloor": [6, 6],
+        "upFloor": [6, 6]
+      },
+      {
+        "id": "23",
+        "floorId": "MT23w",
+        "title": "第23层",
+        "name": "第23层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "bgm": "startText.mp3",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {
+          "11,6": { "floorId": ":before", "stair": "upFloor" }
+        },
+        "afterBattle": {
+          "3,6": [
+            { "type": "moveHero", "time": 125, "steps": ["right"] },
+            { "type": "openDoor", "loc": [4, 6] },
+            { "type": "moveHero", "time": 125, "steps": ["right"] },
+            { "type": "playSound", "name": "item.mp3" },
+            { "type": "hide", "loc": [[5, 6]], "time": 0 },
+            {
+              "type": "autoText",
+              "text": "\t[得到炎之灵杖]\b[down,hero] ",
+              "time": 500
+            }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 228, 0, 27, 27, 27, 0, 0, 0, 4, 0, 32, 3, 999, 0, 993, 3],
+          [3, 0, 4, 4, 4, 4, 4, 4, 0, 82, 0, 4, 3, 998, 0, 992, 3],
+          [3, 27, 4, 4, 247, 228, 228, 228, 0, 4, 0, 4, 3, 997, 0, 991, 3],
+          [3, 27, 4, 4, 50, 4, 4, 4, 4, 4, 0, 4, 3, 996, 0, 990, 3],
+          [3, 0, 247, 4, 4, 4, 4, 4, 4, 63, 0, 4, 3, 995, 0, 989, 3],
+          [3, 4, 83, 208, 86, 72, 4, 4, 63, 82, 0, 88, 3, 994, 0, 988, 3],
+          [3, 0, 247, 4, 4, 4, 4, 4, 4, 63, 0, 4, 3, 21, 0, 987, 3],
+          [3, 27, 4, 4, 50, 4, 4, 4, 4, 4, 0, 4, 3, 22, 0, 986, 3],
+          [3, 27, 4, 4, 247, 228, 228, 228, 0, 4, 0, 4, 3, 23, 0, 985, 3],
+          [3, 0, 4, 4, 4, 4, 4, 4, 0, 82, 0, 4, 3, 0, 0, 0, 3],
+          [3, 228, 0, 27, 27, 27, 0, 0, 0, 4, 0, 32, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "downFloor": [10, 6],
+        "upFloor": [10, 6]
+      },
+      {
+        "id": "24",
+        "floorId": "MT23e",
+        "title": "第23层",
+        "name": "第23层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "bgm": "startText.mp3",
+        "firstArrive": [],
+        "eachArrive": [{ "type": "pauseBgm" }, { "type": "resumeBgm" }],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": { "1,6": { "floorId": "MT22", "stair": "upFloor" } },
+        "afterBattle": {
+          "9,6": [
+            { "type": "moveHero", "time": 125, "steps": ["left"] },
+            { "type": "openDoor", "loc": [8, 6] },
+            { "type": "moveHero", "time": 125, "steps": ["left"] },
+            { "type": "playSound", "name": "item.mp3" },
+            { "type": "hide", "loc": [[7, 6]], "time": 0 },
+            {
+              "type": "autoText",
+              "text": "\t[得到心之灵杖]\b[down,hero] ",
+              "time": 500
+            }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 32, 0, 4, 0, 0, 0, 28, 28, 28, 0, 228, 3, 999, 0, 993, 3],
+          [3, 4, 0, 82, 0, 4, 4, 4, 4, 4, 4, 0, 3, 998, 0, 992, 3],
+          [3, 4, 0, 4, 0, 228, 228, 228, 247, 4, 4, 28, 3, 997, 0, 991, 3],
+          [3, 4, 0, 4, 4, 4, 4, 4, 50, 4, 4, 28, 3, 996, 0, 990, 3],
+          [3, 4, 0, 63, 4, 4, 4, 4, 4, 4, 247, 0, 3, 995, 0, 989, 3],
+          [3, 88, 0, 82, 63, 4, 4, 73, 86, 208, 83, 4, 3, 994, 0, 988, 3],
+          [3, 4, 0, 63, 4, 4, 4, 4, 4, 4, 247, 0, 3, 21, 0, 987, 3],
+          [3, 4, 0, 4, 4, 4, 4, 4, 50, 4, 4, 28, 3, 22, 0, 986, 3],
+          [3, 4, 0, 4, 0, 228, 228, 228, 247, 4, 4, 28, 3, 23, 0, 985, 3],
+          [3, 4, 0, 82, 0, 4, 4, 4, 4, 4, 4, 0, 3, 0, 0, 0, 3],
+          [3, 32, 0, 4, 0, 0, 0, 28, 28, 28, 0, 228, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "downFloor": [2, 6],
+        "upFloor": [2, 6]
+      },
+      {
+        "id": "25",
+        "floorId": "MT23s",
+        "title": "第23层",
+        "name": "第23层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": true,
+        "canUseQuickShop": true,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "bgm": "startText.mp3",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {
+          "4,8": {
+            "trigger": null,
+            "enable": true,
+            "noPass": true,
+            "displayDamage": false,
+            "data": [
+              { "type": "addValue", "name": "status:lv", "value": "3" },
+              { "type": "addValue", "name": "status:hp", "value": "3000" },
+              { "type": "addValue", "name": "status:atk", "value": "30" },
+              { "type": "addValue", "name": "status:def", "value": "30" },
+              { "type": "playSound", "name": "item.mp3" },
+              { "type": "hide", "time": 0 },
+              {
+                "type": "autoText",
+                "text": "\t[得到大飞羽，等级提升三级！] ",
+                "time": 500
+              }
+            ]
+          },
+          "8,8": {
+            "trigger": null,
+            "enable": true,
+            "noPass": true,
+            "displayDamage": false,
+            "data": [
+              { "type": "addValue", "name": "status:lv", "value": "3" },
+              { "type": "addValue", "name": "status:hp", "value": "3000" },
+              { "type": "addValue", "name": "status:atk", "value": "30" },
+              { "type": "addValue", "name": "status:def", "value": "30" },
+              { "type": "playSound", "name": "item.mp3" },
+              { "type": "hide", "time": 0 },
+              {
+                "type": "autoText",
+                "text": "\t[得到大飞羽，等级提升三级！] ",
+                "time": 500
+              }
+            ]
+          }
+        },
+        "changeFloor": {
+          "6,1": { "floorId": "MT22", "stair": "upFloor" },
+          "6,7": { "floorId": ":next", "stair": "downFloor" }
+        },
+        "afterBattle": {
+          "6,9": [
+            { "type": "moveHero", "time": 125, "steps": ["up"] },
+            { "type": "openDoor", "loc": [6, 8] }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 32, 4, 4, 4, 4, 88, 4, 4, 4, 4, 32, 3, 999, 0, 993, 3],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 998, 0, 992, 3],
+          [3, 4, 82, 4, 4, 26, 82, 26, 4, 4, 82, 4, 3, 997, 0, 991, 3],
+          [3, 0, 0, 0, 4, 4, 26, 4, 4, 0, 0, 0, 3, 996, 0, 990, 3],
+          [3, 0, 4, 228, 4, 4, 4, 4, 4, 228, 4, 0, 3, 995, 0, 989, 3],
+          [3, 0, 4, 228, 4, 4, 4, 4, 4, 228, 4, 0, 3, 994, 0, 988, 3],
+          [3, 31, 4, 228, 4, 4, 85, 4, 4, 228, 4, 31, 3, 21, 0, 987, 3],
+          [3, 31, 4, 247, 125, 4, 86, 4, 125, 247, 4, 31, 3, 22, 0, 986, 3],
+          [3, 31, 4, 4, 4, 4, 208, 4, 4, 4, 4, 31, 3, 23, 0, 985, 3],
+          [3, 0, 4, 4, 4, 247, 83, 247, 4, 4, 4, 0, 3, 0, 0, 0, 3],
+          [3, 228, 0, 32, 32, 0, 4, 0, 32, 32, 0, 228, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "downFloor": [6, 2],
+        "upFloor": [6, 2]
+      },
+      {
+        "id": "26",
+        "floorId": "MT_1",
+        "title": "地下层",
+        "name": "地下层",
+        "width": 13,
+        "height": 13,
+        "canFlyTo": false,
+        "canUseQuickShop": false,
+        "cannotViewMap": false,
+        "images": [],
+        "item_ratio": 1,
+        "defaultGround": "ground",
+        "bgm": "startText.mp3",
+        "firstArrive": [],
+        "eachArrive": [],
+        "parallelDo": "",
+        "events": {},
+        "changeFloor": {},
+        "afterBattle": {
+          "6,4": [
+            { "type": "hideStatusBar" },
+            { "type": "playSound", "name": "door.mp3" },
+            { "type": "setCurtain", "color": [0, 0, 0, 1], "time": 0 },
+            {
+              "type": "scrollText",
+              "text": "大魔头被杀死了,公主也被救出了塔,蝶仙的精力也恢复了\n当勇士和公主一起走出塔来的时候，\n国王也带着军队来到了岛外。一切都是那么地平常。\n回国后，国王为勇士和公主举行了隆重而且盛大的婚礼，\n并且宣布由勇士继承国王的位置。\n从此以后，勇士和公主就幸福地生活在一起了",
+              "time": 30000,
+              "lineHeight": 5
+            },
+            {
+              "type": "choices",
+              "text": "\t[请选择计分方式：,hero] ",
+              "choices": [
+                {
+                  "text": "生命值(尽量大)",
+                  "action": [
+                    {
+                      "type": "if",
+                      "condition": "status:lv<200",
+                      "true": [
+                        { "type": "win", "reason": "Normal End(HighHP)" }
+                      ],
+                      "false": [{ "type": "win", "reason": "True End(HighHP)" }]
+                    }
+                  ]
+                },
+                {
+                  "text": "攻防和(尽量大)",
+                  "action": [
+                    {
+                      "type": "setValue",
+                      "name": "status:hp",
+                      "value": "status:atk+status:def"
+                    },
+                    {
+                      "type": "if",
+                      "condition": "status:lv<200",
+                      "true": [
+                        { "type": "win", "reason": "Normal End(HighAD)" }
+                      ],
+                      "false": [{ "type": "win", "reason": "True End(HighAD)" }]
+                    }
+                  ]
+                },
+                {
+                  "text": "攻防和(尽量小)",
+                  "condition": "status:atk+status:def<10088",
+                  "action": [
+                    {
+                      "type": "setValue",
+                      "name": "status:hp",
+                      "value": "10088-status:atk-status:def"
+                    },
+                    {
+                      "type": "if",
+                      "condition": "status:lv<200",
+                      "true": [
+                        { "type": "win", "reason": "Normal End(LowAD)" }
+                      ],
+                      "false": [{ "type": "win", "reason": "True End(LowAD)" }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "afterGetItem": {},
+        "afterOpenDoor": {},
+        "cannotMove": {},
+        "map": [
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          [3, 5, 5, 5, 86, 86, 86, 86, 86, 5, 5, 5, 3, 999, 0, 993, 3],
+          [3, 5, 5, 5, 86, 189, 190, 191, 86, 5, 5, 5, 3, 998, 0, 992, 3],
+          [3, 5, 5, 5, 86, 192, 193, 194, 86, 5, 5, 5, 3, 997, 0, 991, 3],
+          [3, 5, 5, 5, 86, 195, 257, 196, 86, 5, 5, 5, 3, 996, 0, 990, 3],
+          [3, 5, 5, 5, 86, 86, 0, 86, 86, 5, 5, 5, 3, 995, 0, 989, 3],
+          [3, 5, 32, 32, 32, 32, 247, 32, 32, 32, 32, 5, 3, 994, 0, 988, 3],
+          [3, 5, 5, 5, 5, 5, 228, 5, 5, 5, 5, 5, 3, 21, 0, 987, 3],
+          [3, 5, 5, 5, 50, 228, 208, 228, 50, 5, 5, 5, 3, 22, 0, 986, 3],
+          [3, 5, 5, 5, 5, 5, 228, 5, 5, 5, 5, 5, 3, 23, 0, 985, 3],
+          [3, 5, 5, 5, 5, 32, 247, 32, 5, 5, 5, 5, 3, 0, 0, 0, 3],
+          [3, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 3, 0, 976, 0, 3],
+          [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        ],
+        "bgmap": [],
+        "fgmap": [],
+        "upFloor": null,
+        "downFloor": [6, 11]
+      }
+    ]
+  },
+  "blocksInfo": {
+    "npcs": {
+      "imgSrc": "npcs",
+      "maxAniFrame": 2,
+      "list": [
+        { "id": "man", "offsetY": 0 },
+        { "id": "woman", "offsetY": 1 },
+        { "id": "thief", "offsetY": 2 },
+        { "id": "fairy", "offsetY": 3 },
+        { "id": "magician", "offsetY": 4 },
+        { "id": "womanMagician", "offsetY": 5 },
+        { "id": "oldMan", "offsetY": 6 },
+        { "id": "child", "offsetY": 7 },
+        { "id": "wood", "offsetY": 8 },
+        { "id": "pinkShop", "offsetY": 9 },
+        { "id": "blueShop", "offsetY": 10 },
+        { "id": "princess", "offsetY": 11 },
+        { "id": "wlt", "offsetY": 12 },
+        { "id": "wt", "offsetY": 13 },
+        { "id": "wrt", "offsetY": 14 },
+        { "id": "wl", "offsetY": 15 },
+        { "id": "wc", "offsetY": 16 },
+        { "id": "wr", "offsetY": 17 },
+        { "id": "wlb", "offsetY": 18 },
+        { "id": "wrb", "offsetY": 19 },
+        { "id": "dlt", "offsetY": 20 },
+        { "id": "dt", "offsetY": 21 },
+        { "id": "drt", "offsetY": 22 },
+        { "id": "dl", "offsetY": 23 },
+        { "id": "dc", "offsetY": 24 },
+        { "id": "dr", "offsetY": 25 },
+        { "id": "dlb", "offsetY": 26 },
+        { "id": "drb", "offsetY": 27 }
+      ]
+    },
+    "animates": {
+      "imgSrc": "animates",
+      "maxAniFrame": 4,
+      "list": [
+        { "id": "star", "offsetY": 0 },
+        { "id": "lava", "offsetY": 1 },
+        { "id": "blueWater", "offsetY": 2 },
+        { "id": "water", "offsetY": 3 },
+        { "id": "yellowDoor", "offsetY": 4 },
+        { "id": "blueDoor", "offsetY": 5 },
+        { "id": "redDoor", "offsetY": 6 },
+        { "id": "greenDoor", "offsetY": 7 },
+        { "id": "specialDoor", "offsetY": 8 },
+        { "id": "steelDoor", "offsetY": 9 },
+        { "id": "yellowWall", "offsetY": 10 },
+        { "id": "whiteWall", "offsetY": 11 },
+        { "id": "blueWall", "offsetY": 12 },
+        { "id": "crystalUp", "offsetY": 13 },
+        { "id": "crystalBottom", "offsetY": 14 },
+        { "id": "starPortal", "offsetY": 15 },
+        { "id": "fire", "offsetY": 16 },
+        { "id": "portal", "offsetY": 17 },
+        { "id": "switch", "offsetY": 18 },
+        { "id": "lavaNet", "offsetY": 19 },
+        { "id": "poisonNet", "offsetY": 20 },
+        { "id": "weakNet", "offsetY": 21 },
+        { "id": "curseNet", "offsetY": 22 },
+        { "id": "downPortal", "offsetY": 23 },
+        { "id": "leftPortal", "offsetY": 24 },
+        { "id": "rightPortal", "offsetY": 25 },
+        { "id": "upPortal", "offsetY": 26 }
+      ]
+    },
+    "enemys": {
+      "maxAniFrame": 2,
+      "imgSrc": "enemys",
+      "list": [
+        {
+          "id": "greenSlime",
+          "name": "绿头怪",
+          "hp": 50,
+          "atk": 20,
+          "def": 1,
+          "money": 1,
+          "experience": 1,
+          "special": 0,
+          "offsetY": 0
+        },
+        {
+          "id": "redSlime",
+          "name": "红头怪",
+          "hp": 70,
+          "atk": 15,
+          "def": 2,
+          "money": 2,
+          "experience": 2,
+          "special": 0,
+          "offsetY": 1
+        },
+        {
+          "id": "blackSlime",
+          "name": "青头怪",
+          "hp": 200,
+          "atk": 35,
+          "def": 10,
+          "money": 5,
+          "experience": 5,
+          "special": 0,
+          "offsetY": 2
+        },
+        {
+          "id": "slimelord",
+          "name": "怪王",
+          "hp": 700,
+          "atk": 250,
+          "def": 125,
+          "money": 32,
+          "experience": 30,
+          "special": 0,
+          "offsetY": 3
+        },
+        {
+          "id": "bat",
+          "name": "小蝙蝠",
+          "hp": 100,
+          "atk": 20,
+          "def": 5,
+          "money": 3,
+          "experience": 3,
+          "special": 0,
+          "offsetY": 4
+        },
+        {
+          "id": "bigBat",
+          "name": "大蝙蝠",
+          "hp": 150,
+          "atk": 65,
+          "def": 30,
+          "money": 10,
+          "experience": 8,
+          "special": 0,
+          "offsetY": 5
+        },
+        {
+          "id": "redBat",
+          "name": "红蝙蝠",
+          "hp": 550,
+          "atk": 160,
+          "def": 90,
+          "money": 25,
+          "experience": 20,
+          "special": 0,
+          "offsetY": 6
+        },
+        {
+          "id": "vampire",
+          "name": "冥灵魔王",
+          "hp": 30000,
+          "atk": 1700,
+          "def": 1500,
+          "money": 250,
+          "experience": 220,
+          "special": 0,
+          "offsetY": 7
+        },
+        {
+          "id": "vampire2",
+          "name": "冥灵魔王",
+          "hp": 45000,
+          "atk": 2550,
+          "def": 2250,
+          "money": 312,
+          "experience": 275,
+          "special": 0,
+          "d": 1
+        },
+        {
+          "id": "vampire3",
+          "name": "冥灵魔王",
+          "hp": 60000,
+          "atk": 3400,
+          "def": 3000,
+          "money": 390,
+          "experience": 343,
+          "special": 0,
+          "d": 1
+        },
+        {
+          "id": "skeleton",
+          "name": "骷髅人",
+          "hp": 110,
+          "atk": 25,
+          "def": 5,
+          "money": 5,
+          "experience": 4,
+          "special": 0,
+          "offsetY": 8
+        },
+        {
+          "id": "skeletonSoilder",
+          "name": "骷髅士兵",
+          "hp": 150,
+          "atk": 40,
+          "def": 20,
+          "money": 8,
+          "experience": 6,
+          "special": 0,
+          "offsetY": 9
+        },
+        {
+          "id": "skeletonCaptain",
+          "name": "骷髅队长",
+          "hp": 400,
+          "atk": 90,
+          "def": 50,
+          "money": 15,
+          "experience": 12,
+          "special": 0,
+          "offsetY": 10
+        },
+        {
+          "id": "ghostSkeleton",
+          "name": "冥队长",
+          "hp": 2500,
+          "atk": 900,
+          "def": 850,
+          "money": 84,
+          "experience": 75,
+          "special": 0,
+          "offsetY": 11
+        },
+        {
+          "id": "zombie",
+          "name": "兽面人",
+          "hp": 300,
+          "atk": 75,
+          "def": 45,
+          "money": 13,
+          "experience": 10,
+          "special": 0,
+          "offsetY": 12
+        },
+        {
+          "id": "zombieKnight",
+          "name": "兽面武士",
+          "hp": 900,
+          "atk": 450,
+          "def": 330,
+          "money": 50,
+          "experience": 50,
+          "special": 0,
+          "offsetY": 13
+        },
+        {
+          "id": "rock",
+          "name": "石头人",
+          "hp": 500,
+          "atk": 115,
+          "def": 65,
+          "money": 15,
+          "experience": 15,
+          "special": 0,
+          "offsetY": 14
+        },
+        {
+          "id": "slimeMan",
+          "name": "影子战士",
+          "hp": 3100,
+          "atk": 1150,
+          "def": 1050,
+          "money": 92,
+          "experience": 80,
+          "special": 0,
+          "offsetY": 15
+        },
+        {
+          "id": "bluePriest",
+          "name": "初级法师",
+          "hp": 125,
+          "atk": 50,
+          "def": 25,
+          "money": 10,
+          "experience": 7,
+          "special": 0,
+          "offsetY": 16
+        },
+        {
+          "id": "redPriest",
+          "name": "高级法师",
+          "hp": 100,
+          "atk": 200,
+          "def": 110,
+          "money": 30,
+          "experience": 25,
+          "special": 0,
+          "offsetY": 17
+        },
+        {
+          "id": "brownWizard",
+          "name": "麻衣法师",
+          "hp": 250,
+          "atk": 120,
+          "def": 70,
+          "money": 20,
+          "experience": 17,
+          "special": 22,
+          "damage": 100,
+          "offsetY": 18
+        },
+        {
+          "id": "redWizard",
+          "name": "红衣法师",
+          "hp": 500,
+          "atk": 400,
+          "def": 260,
+          "money": 47,
+          "experience": 45,
+          "special": 22,
+          "damage": 300,
+          "offsetY": 19
+        },
+        {
+          "id": "yellowGuard",
+          "name": "初级卫兵",
+          "hp": 450,
+          "atk": 150,
+          "def": 90,
+          "money": 22,
+          "experience": 19,
+          "special": 0,
+          "offsetY": 20
+        },
+        {
+          "id": "blueGuard",
+          "name": "中级卫兵",
+          "hp": 1250,
+          "atk": 500,
+          "def": 400,
+          "money": 55,
+          "experience": 55,
+          "special": 0,
+          "offsetY": 21
+        },
+        {
+          "id": "redGuard",
+          "name": "高级卫兵",
+          "hp": 1500,
+          "atk": 560,
+          "def": 460,
+          "money": 60,
+          "experience": 60,
+          "special": 0,
+          "offsetY": 22
+        },
+        {
+          "id": "swordsman",
+          "name": "双手剑士",
+          "hp": 1200,
+          "atk": 620,
+          "def": 520,
+          "money": 65,
+          "experience": 75,
+          "special": 0,
+          "offsetY": 23
+        },
+        {
+          "id": "soldier",
+          "name": "冥战士",
+          "hp": 2000,
+          "atk": 680,
+          "def": 590,
+          "money": 70,
+          "experience": 65,
+          "special": 0,
+          "offsetY": 24
+        },
+        {
+          "id": "yellowKnight",
+          "name": "金卫士",
+          "hp": 850,
+          "atk": 350,
+          "def": 200,
+          "money": 45,
+          "experience": 40,
+          "special": 0,
+          "offsetY": 25
+        },
+        {
+          "id": "redKnight",
+          "name": "金队长",
+          "hp": 900,
+          "atk": 750,
+          "def": 650,
+          "money": 77,
+          "experience": 70,
+          "special": 0,
+          "offsetY": 26
+        },
+        {
+          "id": "darkKnight",
+          "name": "灵武士",
+          "hp": 1200,
+          "atk": 980,
+          "def": 900,
+          "money": 88,
+          "experience": 75,
+          "point": 0,
+          "special": 0,
+          "offsetY": 27
+        },
+        {
+          "id": "blackKing",
+          "name": "黑衣魔王",
+          "hp": 1000,
+          "atk": 500,
+          "def": 0,
+          "money": 1000,
+          "experience": 1000,
+          "point": 0,
+          "special": 0,
+          "notBomb": true,
+          "offsetY": 28
+        },
+        {
+          "id": "yellowKing",
+          "name": "黄衣魔王",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 29
+        },
+        {
+          "id": "greenKing",
+          "name": "青衣武士",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 30
+        },
+        {
+          "id": "blueKnight",
+          "name": "蓝骑士",
+          "hp": 100,
+          "atk": 120,
+          "def": 0,
+          "money": 9,
+          "experience": 0,
+          "point": 0,
+          "special": 8,
+          "offsetY": 31
+        },
+        {
+          "id": "goldSlime",
+          "name": "黄头怪",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 32
+        },
+        {
+          "id": "poisonSkeleton",
+          "name": "紫骷髅",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 33
+        },
+        {
+          "id": "poisonBat",
+          "name": "紫蝙蝠",
+          "hp": 100,
+          "atk": 120,
+          "def": 0,
+          "money": 14,
+          "experience": 0,
+          "point": 0,
+          "special": 13,
+          "offsetY": 34
+        },
+        {
+          "id": "steelRock",
+          "name": "铁面人",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 35
+        },
+        {
+          "id": "skeletonPriest",
+          "name": "骷髅法师",
+          "hp": 100,
+          "atk": 100,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 18,
+          "value": 20,
+          "offsetY": 36
+        },
+        {
+          "id": "skeletonKing",
+          "name": "骷髅王",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 37
+        },
+        {
+          "id": "skeletonWizard",
+          "name": "骷髅巫师",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 38
+        },
+        {
+          "id": "redSkeletonCaption",
+          "name": "骷髅武士",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 39
+        },
+        {
+          "id": "badHero",
+          "name": "迷失勇者",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 40
+        },
+        {
+          "id": "demon",
+          "name": "魔神武士",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 41
+        },
+        {
+          "id": "demonPriest",
+          "name": "魔神法师",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 42
+        },
+        {
+          "id": "goldHornSlime",
+          "name": "金角怪",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 43
+        },
+        {
+          "id": "redKing",
+          "name": "红衣魔王",
+          "hp": 15000,
+          "atk": 1000,
+          "def": 1000,
+          "money": 100,
+          "experience": 100,
+          "point": 0,
+          "special": 0,
+          "offsetY": 44
+        },
+        {
+          "id": "whiteKing",
+          "name": "白衣武士",
+          "hp": 1300,
+          "atk": 300,
+          "def": 150,
+          "money": 40,
+          "experience": 35,
+          "point": 0,
+          "special": 11,
+          "value": 4,
+          "offsetY": 45
+        },
+        {
+          "id": "blackMagician",
+          "name": "灵法师",
+          "hp": 1500,
+          "atk": 830,
+          "def": 730,
+          "money": 80,
+          "experience": 70,
+          "point": 0,
+          "special": 11,
+          "value": 3,
+          "add": false,
+          "notBomb": false,
+          "offsetY": 46
+        },
+        {
+          "id": "silverSlime",
+          "name": "银头怪",
+          "hp": 100,
+          "atk": 120,
+          "def": 0,
+          "money": 15,
+          "experience": 0,
+          "point": 0,
+          "special": 14,
+          "offsetY": 47
+        },
+        {
+          "id": "swordEmperor",
+          "name": "剑圣",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 48
+        },
+        {
+          "id": "whiteHornSlime",
+          "name": "尖角怪",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 49
+        },
+        {
+          "id": "badPrincess",
+          "name": "痛苦魔女",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 50
+        },
+        {
+          "id": "badFairy",
+          "name": "黑暗仙子",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 51
+        },
+        {
+          "id": "grayPriest",
+          "name": "中级法师",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 52
+        },
+        {
+          "id": "redSwordsman",
+          "name": "剑王",
+          "hp": 100,
+          "atk": 120,
+          "def": 0,
+          "money": 7,
+          "experience": 0,
+          "point": 0,
+          "special": 6,
+          "n": 8,
+          "offsetY": 53
+        },
+        {
+          "id": "whiteGhost",
+          "name": "水银战士",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 54
+        },
+        {
+          "id": "poisonZombie",
+          "name": "绿兽人",
+          "hp": 100,
+          "atk": 120,
+          "def": 0,
+          "money": 13,
+          "experience": 0,
+          "point": 0,
+          "special": 12,
+          "offsetY": 55
+        },
+        {
+          "id": "magicDragon",
+          "name": "魔龙",
+          "hp": 99999,
+          "atk": 9999,
+          "def": 5000,
+          "money": 0,
+          "experience": 0,
+          "special": 0,
+          "point": 0,
+          "offsetY": 56
+        },
+        {
+          "id": "octopus",
+          "name": "血影",
+          "hp": 99999,
+          "atk": 5000,
+          "def": 4000,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 57
+        },
+        {
+          "id": "darkFairy",
+          "name": "仙子",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 58
+        },
+        {
+          "id": "greenKnight",
+          "name": "强盾骑士",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "offsetY": 59
+        },
+        {
+          "id": "angel",
+          "name": "天使",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "d": 1
+        },
+        {
+          "id": "elemental",
+          "name": "元素生物",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 0,
+          "d": 1
+        },
+        {
+          "id": "steelGuard",
+          "name": "铁守卫",
+          "hp": 0,
+          "atk": 0,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": 18,
+          "value": 20,
+          "d": 1
+        },
+        {
+          "id": "evilBat",
+          "name": "邪恶蝙蝠",
+          "hp": 1000,
+          "atk": 1,
+          "def": 0,
+          "money": 0,
+          "experience": 0,
+          "point": 0,
+          "special": [2, 3],
+          "d": 1
+        }
+      ]
+    },
+    "items": {
+      "imgSrc": "items",
+      "list": [
+        {
+          "id": "yellowKey",
+          "offsetY": 0,
+          "cls": "store",
+          "name": "黄钥匙",
+          "text": "可以打开一扇黄门"
+        },
+        {
+          "id": "blueKey",
+          "offsetY": 1,
+          "cls": "store",
+          "name": "蓝钥匙",
+          "text": "可以打开一扇蓝门"
+        },
+        {
+          "id": "redKey",
+          "offsetY": 2,
+          "cls": "store",
+          "name": "红钥匙",
+          "text": "可以打开一扇红门"
+        },
+        {
+          "id": "greenKey",
+          "offsetY": 3,
+          "cls": "store",
+          "name": "绿钥匙",
+          "text": "可以打开一扇绿门"
+        },
+        {
+          "id": "steelKey",
+          "offsetY": 4,
+          "cls": "store",
+          "name": "铁门钥匙",
+          "text": "可以打开一扇铁门"
+        },
+        {
+          "id": "bigKey",
+          "offsetY": 6,
+          "cls": "store",
+          "name": "大黄门钥匙",
+          "text": "可以开启当前层所有黄门"
+        },
+        {
+          "id": "earthquake",
+          "offsetY": 8,
+          "cls": "store",
+          "name": "地震卷轴",
+          "text": "可以破坏当前层的所有墙"
+        },
+        {
+          "id": "book",
+          "offsetY": 9,
+          "cls": "constants",
+          "name": "圣光徽",
+          "text": "该宝物可以查看怪物的基本情况。使用时按下键盘上的L键便可查看，然后按X键则取消显示。"
+        },
+        { "id": "wand", "offsetY": 10, "cls": "use", "name": "新物品" },
+        {
+          "id": "coin",
+          "offsetY": 11,
+          "cls": "constants",
+          "name": "幸运金币",
+          "text": "持有时打败怪物可得双倍金币"
+        },
+        {
+          "id": "fly",
+          "offsetY": 12,
+          "cls": "constants",
+          "name": "风之罗盘",
+          "text": "该宝物可以随意在已经走过的楼层间自由上下。主角可使用J键在已经走过的楼层间进行跳跃。",
+          "hideInReplay": true
+        },
+        {
+          "id": "centerFly",
+          "offsetY": 13,
+          "cls": "use",
+          "name": "小飞羽",
+          "text": "可以飞向当前楼层中心对称的位置"
+        },
+        {
+          "id": "downFly",
+          "offsetY": 14,
+          "cls": "store",
+          "name": "下楼器",
+          "text": "可以飞往楼下的相同位置"
+        },
+        {
+          "id": "upFly",
+          "offsetY": 15,
+          "cls": "store",
+          "name": "上楼器",
+          "text": "可以飞往楼上的相同位置"
+        },
+        {
+          "id": "redJewel",
+          "offsetY": 16,
+          "cls": "use",
+          "name": "红宝石",
+          "text": "'，攻击+'+core.values.redJewel",
+          "effect": "hero:atk:3"
+        },
+        {
+          "id": "blueJewel",
+          "offsetY": 17,
+          "cls": "use",
+          "name": "蓝宝石",
+          "text": "'，防御+'+core.values.blueJewel",
+          "effect": "hero:def:3"
+        },
+        {
+          "id": "greenJewel",
+          "offsetY": 18,
+          "cls": "use",
+          "name": "绿宝石",
+          "text": "'，魔防+'+core.values.greenJewel"
+        },
+        {
+          "id": "yellowJewel",
+          "offsetY": 19,
+          "cls": "use",
+          "name": "黄宝石",
+          "text": "可以进行加点"
+        },
+        {
+          "id": "redPotion",
+          "offsetY": 20,
+          "cls": "use",
+          "name": "小血瓶",
+          "text": "'，生命+'+core.values.redPotion",
+          "effect": "hero:hp:200"
+        },
+        {
+          "id": "bluePotion",
+          "offsetY": 21,
+          "cls": "use",
+          "name": "大血瓶",
+          "text": "'，生命+'+core.values.bluePotion",
+          "effect": "hero:hp:500"
+        },
+        { "id": "greenPotion", "offsetY": 22 },
+        { "id": "yellowPotion", "offsetY": 23 },
+        {
+          "id": "poisonWine",
+          "offsetY": 24,
+          "cls": "store",
+          "name": "解毒药水",
+          "text": "可以解除中毒状态"
+        },
+        {
+          "id": "weakWine",
+          "offsetY": 25,
+          "cls": "store",
+          "name": "解衰药水",
+          "text": "可以解除衰弱状态"
+        },
+        {
+          "id": "curseWine",
+          "offsetY": 27,
+          "cls": "store",
+          "name": "解咒药水",
+          "text": "可以解除诅咒状态"
+        },
+        {
+          "id": "superWine",
+          "offsetY": 28,
+          "cls": "store",
+          "name": "万能药水",
+          "text": "可以解除所有不良状态"
+        },
+        { "id": "superPotion", "offsetY": 29, "cls": "use", "name": "圣水瓶" },
+        {
+          "id": "skill1",
+          "offsetY": 30,
+          "cls": "constants",
+          "name": "技能：二倍斩",
+          "text": "可以打开或关闭主动技能二倍斩",
+          "hideInReplay": true
+        },
+        {
+          "id": "lifeWand",
+          "offsetY": 33,
+          "cls": "store",
+          "name": "生命魔杖",
+          "text": "可以恢复100点生命值"
+        },
+        {
+          "id": "cross",
+          "offsetY": 40,
+          "cls": "constants",
+          "name": "幸运十字架",
+          "text": "把它交给序章中的仙子，可以将自身的所有能力提升一些（攻击、防御和生命值）。"
+        },
+        {
+          "id": "snow",
+          "offsetY": 41,
+          "cls": "constants",
+          "name": "冰冻徽章",
+          "text": "可以将面前的熔岩变成平地"
+        },
+        {
+          "id": "knife",
+          "offsetY": 42,
+          "cls": "constants",
+          "name": "屠龙匕首",
+          "text": "该道具尚未被定义"
+        },
+        {
+          "id": "bomb",
+          "offsetY": 43,
+          "cls": "store",
+          "name": "炸弹",
+          "text": "可以炸掉勇士面前的怪物"
+        },
+        {
+          "id": "icePickaxe",
+          "offsetY": 44,
+          "cls": "constants",
+          "name": "星光神锒",
+          "text": "把它交给第四层的小偷，小偷便会用它打开第十八层的隐藏地面（你就可以救出公主了）。"
+        },
+        {
+          "id": "pickaxe",
+          "offsetY": 45,
+          "cls": "store",
+          "name": "破墙镐",
+          "text": "可以破坏勇士面前的墙"
+        },
+        { "id": "moneyPocket", "offsetY": 46, "cls": "use", "name": "金块" },
+        {
+          "id": "shoes",
+          "offsetY": 47,
+          "cls": "constants",
+          "name": "绿鞋",
+          "text": "持有时无视负面地形"
+        },
+        {
+          "id": "hammer",
+          "offsetY": 48,
+          "cls": "store",
+          "name": "圣锤",
+          "text": "可以炸掉勇士面前的怪物"
+        },
+        {
+          "id": "jumpShoes",
+          "offsetY": 49,
+          "cls": "store",
+          "name": "跳跃靴",
+          "text": "能跳跃到前方两格处"
+        },
+        {
+          "id": "sword1",
+          "offsetY": 50,
+          "cls": "use",
+          "name": "铁剑",
+          "text": "一把很普通的铁剑",
+          "effect": "hero:atk:10",
+          "equip2": { "type": 0, "atk": 10, "animate": "sword" }
+        },
+        {
+          "id": "sword2",
+          "offsetY": 51,
+          "cls": "use",
+          "name": "银剑",
+          "text": "一把很普通的银剑",
+          "effect": "hero:atk:20",
+          "equip": { "type": 0, "atk": 20, "animate": "sword" }
+        },
+        {
+          "id": "sword3",
+          "offsetY": 52,
+          "cls": "use",
+          "name": "青锋剑",
+          "text": "一把很普通的骑士剑",
+          "effect": "hero:atk:500",
+          "equip": { "type": 0, "atk": 40, "animate": "sword" }
+        },
+        {
+          "id": "sword4",
+          "offsetY": 53,
+          "cls": "use",
+          "name": "圣剑",
+          "text": "一把很普通的圣剑",
+          "equip": { "type": 0, "atk": 80, "animate": "sword" }
+        },
+        {
+          "id": "sword5",
+          "offsetY": 54,
+          "cls": "use",
+          "name": "星光神剑",
+          "text": "一把很普通的神圣剑",
+          "effect": "hero:atk:500",
+          "equip": { "type": 0, "atk": 100, "animate": "sword" }
+        },
+        {
+          "id": "shield1",
+          "offsetY": 55,
+          "cls": "use",
+          "name": "铁盾",
+          "effect": "hero:def:500",
+          "text": "一个很普通的铁盾",
+          "equip": { "type": 1, "def": 10 }
+        },
+        {
+          "id": "shield2",
+          "offsetY": 56,
+          "cls": "use",
+          "name": "银盾",
+          "effect": "hero:def:500",
+          "text": "一个很普通的银盾",
+          "equip": { "type": 1, "def": 20 }
+        },
+        {
+          "id": "shield3",
+          "offsetY": 57,
+          "cls": "use",
+          "name": "黄金盾",
+          "effect": "hero:def:500",
+          "text": "一个很普通的骑士盾",
+          "equip": { "type": 1, "def": 40 }
+        },
+        {
+          "id": "shield4",
+          "offsetY": 58,
+          "cls": "use",
+          "name": "圣盾",
+          "effect": "hero:def:500",
+          "text": "一个很普通的圣盾",
+          "equip": { "type": 1, "def": 80 }
+        },
+        {
+          "id": "shield5",
+          "offsetY": 59,
+          "cls": "use",
+          "name": "光芒神盾",
+          "effect": "hero:def:500",
+          "text": "一个很普通的神圣盾",
+          "equip": { "type": 1, "def": 100, "mdef": 100 }
+        },
+        { "id": "sword0", "offsetY": 60 },
+        {
+          "id": "shield0",
+          "offsetY": 61,
+          "cls": "use",
+          "name": "破旧的盾",
+          "text": "一个很破旧的铁盾",
+          "effect": "hero:def:500",
+          "equip": { "type": 1, "def": 0 }
+        }
+      ]
+    },
+    "terrains": {
+      "imgSrc": "terrains",
+      "list": [
+        { "id": "ground", "offsetY": 0 },
+        { "id": "grass", "offsetY": 1 },
+        { "id": "grass2", "offsetY": 2 },
+        { "id": "yellowWall", "offsetY": 3 },
+        { "id": "whiteWall", "offsetY": 4 },
+        { "id": "blueWall", "offsetY": 5 },
+        { "id": "snowGround", "offsetY": 6 },
+        { "id": "ground2", "offsetY": 7 },
+        { "id": "ground3", "offsetY": 8 },
+        { "id": "ground4", "offsetY": 9 },
+        { "id": "sand", "offsetY": 10 },
+        { "id": "ground5", "offsetY": 11 },
+        { "id": "yellowWall2", "offsetY": 12 },
+        { "id": "whiteWall2", "offsetY": 13 },
+        { "id": "blueWall2", "offsetY": 14 },
+        { "id": "blockWall", "offsetY": 15 },
+        { "id": "grayWall", "offsetY": 16 },
+        { "id": "white", "offsetY": 17 },
+        { "id": "ground6", "offsetY": 18 },
+        { "id": "soil", "offsetY": 19 },
+        { "id": "ground7", "offsetY": 20 },
+        { "id": "ground8", "offsetY": 21 },
+        { "id": "ice", "offsetY": 22 },
+        { "id": "downFloor", "offsetY": 23 },
+        { "id": "upFloor", "offsetY": 24 },
+        { "id": "yellowDoor", "offsetY": 25 },
+        { "id": "blueDoor", "offsetY": 26 },
+        { "id": "redDoor", "offsetY": 27 },
+        { "id": "greenDoor", "offsetY": 28 },
+        { "id": "specialDoor", "offsetY": 29 },
+        { "id": "steelDoor", "offsetY": 30 },
+        { "id": "blueShop-left", "offsetY": 31 },
+        { "id": "blueShop-right", "offsetY": 32 },
+        { "id": "pinkShop-left", "offsetY": 33 },
+        { "id": "pinkShop-right", "offsetY": 34 },
+        { "id": "arrowUp", "offsetY": 35 },
+        { "id": "arrowDown", "offsetY": 36 },
+        { "id": "arrowLeft", "offsetY": 37 },
+        { "id": "arrowRight", "offsetY": 38 },
+        { "id": "light", "offsetY": 39 },
+        { "id": "darkLight", "offsetY": 40 },
+        { "id": "ski", "offsetY": 41 },
+        { "id": "flower", "offsetY": 42 },
+        { "id": "box", "offsetY": 43 },
+        { "id": "boxed", "offsetY": 44 }
+      ]
+    },
+    "icons": {
+      "imgSrc": "icons",
+      "list": [
+        { "id": "ground", "offsetY": 0 },
+        { "id": "hp", "offsetY": 1 },
+        { "id": "sword", "offsetY": 2 },
+        { "id": "exp", "offsetY": 3 },
+        { "id": "whiteWall", "offsetY": 4 },
+        { "id": "blueWall", "offsetY": 5 },
+        { "id": "snowGround", "offsetY": 6 },
+        { "id": "ground2", "offsetY": 7 },
+        { "id": "ground3", "offsetY": 8 },
+        { "id": "ground4", "offsetY": 9 },
+        { "id": "sand", "offsetY": 10 },
+        { "id": "ground5", "offsetY": 11 },
+        { "id": "yellowWall2", "offsetY": 12 },
+        { "id": "whiteWall2", "offsetY": 13 },
+        { "id": "blueWall2", "offsetY": 14 },
+        { "id": "blockWall", "offsetY": 15 },
+        { "id": "grayWall", "offsetY": 16 },
+        { "id": "white", "offsetY": 17 },
+        { "id": "ground6", "offsetY": 18 },
+        { "id": "soil", "offsetY": 19 },
+        { "id": "ground7", "offsetY": 20 }
+      ]
+    },
+    "heros": {
+      "imgSrc": "hero",
+      "list": [
+        {
+          "id": "ab",
+          "name": "啊帮",
+          "lv": 1,
+          "mdef": 0,
+          "money": 0,
+          "exp": 0,
+          "x": 6,
+          "y": 10,
+          "equipment": [],
+          "atk": 10,
+          "def": 10,
+          "hp": 1000,
+          "hpmax": 999999,
+          "maxAniFrame": 4,
+          "items": {
+            "yellowKey": 0,
+            "blueKey": 0,
+            "redKey": 0,
+            "constants": { "book": 1 },
+            "tools": {},
+            "equips": {}
+          },
+          "direction": "up",
+          "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
+          "height": 33,
+          "width": 32
+        }
+      ]
+    }
+  },
+  "sounds": {
     "bgms": [
       "title.wav",
       "startText.mp3",
@@ -56,358 +4020,6 @@
       "whiteKing.mp3",
       "blackMagician.mp3",
       "load.mp3"
-    ],
-    "nameMap": {},
-    "startBackground": "title.png",
-    "startLogoStyle": "display:none",
-    "levelChoose": [["", ""]],
-    "equipName": [],
-    "startBgm": "title.wav",
-    "statusLeftBackground": "url(project/images/ground.png) repeat",
-    "statusTopBackground": "url(project/images/ground.png) repeat",
-    "toolsBackground": "url(project/images/ground.png) repeat",
-    "borderColor": "white",
-    "statusBarColor": "white",
-    "hardLabelColor": "white",
-    "floorChangingBackground": "black",
-    "floorChangingTextColor": "white",
-    "font": "Verdana",
-    "startButtonsStyle": "background-color: #000000; opacity: 1; color: #FFFFFF; border: #000000 1px solid; caret-color: #FFFFFF;"
-  },
-  "firstData": {
-    "title": "24层魔塔",
-    "name": "24",
-    "version": "Ver 1.12",
-    "floorId": "MT0",
-    "startCanvas": [],
-    "startText": [
-      { "type": "pauseBgm" },
-      { "type": "hideStatusBar" },
-      {
-        "type": "confirm",
-        "default": true,
-        "text": "是否观看片头？（四十秒）",
-        "yes": [
-          { "type": "setVolume", "value": 0, "time": 0 },
-          { "type": "playBgm", "name": "startText.mp3" },
-          { "type": "setVolume", "value": 100, "time": 40000, "async": true },
-          {
-            "type": "scrollText",
-            "text": "这是一个很古老的故事\n在很久很久以前，在遥远的西方大地上，\n有着这样一个王国，\n王国虽小但全国的人们都生活得非常幸福和快乐。\n突然有一天，从天空飞来一群可怕的怪物，\n它们来到皇宫，抢走了国王唯一的女儿。\n第二天，国王便向全国下达了紧急令，\n只要谁能将公主给找回来，他便将王位让给他。\n于是，全国的勇士们都出发了。\n他们的足迹走遍了全国的各个角落，\n可一点儿线索都没有找到，时间很快就过去了一个月。\n终于，在国王命令下达的第三十一天，\n一个从远方归来的人告诉国王，\n说在海边的一座小岛上，曾看到一群怪物出现过。\n勇士们又出发了，可是，却没有一个人可以回来，\n有幸回来的，都再也不敢去了。\n而我们的故事，便是从这里开始……",
-            "time": 40,
-            "lineHeight": 2
-          }
-        ],
-        "no": [
-          {
-            "type": "function",
-            "function": "function(){\ncore.addItem('yellowKey');\ncore.addItem('blueKey');\ncore.addItem('redKey');\ncore.hideBlock(6, 9, 'MT0');\ncore.setBlock('fairy', 5, 9, 'MT0')\n}"
-          }
-        ]
-      },
-      {
-        "type": "setText",
-        "title": [255, 255, 255, 1],
-        "background": [0, 0, 0, 1]
-      }
-    ],
-    "shops": [
-      {
-        "id": "moneyShop1",
-        "name": " ",
-        "icon": "blueShop",
-        "textInList": "三楼商店",
-        "commonTimes": true,
-        "mustEnable": false,
-        "use": "money",
-        "need": "25",
-        "text": "想要增加你的能力吗？\\n如果你有25个金币，你可以任意选择一项：",
-        "choices": [
-          { "text": "增加800点生命", "effect": "status:hp+=800" },
-          { "text": "增加4点攻击", "effect": "status:atk+=4" },
-          { "text": "增加4点防御", "effect": "status:def+=4" }
-        ]
-      },
-      {
-        "id": "moneyShop2",
-        "name": " ",
-        "icon": "blueShop",
-        "textInList": "11楼商店",
-        "commonTimes": true,
-        "mustEnable": false,
-        "use": "money",
-        "need": "100",
-        "text": "想要增加你的能力吗？\\n如果你有100个金币，\\n你可以任意选择一项：",
-        "choices": [
-          { "text": "增加4000点生命", "effect": "status:hp+=4000" },
-          { "text": "增加20点攻击", "effect": "status:atk+=20" },
-          { "text": "增加20点防御", "effect": "status:def+=20" }
-        ]
-      },
-      {
-        "id": "expShop1",
-        "name": " ",
-        "icon": "man",
-        "textInList": "五楼老人",
-        "commonTimes": true,
-        "mustEnable": false,
-        "use": "experience",
-        "need": "-1",
-        "text": "你好，英雄的人类，只要你有足够的经验，我就可以让你变得更强大：",
-        "choices": [
-          {
-            "text": "提升一级",
-            "need": "100",
-            "effect": "status:lv+=1;status:hp+=1000;status:atk+=7;status:def+=7"
-          },
-          { "text": "增加攻击5", "need": "30", "effect": "status:atk+=5" },
-          { "text": "增加防御5", "need": "30", "effect": "status:def+=5" }
-        ]
-      },
-      {
-        "id": "expShop2",
-        "name": " ",
-        "icon": "man",
-        "textInList": "13楼老人",
-        "commonTimes": true,
-        "mustEnable": false,
-        "use": "experience",
-        "need": "-1",
-        "text": "你好，英雄的人类，只要你有足够的经验，我就可以让你变得更强大：",
-        "choices": [
-          {
-            "text": "提升三级",
-            "need": "270",
-            "effect": "status:lv+=3;status:hp+=3000;status:atk+=20;status:def+=20"
-          },
-          { "text": "增加攻击17", "need": "95", "effect": "status:atk+=17" },
-          { "text": "增加防御17", "need": "95", "effect": "status:def+=17" }
-        ]
-      },
-      {
-        "id": "keyShop1",
-        "name": " ",
-        "icon": "woman",
-        "textInList": "购入钥匙",
-        "commonTimes": true,
-        "mustEnable": false,
-        "use": "money",
-        "need": "-1",
-        "text": "相信你一定有特殊的需要，只要你有金币，我就可以帮你：",
-        "choices": [
-          {
-            "text": "购买1把黄钥匙",
-            "need": "10",
-            "effect": "item:yellowKey+=1"
-          },
-          {
-            "text": "购买1把蓝钥匙",
-            "need": "50",
-            "effect": "item:blueKey+=1"
-          },
-          { "text": "购买1把红钥匙", "need": "100", "effect": "item:redKey+=1" }
-        ]
-      },
-      {
-        "id": "keyShop2",
-        "textInList": "卖出钥匙",
-        "mustEnable": false,
-        "commonEvent": "回收钥匙商店"
-      }
-    ],
-    "levelUp": [{ "need": "0", "title": "", "action": [] }]
-  },
-  "values": {
-    "lavaDamage": 100,
-    "poisonDamage": 10,
-    "weakValue": 20,
-    "redJewel": 3,
-    "blueJewel": 3,
-    "greenJewel": 5,
-    "redPotion": 200,
-    "bluePotion": 500,
-    "yellowPotion": 500,
-    "greenPotion": 800,
-    "breakArmor": 0.9,
-    "counterAttack": 0.1,
-    "purify": 3,
-    "hatred": 2,
-    "moveSpeed": 125,
-    "animateSpeed": 300,
-    "floorChangeTime": 100
-  },
-  "flags": {
-    "enableFloor": true,
-    "enableName": false,
-    "enableLv": true,
-    "enableHPMax": false,
-    "enableMana": false,
-    "enableMDef": false,
-    "enableMoney": true,
-    "enableExperience": true,
-    "enableLevelUp": false,
-    "levelUpLeftMode": false,
-    "enableKeys": true,
-    "enablePZF": false,
-    "enableDebuff": false,
-    "enableSkill": false,
-    "flyNearStair": false,
-    "flyRecordPosition": false,
-    "pickaxeFourDirections": false,
-    "bombFourDirections": false,
-    "snowFourDirections": false,
-    "bigKeyIsBox": true,
-    "steelDoorWithoutKey": false,
-    "itemFirstText": false,
-    "equipment": false,
-    "equipboxButton": false,
-    "iconInEquipbox": false,
-    "enableAddPoint": false,
-    "enableNegativeDamage": false,
-    "hatredDecrease": true,
-    "betweenAttackCeil": false,
-    "betweenAttackMax": false,
-    "useLoop": false,
-    "startUsingCanvas": false,
-    "startDirectly": true,
-    "statusCanvas": false,
-    "statusCanvasRowsOnMobile": 3,
-    "displayEnemyDamage": true,
-    "displayCritical": true,
-    "displayExtraDamage": false,
-    "enableGentleClick": true,
-    "potionWhileRouting": false,
-    "ignoreChangeFloor": false,
-    "canGoDeadZone": false,
-    "enableMoveDirectly": true,
-    "enableDisabledShop": true,
-    "disableShopOnDamage": false,
-    "checkConsole": false
-  },
-  "resource": {
-    "map": {
-      "list": [
-        "MT0",
-        "MT1",
-        "MT2",
-        "MT3",
-        "MT4",
-        "MT5",
-        "MT6",
-        "MT7",
-        "MT8",
-        "MT9",
-        "MT10",
-        "MT11",
-        "MT12",
-        "MT13",
-        "MT14",
-        "MT15",
-        "MT16",
-        "MT17",
-        "MT18",
-        "MT19",
-        "MT20",
-        "MT21",
-        "MT22",
-        "MT23w",
-        "MT23e",
-        "MT23s",
-        "MT_1"
-      ],
-      "mapMapping": "mapMapping"
-    },
-    "enemys": "enemys",
-    "items": "items"
-  },
-  "maps": [
-    "MT0",
-    "MT1",
-    "MT2",
-    "MT3",
-    "MT4",
-    "MT5",
-    "MT6",
-    "MT7",
-    "MT8",
-    "MT9",
-    "MT10",
-    "MT11",
-    "MT12",
-    "MT13",
-    "MT14",
-    "MT15",
-    "MT16",
-    "MT17",
-    "MT18",
-    "MT19",
-    "MT20",
-    "MT21",
-    "MT22",
-    "MT23w",
-    "MT23e",
-    "MT23s",
-    "MT_1"
-  ],
-  "leftMenu": {
-    "floorId": "leftMenu",
-    "map": [
-      [3, 3, 3, 3],
-      [3, 0, 0, 0],
-      [3, 0, 0, 0],
-      [3, 0, 0, 0],
-      [3, 0, 0, 0],
-      [3, 0, 0, 0],
-      [3, 0, 0, 0],
-      [3, 21, 0, 0],
-      [3, 22, 0, 0],
-      [3, 23, 0, 0],
-      [3, 0, 0, 0],
-      [3, 0, 0, 0],
-      [3, 3, 3, 3]
     ]
-  },
-  "leftText": [
-    [0, 0, 0, 0],
-    [0, "等级", 0, "{hero.lv}"],
-    [0, "生命", 0, "{hero.hp}"],
-    [0, "攻击", 0, "{hero.atk}"],
-    [0, "防御", 0, "{hero.def}"],
-    [0, "金币", 0, "{hero.money}"],
-    [0, "经验", 0, "{hero.exp}"],
-    [0, 0, 0, "{hero.items.yellowKey}"],
-    [0, 0, 0, "{hero.items.blueKey}"],
-    [0, 0, 0, "{hero.items.redKey}"],
-    [0, 0, 0, 0],
-    [0, 0, "{gameData.map.title}", 0],
-    [0, 0, 0, 0]
-  ],
-  "hero": {
-    "name": "啊帮",
-    "lv": 1,
-    "mdef": 0,
-    "money": 0,
-    "exp": 0,
-    "x": 6,
-    "y": 3,
-    "equipment": [],
-    "atk": 10,
-    "def": 10,
-    "hp": 1000,
-    "hpmax": 999999,
-    "maxAniFrame": 4,
-    "items": {
-      "yellowKey": 0,
-      "blueKey": 0,
-      "redKey": 0,
-      "constants": { "book": 1 },
-      "tools": {},
-      "equips": {}
-    },
-    "direction": "up",
-    "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
-    "height": 33,
-    "width": 32
-  },
-  "config": {}
+  }
 }

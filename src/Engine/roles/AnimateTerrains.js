@@ -1,4 +1,4 @@
-import Block from "../base/block";
+import Block from "../Base/block";
 
 export default class Animate extends Block {
   constructor({ resource }, { id, ...others }) {

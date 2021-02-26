@@ -17,8 +17,8 @@ export default class UI {
   clearRect() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
-  drawRect(x, y, width, height = 20) {
-    this.context.fillStyle = "rgba(22, 155, 169, .7)";
+  drawRect(x, y, width, height = 20, style) {
+    this.context.fillStyle = style || "rgba(22, 155, 169, .7)";
     this.context.fillRect(x, y, width, height);
   }
   drawColorBox(box) {
@@ -29,15 +29,15 @@ export default class UI {
   drawText(box) {
     const { context } = this;
     const side = this.config.side;
-    const { img, offsetX, offsetY, x, y, height, width } = box;
-    this.context.beginPath();
-    context.strokeStyle = "#000";
-    context.stroke();
+    const { x, y } = box;
+    context.beginPath();
+    context.save()
     context.font = `16px '楷体'`; //设置字体
     context.fillStyle = "white";
-    context.textBaseline = "top";
+    context.textBaseline = "middle";
     context.textAlign = "center";
-    context.fillText(box.getText(), x * side + side / 2, y * side + 5);
+    context.fillText(box.getText(), x * side + side / 2, y * side + side / 2);
+    context.restore();
     context.closePath();
   }
 
@@ -56,26 +56,25 @@ export default class UI {
     context.restore();
   }
   drawGlobalMessage() {
-    const { context } = this;
-    context.save();
+    const { context, canvas } = this;
     if (this.globalMessage) {
       context.save();
       const size = 40;
-      this.context.font = `${size}px '微软雅黑'`; //设置字体
-      this.context.fillStyle = "rgba(244, 144, 123, .1)";
-      const offsetWidth = 30;
-      const offsetHeight = 10;
+      context.font = `${size}px '楷体'`; //设置字体
       const width = context.measureText(this.globalMessage).width;
+      const offsetHeight = 10;
+      const offsetWidth = 10;
       this.drawRect(
-        288  - width / 2 - offsetWidth,
-        50 - offsetHeight,
+        canvas.width / 2 - width / 2 - offsetWidth,
+        50 - size / 2 - offsetHeight,
         width + offsetWidth * 2,
-        size + 2 * offsetHeight
+        size + 2 * offsetHeight,
+        "rgba(155, 144, 255, .8)"
       );
-      this.context.textAlign = "center";
-      this.context.textBaseline = "top";
-      this.context.fillStyle = "red";
-      this.context.fillText(this.globalMessage, 288, 50);
+      context.textBaseline = "middle";
+      context.textAlign = "center";
+      context.fillStyle = "red";
+      context.fillText(this.globalMessage, canvas.width / 2, 50);
       this.tick++;
       if (this.tick > 30) {
         this.tick = 0;

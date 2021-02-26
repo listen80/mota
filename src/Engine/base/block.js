@@ -20,6 +20,7 @@ export default class Block {
 
     this.offsetX = offsetX;
     this.offsetY = offsetY;
+    // debugger
     this.x = x;
     this.y = y;
     this.height = height;
@@ -45,14 +46,13 @@ export default class Block {
       y: this.x - origin.x + origin.y,
     };
   }
-  set({ x, y }) {
-    this.x = x;
-    this.y = y;
+  set(setValue) {
+    Object.assign(this, setValue);
   }
   calc() {
     if (this.maxAniFrame) {
       this.frame += 1;
-      
+
       if (this.frame === this.maxAniFrame) {
         this.frame = 0;
         if (this.playCount) {
@@ -63,7 +63,9 @@ export default class Block {
       this.offsetX = this.frame;
     }
   }
-
+  destroy() {
+    this.died = true;
+  }
   draw(ui) {
     ui.drawBlock(this);
   }

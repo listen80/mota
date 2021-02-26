@@ -1,5 +1,5 @@
 // 我方
-import Block from "../base/block";
+import Block from "../Base/block";
 
 export default class Terrains extends Block {
   constructor({ resource }, { id, ...others }) {

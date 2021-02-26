@@ -1,84 +1,68 @@
 // 地图生成
 
-import Block from "./base/block";
-import Enemy from "./roles/Enemy";
-import Terrains from "./roles/Terrains";
-import AnimateTerrains from "./roles/AnimateTerrains";
-import Text from "./roles/Text";
-import Item from "./roles/Item";
-import Npc from "./roles/Npc";
+import Block from "./Base/Block";
+import Text from "./Roles/Text";
 import Layer from "./Layer";
 
 const cache = {};
 export default class Map {
-  constructor(game, map, textMap) {
-    const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0 } = map;
-    // if (floorId) {
-    //   if (cache[floorId]) {
-    //     return cache[floorId];
-    //   }
-    //   cache[floorId] = this;
-    // }
+  constructor(game, map) {
+    const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0, id } = map;
+    if (id) {
+      if (cache[id]) {
+        return cache[id];
+      }
+      cache[id] = this;
+    }
     this.backLayer = new Layer({ offsetX });
     this.mainLayer = new Layer({ offsetX });
     this.topLayer = new Layer({ offsetX });
-
+    this.config = map;
     this.layers = [this.backLayer, this.mainLayer, this.topLayer];
-    if (textMap) {
-      this.textLayer = new Layer({ offsetY });
-      this.layers.push(this.textLayer);
-    }
-    const { resource } = game;
+    const { mapsInfo, blocksInfo } = game;
     mapArray.forEach((line, y) => {
       line.forEach((value, x) => {
         if (value) {
-          const info = resource.mapMapping[value];
+          const info = mapsInfo.mapMapping[value];
           if (info) {
             const { cls, id } = info;
-            let Role = null;
-            if (cls === "animates-terrains") {
-              Role = AnimateTerrains;
-            } else if (cls === "terrains") {
-              Role = Terrains;
-            } else if (cls === "npcs") {
-              Role = Npc;
-            } else if (cls === "enemys") {
-              Role = Enemy;
-            } else if (cls === "items") {
-              Role = Item;
+            if (cls === "text") {
+              this.mainLayer.add(
+                new Text(game, {
+                  y,
+                  x,
+                  info,
+                  msg: id,
+                })
+              );
             } else {
-              console.error("未知的地图cls");
+              const { img, offsetY = 0, maxAniFrame = 0 } = blocksInfo[
+                cls
+              ].list[id];
+              this.mainLayer.add(
+                new Block({
+                  img, // 动画
+                  offsetY, // 动画
+                  maxAniFrame, // 动画
+                  x, // 坐标
+                  y, // 坐标
+                  info, // 游戏相关
+                })
+              );
             }
-            this.mainLayer.add(
-              new Role(game, {
-                x,
-                y,
-                id,
-                info,
-              })
-            );
           } else {
-            console.error("未知的地图元素");
+            console.error("未知的地图元素", "映射ID为", value);
           }
         } else {
           // 空地，显示背景
         }
         this.backLayer.add(
           new Block({
-            img: resource.images.terrains, // 图片用的是地形最上面一个
+            img: blocksInfo.terrains.list.ground.img, // 图片用的是地形最上面一个
             y,
             x,
           })
         );
-        if (textMap && typeof textMap[y][x] === "string") {
-          this.textLayer.add(
-            new Text(game, {
-              msg: textMap[y][x],
-              x,
-              y,
-            })
-          );
-        }
       });
     });
 
@@ -96,5 +80,8 @@ export default class Map {
   }
   add(block) {
     this.mainLayer.add(block);
+  }
+  get(...some) {
+    return this.mainLayer.find(...some);
   }
 }

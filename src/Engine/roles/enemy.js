@@ -1,4 +1,4 @@
-import Block from "../base/block";
+import Block from "../Base/block";
 
 export default class Enemy extends Block {
   constructor({ hero, resource }, { id, ...others }) {
