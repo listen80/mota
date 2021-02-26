@@ -3,26 +3,14 @@ const baseURL = "static";
 const loadResource = () => {
   return loadJSON(`${baseURL}/data.json`).then((data) => {
     // data.mapsInfo.list.forEach((r, index, arr) => {
-    //   const changeFloor = r.changeFloor;
-    //   Object.entries(changeFloor).forEach(([key, values]) => {
-    //     const { floorId: id } = values;
-
-    //     if (id === ":next") {
-    //       // changeFloor[key] = [arr[index+1].id, ...r["upFloor"]];
-    //       const before = arr[index + 1];
-    //       console.log(before.id, before.upFloor);
-    //       changeFloor[key] = [before.id, ...before.downFloor];
-    //     } else if (id === ":before") {
-    //       // debugger
-    //       const before = arr[index - 1];
-    //       console.log(before.id, before.upFloor);
-    //       changeFloor[key] = [before.id, ...before.upFloor];
-    //     } else {
-    //       changeFloor[key] = [id, 0, 0];
+    //   const map = r.map;
+    //   map.reduceRight((map, lineArr, lineNo) => {
+    //     if (lineNo === 1) {
+    //       lineArr[14] = 1000
     //     }
-    //   });
-    //   delete r.changeFloor;
-    //   r.portal = changeFloor;
+       
+    //     return map
+    //   }, map)
     // });
 
     // console.log(JSON.stringify(data))

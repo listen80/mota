@@ -23,8 +23,6 @@ export default class Hero extends Block {
       hp = 1000,
       hpmax = 999999,
       exp = 0,
-      maxAniFrame = 4,
-      img,
     } = config;
     super(config);
     this.name = name;
@@ -83,8 +81,11 @@ export default class Hero extends Block {
     this.exp += experience;
     this.money += money;
   }
-  getItem(some) {
+  getItem(some, num) {
     Object.keys(some).forEach((v) => {
+      if (!this.items[v]) {
+        this.items[v] = 0;
+      }
       this.items[v] += some[v];
     });
   }
@@ -237,10 +238,9 @@ export default class Hero extends Block {
   }
 
   handleItem(block) {
-    const { map, blocksInfo, ui, hero } = this.game;
-    const { mainLayer } = map;
+    const { blocksInfo, ui, hero } = this.game;
     const { info, x, y } = block;
-    const { id, cls, trigger } = info;
+    const { id } = info;
 
     block.destroy();
     hero.set({ x, y });
@@ -254,19 +254,14 @@ export default class Hero extends Block {
           game[lead][attribute] += parseInt(num);
           const fanyi = { atk: "攻击", def: "防御", hp: "生命" };
           console.log(
-            game[lead].name +
-              fanyi[attribute] +
-              (num > 0 ? "增加" : "减少") +
-              num
+            game[lead].name,
+            fanyi[attribute],
+            (num > 0 ? "增加" : "减少") + num
           );
         };
         getString(item.effect);
       } else if (item.equip) {
-        if (item.equip.type === 0) {
-          hero.battleInfo.atk += item.equip.atk;
-        } else if (item.equip.type === 1) {
-          hero.battleInfo.def += item.equip.def;
-        }
+        debugger;
       } else {
         debugger;
       }
