@@ -6,7 +6,7 @@ import Control from "./Control";
 import Hero from "./Roles/Hero";
 import loder from "../utils/loader";
 import Block from "./base/Block";
-import { setStorage, getStorage } from "../utils/utils";
+import { setStorage, getStorage, deepFreeze } from "../utils/utils";
 export default class Game {
   constructor() {
     const config = {
@@ -22,8 +22,6 @@ export default class Game {
     this.heros = [];
     loder().then((data) => {
       Object.assign(this, data);
-      // blocksInfo mapsInfo main sounds
-      // deepFreeze(this.resource);
       this.init();
     });
   }
@@ -41,6 +39,7 @@ export default class Game {
       return hero;
     }, null);
     this.hero.control = this.control;
+    this.control.push(this.hero);
     let mapId = main.firstData.mapId;
     if (true) {
       mapId = getStorage("mapId") || mapId;

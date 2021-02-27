@@ -105,15 +105,14 @@ export default class Hero extends Block {
   calc() {
     const { control } = this;
 
-    if (control) {
-      const { direction } = control;
-
+    if (control && control.isFocus(this)) {
       const DirToArr = {
         down: { x: 0, y: 1 },
         left: { x: -1, y: 0 },
         right: { x: 1, y: 0 },
         up: { x: 0, y: -1 },
       };
+      const { direction } = control;
       if (direction) {
         this.face(direction);
         // debugger;
@@ -233,15 +232,17 @@ export default class Hero extends Block {
     if (item.cls === "use") {
       if (item.effect) {
         const getString = (effect) => {
-          effect = effect.split(":");
-          const [lead, attribute, num] = effect;
-          game[lead][attribute] += parseInt(num);
-          const fanyi = { atk: "攻击", def: "防御", hp: "生命" };
-          console.log(
-            game[lead].name,
-            fanyi[attribute],
-            (num > 0 ? "增加" : "减少") + num
-          );
+          effect.split(',').forEach((effect) => {
+            effect = effect.split(":");
+            const [lead, attribute, num] = effect;
+            game[lead][attribute] += parseInt(num);
+            const fanyi = { atk: "攻击", def: "防御", hp: "生命", lv: "等级", exp: "经验", money: "金币" };
+            console.log(
+              game[lead].name,
+              fanyi[attribute],
+              (num > 0 ? "增加" : "减少") + num
+            );
+          })
         };
         getString(item.effect);
         return true
@@ -303,8 +304,9 @@ export default class Hero extends Block {
           run(event);
         } catch (e) {
           console.error(e)
+          console.log(event, events)
           try {
-            run(event, true);
+            // run(event, true);
           } catch (e) { }
         }
       });

@@ -1,5 +1,5 @@
 import { loadImage, loadJSON } from "./utils";
-const baseURL = "static";
+const baseURL = ".";
 const loadResource = () => {
   return loadJSON(`${baseURL}/data.json`).then((data) => {
     // data.mapsInfo.list.forEach((r, index, arr) => {

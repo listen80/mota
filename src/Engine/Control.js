@@ -10,9 +10,23 @@ export default class Control {
     this.Cancel_KEY = "ESC"
     this.restore();
     this.bind();
+    this.focusList = [];
   }
   bind() {
     document.addEventListener("keydown", this.keydown);
+  }
+  destroy() {
+    document.removeEventListener("keydown", this.keydown);
+  }
+  pop() {
+    return this.focusList.pop()
+  }
+  push(block) {
+    this.focusBlock = block
+    return this.focusList.push(block)
+  }
+  isFocus(block) {
+    return this.focusBlock === block
   }
   keydown = (e) => {
     const { code } = e;
@@ -30,8 +44,5 @@ export default class Control {
     this.confirm = false;
     this.cancel = false;
     this.cheat = true;
-  }
-  destroy() {
-    document.removeEventListener("keydown", this.keydown);
   }
 }
