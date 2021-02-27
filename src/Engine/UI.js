@@ -59,40 +59,41 @@ export default class UI {
     const { context, canvas } = this;
     if (this.globalMessage) {
       context.save();
-      const size = 40;
+      const size = 24;
       context.font = `${size}px '楷体'`; //设置字体
       const textWidth = context.measureText(this.globalMessage).width;
       const offsetHeight = 10;
       const offsetWidth = 10;
       context.save();
-      const width = 32 * 11;
-      context.translate((this.canvas.width - width) / 2 - offsetWidth, 32 * 2 - offsetHeight);
-      context.scale(this.tick / 30, this.tick / 30)
+      const width = textWidth;
+      context.translate((this.canvas.width) / 2, 32 * 2);
+      const maxTick = 40;
+      const aniMax = maxTick / 7
+      if (this.tick < aniMax) {
+        context.scale(this.tick / aniMax, 1)
+        // context.rotate(this.tick / aniMax * Math.PI * 2)
+      }
       //绘制圆角矩形的各个边  
-      console.log(this.globalMessage.length * 32)
-      this.drawRoundRectPath(context, width + offsetWidth * 2, this.globalMessage.length * 42 + offsetHeight, 25);
+      // console.log(this.globalMessage.length * 32)
+      this.drawRoundRectPath(context, width / 2, this.globalMessage.length * 28, 10);
       context.fillStyle = "rgba(155, 144, 255, .8)"; //若是给定了值就用给定的值否则给予默认值  
       context.fill();
-      context.restore();
       context.textBaseline = "middle";
       context.textAlign = "center";
-      context.fillStyle = "rgba(233, 166, 22, 1)";
-      const msgs = Array.isArray(this.globalMessage) ? this.globalMessage : [this.globalMessage]
+      context.fillStyle = "rgba(202, 154, 1, 1)";
       // console.log(msgs)
-      msgs.forEach((msg, i) => {
+      this.globalMessage.forEach((msg, i) => {
         // console.log(msg)
-        context.fillText(msg + "", canvas.width / 2, i * 42 + 64 + 20);
+        context.fillText(msg.join(''), 0, i * 28 + 14);
       })
+      context.restore();
       this.tick++;
-      if (this.tick > 30) {
+      if (this.tick > maxTick) {
         this.tick = 0;
         this.globalMessage = "";
       }
       context.restore();
-
-
     }
-
   }
   drawRoundRectPath(cxt, width, height, radius) {
 
@@ -104,13 +105,13 @@ export default class UI {
     cxt.lineTo(radius, height);
 
     //左下角圆弧，弧度从1/2PI到PI  
-    cxt.arc(radius, height - radius, radius, Math.PI / 2, Math.PI);
+    cxt.arc(radius - width, height - radius, radius, Math.PI / 2, Math.PI);
 
     //矩形左边线  
-    cxt.lineTo(0, radius);
+    cxt.lineTo(- width, radius);
 
     //左上角圆弧，弧度从PI到3/2PI  
-    cxt.arc(radius, radius, radius, Math.PI, Math.PI * 3 / 2);
+    cxt.arc(radius- width, radius, radius, Math.PI, Math.PI * 3 / 2);
 
     //上边线  
     cxt.lineTo(width - radius, 0);
@@ -122,7 +123,7 @@ export default class UI {
     cxt.lineTo(width, height - radius);
     cxt.closePath();
   }
-  alert(msg) {
+  alert(...msg) {
     this.globalMessage = msg;
     this.tick = 0;
   }

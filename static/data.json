@@ -145,7 +145,7 @@
           "commonEvent": "回收钥匙商店"
         }
       ],
-      "heros": ["al", "af", "ag"]
+      "heros": ["af", "al", "ag"]
     },
     "values": {
       "lavaDamage": 100,
@@ -3917,7 +3917,7 @@
         },
         {
           "id": "af",
-          "name": "啊福",
+          "name": "啊飞",
           "lv": 1,
           "mdef": 0,
           "money": 0,

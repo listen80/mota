@@ -206,17 +206,13 @@ export default class Hero extends Block {
       block.destroy();
       hero.kill(enemyInfo);
       hero.hp = lessHp;
-      const msgs = [
-        [hero.name, "击败", enemyInfo.name],
-        ["获得", enemyInfo.money, "金币"],
-        [enemyInfo.experience, "经验"]
-      ]
-      ui.alert(msgs);
+
+      ui.alert([hero.name, "击败", enemyInfo.name, "获得", enemyInfo.money, "金币", enemyInfo.experience, "经验"]);
       // ui.alert(hero.name,);
       // ui.alert(hero.name, "获得", enemyInfo.experience, "经验");
       return true;
     } else {
-      ui.alert(hero.name, "打不过", enemyInfo.name);
+      ui.alert([hero.name, "打不过", enemyInfo.name]);
       return false
     }
   }
@@ -228,7 +224,7 @@ export default class Hero extends Block {
 
     block.destroy();
     const item = blocksInfo.items.list[id];
-    ui.alert(hero.name, "获得", item.name);
+    ui.alert([hero.name, "获得", item.name]);
     if (item.cls === "use") {
       if (item.effect) {
         const getString = (effect) => {
@@ -284,6 +280,8 @@ export default class Hero extends Block {
       game.heros.forEach(hero => hero.set({ x, y }))
     }
     if (events) {
+      console.log(events)
+      return false
       const run = (event, dev) => {
         const { type, who, act } = event;
         if (dev) {
