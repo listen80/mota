@@ -75,9 +75,9 @@ export default class UI {
       context.textAlign = "center";
       context.fillStyle = "red";
       const msgs = Array.isArray(this.globalMessage) ? this.globalMessage : [this.globalMessage]
-      console.log(msgs)
+      // console.log(msgs)
       msgs.forEach((msg, i) => {
-        console.log(msg)
+        // console.log(msg)
         context.fillText(msg + "", canvas.width / 2, i * 42 + 32);
       })
       this.tick++;

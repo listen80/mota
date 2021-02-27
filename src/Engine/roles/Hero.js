@@ -1,4 +1,4 @@
-import { get, set } from "../../utils/utils";
+import { getStorage, setStorage } from "../../utils/utils";
 
 import Block from "../base/Block";
 
@@ -7,7 +7,7 @@ export default class Hero extends Block {
     if (true) {
       config = Object.assign(
         config,
-        get("hero", { x, y, direction, atk, def, hp, items })
+        getStorage("hero")
       );
     }
     const {
@@ -122,8 +122,8 @@ export default class Hero extends Block {
           this.setFollower();
           this.set(dist);
           // 新的状态
-          const { x, y, atk, def, hp, items } = this;
-          set("hero", { x, y, direction, atk, def, hp, items });
+          const { x, y, atk, def, hp, items, money, exp } = this;
+          setStorage("hero", { x, y, direction, atk, def, hp, items, money, exp });
         }
       }
     }

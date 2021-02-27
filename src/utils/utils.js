@@ -83,11 +83,11 @@ export const loadJSON = function (url) {
   });
 };
 
-export function set(key, value) {
+export function setStorage(key, value) {
   return localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function get(key) {
+export function getStorage(key) {
   try {
     return JSON.parse(localStorage.getItem(key));
   } catch (e) {

@@ -6,7 +6,7 @@ import Control from "./Control";
 import Hero from "./Roles/Hero";
 import loder from "../utils/loader";
 import Block from "./base/Block";
-import { set, get } from "../utils/utils";
+import { setStorage, getStorage } from "../utils/utils";
 export default class Game {
   constructor() {
     const config = {
@@ -43,7 +43,7 @@ export default class Game {
     this.hero.control = this.control;
     let mapId = main.firstData.mapId;
     if (true) {
-      mapId = get("mapId") || mapId;
+      mapId = getStorage("mapId") || mapId;
     }
     this.mapChange(mapId);
     this.gameStart();
@@ -53,7 +53,7 @@ export default class Game {
     const map = mapsInfo.list[id];
     if (map) {
       if (true) {
-        set("mapId", id);
+        setStorage("mapId", id);
       }
       this.createMap(map);
     }
