@@ -74,17 +74,22 @@ export default class UI {
       context.textBaseline = "middle";
       context.textAlign = "center";
       context.fillStyle = "red";
-      context.fillText(this.globalMessage, canvas.width / 2, 50);
+      const msgs = Array.isArray(this.globalMessage) ? this.globalMessage : [this.globalMessage]
+      console.log(msgs)
+      msgs.forEach((msg, i) => {
+        console.log(msg)
+        context.fillText(msg + "", canvas.width / 2, i * 42 + 32);
+      })
       this.tick++;
-      if (this.tick > 30) {
+      if (this.tick > 3000) {
         this.tick = 0;
         this.globalMessage = "";
       }
       context.restore();
     }
   }
-  alert(...msg) {
-    this.globalMessage = msg.join(" ");
+  alert(msg) {
+    this.globalMessage = msg;
     this.tick = 0;
   }
   drawImage(box) {

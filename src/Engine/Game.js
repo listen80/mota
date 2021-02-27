@@ -1,12 +1,12 @@
 // 模仿三国志曹操传 运气 敏捷 带兵
 // 物品 使用 放背包
-import Map from "./Engine/Map";
-import UI from "./Engine/UI";
-import Control from "./Engine/Control";
-import Hero from "./Engine/Roles/Hero";
-import loder from "./utils/loader";
-import Block from "./Engine/Base/Block";
-import { set, get } from "./utils/utils";
+import Map from "./Map";
+import UI from "./UI";
+import Control from "./Control";
+import Hero from "./Roles/Hero";
+import loder from "../utils/loader";
+import Block from "./base/Block";
+import { set, get } from "../utils/utils";
 export default class Game {
   constructor() {
     const config = {
@@ -33,16 +33,14 @@ export default class Game {
     document.title = main.firstData.title;
     this.ui = new UI(this);
     this.control = new Control();
-    this.hero = new Hero(this, this.blocksInfo.heros.list.ab, this.control);
-    main.firstData.heros.reduce((pre, heroId, i) => {
+    this.hero = main.firstData.heros.reduceRight((pre, heroId, i) => {
       const heroConfig = this.blocksInfo.heros.list[heroId];
-      let hero = new Hero(this, heroConfig, pre ? null : this.control);
+      let hero = new Hero(this, heroConfig);
       this.heros.push(hero);
-      if (pre) {
-        pre.follower = hero;
-      }
+      hero.follower = pre;
       return hero;
     }, null);
+    this.hero.control = this.control;
     let mapId = main.firstData.mapId;
     if (true) {
       mapId = get("mapId") || mapId;
@@ -50,7 +48,6 @@ export default class Game {
     this.mapChange(mapId);
     this.gameStart();
   }
-
   mapChange(id) {
     const { mapsInfo } = this;
     const map = mapsInfo.list[id];
@@ -63,8 +60,13 @@ export default class Game {
   }
 
   createMap(map) {
+    if (this.map) {
+      this.map.restoreHeroLayer()
+    }
     this.map = new Map(this, { ...map });
-    this.heros.forEach((hero) => this.map.add(hero));
+    this.heros.forEach((hero) => {
+      this.map.add(hero)
+    });
   }
 
   gameStop() {

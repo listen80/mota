@@ -26,7 +26,6 @@ const loadResource = () => {
       });
     });
 
-    console.log(KeyMap);
     return Promise.all(
       Object.keys(KeyMap).map((imgSrc) =>
         loadImage(`${baseURL}/images/${imgSrc}.png`)
@@ -42,7 +41,13 @@ const loadResource = () => {
           let res = top.list[x];
           top.list[res.id] = res;
           res.img = KeyMap[res.imgSrc || top.imgSrc];
-          res = Object.assign({}, top, res);
+          const { offsetY, maxAniFrame } = top;
+          if (res.offsetY === undefined) {
+            res.offsetY = top.offsetY
+          }
+          if (res.maxAniFrame === undefined) {
+            res.maxAniFrame = top.maxAniFrame
+          }
         }
       });
       return data;

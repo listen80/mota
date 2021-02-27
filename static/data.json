@@ -1,7 +1,7 @@
 {
   "main": {
     "firstData": {
-      "title": "啊亮冒险记",
+      "title": "拯救啊亮",
       "name": "24",
       "version": "Ver 1.12",
       "mapId": "1",
@@ -3855,7 +3855,7 @@
       ]
     },
     "heros": {
-      "imgSrc": "hero",
+      "imgSrc": "ab",
       "list": [
         {
           "id": "ab",
