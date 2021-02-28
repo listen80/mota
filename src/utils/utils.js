@@ -12,12 +12,15 @@ export const loadImage = (src) => {
 
 export const loadSound = (src) => {
   return new Promise(function (resolve, reject) {
-    var image = new Audio();
-    image.onload = function () {
-      resolve(image);
+    var myaudio = new Audio();
+    myaudio.onload = function () {
+      resolve(myaudio);
     };
-    image.src = src;
-    image.error = reject;
+    myaudio.addEventListener("canplay", function () {
+      // this.play()
+      resolve(this)
+    })
+    myaudio.src = src;
   });
 };
 
@@ -34,11 +37,13 @@ export function loadScript(url, callback) {
   } else {
     //Others
     script.onload = function () {
+      head.removeChild(script);
       callback();
     };
   }
   script.src = url;
-  document.getElementsByTagName_r("head")[0].appendChild(script);
+  const head = document.getElementsByTagName_r("head")[0]
+  head.appendChild(script);
 }
 
 export const http = function (

@@ -45,11 +45,12 @@ const loadSounds = (data) => {
   const sounds = data.sounds.bgms.concat(data.sounds.sounds)
   Promise.all(
     sounds.map((sound) =>
-      loadSound(`${baseURL}/images/${sounds}.mp3`)
+    loadSound(`${baseURL}/sounds/${sound}`)
     )
-  ).then((sounds) => {
+    ).then((sounds) => {
+    debugger
     console.log(sounds)
-    return data;
+    return Promise.all(data);
   });
 }
 
