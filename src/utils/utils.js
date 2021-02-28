@@ -1,15 +1,23 @@
 export const loadImage = (src) => {
   return new Promise(function (resolve, reject) {
-    try {
-      var name = src;
-      var image = new Image();
-      image.onload = function () {
-        resolve(image);
-      };
-      image.src = src;
-    } catch (e) {
-      reject(null);
-    }
+    var image = new Image();
+    image.onload = function () {
+      resolve(image);
+    };
+    image.src = src;
+    image.error = reject;
+
+  });
+};
+
+export const loadSound = (src) => {
+  return new Promise(function (resolve, reject) {
+    var image = new Audio();
+    image.onload = function () {
+      resolve(image);
+    };
+    image.src = src;
+    image.error = reject;
   });
 };
 

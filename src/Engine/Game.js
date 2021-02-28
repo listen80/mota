@@ -31,8 +31,8 @@ export default class Game {
     document.title = main.firstData.title;
     this.ui = new UI(this);
     this.control = new Control();
-    this.hero = main.firstData.heros.reduceRight((pre, heroId, i) => {
-      const heroConfig = this.blocksInfo.heros.list[heroId];
+    this.hero = main.firstData.heros.reduceRight((pre, id, i) => {
+      const heroConfig = this.getBlockInfo({ cls: "heros", id })
       let hero = new Hero(this, heroConfig);
       this.heros.push(hero);
       hero.follower = pre;
@@ -85,6 +85,12 @@ export default class Game {
     this.map.nextFrame(ui);
     this.ui.drawGlobalMessage(); // 全局提示
     this.control.restore();
+  }
+
+  getBlockInfo(info) {
+    const { cls, id } = info
+    const clses = this.blocksInfo[cls]
+    return clses.list[id]
   }
 }
 

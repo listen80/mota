@@ -2,9 +2,7 @@
 export default class UI {
   constructor({ config }) {
     this.config = config;
-
     const { el, side, width, height } = this.config;
-    this.layers = {};
     const canvas = document.createElement("canvas");
     canvas.width = side * width;
     canvas.height = side * height;
@@ -61,11 +59,12 @@ export default class UI {
       context.save();
       const size = 24;
       context.font = `${size}px '楷体'`; //设置字体
-      const textWidth = context.measureText(this.globalMessage).width;
+      const msg = this.globalMessage + ''
+      const textWidth = context.measureText(msg).width;
       const offsetHeight = 10;
       const offsetWidth = 10;
       context.save();
-      const width = textWidth;
+      const width = textWidth + 20;
       context.translate((this.canvas.width) / 2, 32 * 2);
       const maxTick = 40;
       const aniMax = maxTick / 7
@@ -75,17 +74,14 @@ export default class UI {
       }
       //绘制圆角矩形的各个边  
       // console.log(this.globalMessage.length * 32)
-      this.drawRoundRectPath(context, width / 2, this.globalMessage.length * 28, 10);
+      const lineHeight = 28;
+      this.drawRoundRectPath(context, width / 2, this.globalMessage.length * lineHeight, 10);
       context.fillStyle = "rgba(155, 144, 255, .8)"; //若是给定了值就用给定的值否则给予默认值  
       context.fill();
       context.textBaseline = "middle";
       context.textAlign = "center";
-      context.fillStyle = "rgba(202, 154, 1, 1)";
-      // console.log(msgs)
-      this.globalMessage.forEach((msg, i) => {
-        // console.log(msg)
-        context.fillText(msg.join(''), 0, i * 28 + 14);
-      })
+      context.fillStyle = "red";
+      context.fillText(msg, 0, 0 * lineHeight + lineHeight / 2);
       context.restore();
       this.tick++;
       if (this.tick > maxTick) {
@@ -111,7 +107,7 @@ export default class UI {
     cxt.lineTo(- width, radius);
 
     //左上角圆弧，弧度从PI到3/2PI  
-    cxt.arc(radius- width, radius, radius, Math.PI, Math.PI * 3 / 2);
+    cxt.arc(radius - width, radius, radius, Math.PI, Math.PI * 3 / 2);
 
     //上边线  
     cxt.lineTo(width - radius, 0);

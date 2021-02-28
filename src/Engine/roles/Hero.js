@@ -179,7 +179,7 @@ export default class Hero extends Block {
         );
       } else {
         const item = blocksInfo.items.list[need];
-        ui.alert(hero.name, "没有", item.name);
+        ui.alert([hero.name, "没有", item.name].join(''));
       }
     }
   }
@@ -207,7 +207,7 @@ export default class Hero extends Block {
       hero.kill(enemyInfo);
       hero.hp = lessHp;
 
-      ui.alert([hero.name, "击败", enemyInfo.name, "获得", enemyInfo.money, "金币", enemyInfo.experience, "经验"]);
+      ui.alert([hero.name, "击败", enemyInfo.name, "，获得", enemyInfo.money, "金币", enemyInfo.experience, "经验"].join(''));
       // ui.alert(hero.name,);
       // ui.alert(hero.name, "获得", enemyInfo.experience, "经验");
       return true;
