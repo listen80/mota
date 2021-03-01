@@ -64,6 +64,7 @@ export default class Game {
       this.sounds[this.map.config.bgm].pause();
     }
     this.map = new Map(this, { ...map });
+    this.sounds["floor.mp3"].play()
     const bgm = this.sounds[map.bgm];
     bgm.loop = true;
     bgm.play();

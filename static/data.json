@@ -145,7 +145,7 @@
           "commonEvent": "回收钥匙商店"
         }
       ],
-      "heros": ["af", "al", "ag"]
+      "heros": ["hero1", "hero2", "hero3"]
     },
     "values": {
       "lavaDamage": 100,
@@ -3859,8 +3859,8 @@
       "imgSrc": "ag",
       "list": [
         {
-          "id": "ag",
-          "name": "啊刚",
+          "id": "hero1",
+          "name": "勇士",
           "lv": 1,
           "mdef": 0,
           "money": 0,
@@ -3887,8 +3887,8 @@
           "width": 32
         },
         {
-          "id": "al",
-          "name": "啊亮",
+          "id": "hero2",
+          "name": "勇士助手",
           "lv": 1,
           "mdef": 0,
           "money": 0,
@@ -3916,8 +3916,8 @@
           "imgSrc": "al"
         },
         {
-          "id": "af",
-          "name": "啊飞",
+          "id": "hero3",
+          "name": "勇士书童",
           "lv": 1,
           "mdef": 0,
           "money": 0,
