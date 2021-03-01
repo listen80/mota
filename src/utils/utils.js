@@ -13,9 +13,6 @@ export const loadImage = (src) => {
 export const loadSound = (src) => {
   return new Promise(function (resolve, reject) {
     var myaudio = new Audio();
-    myaudio.onload = function () {
-      resolve(myaudio);
-    };
     myaudio.addEventListener("canplay", function () {
       // this.play()
       resolve(this)
