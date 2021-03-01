@@ -165,6 +165,7 @@ export default class Hero extends Block {
       if (hero.removeItem(need)) {
         // 开门
         block.destroy();
+        this.game.sounds["door.mp3"].play()
         const { img, maxAniFrame, offsetY } = blocksInfo.animates.list[id];
         mainLayer.add(
           new Block({
@@ -205,6 +206,7 @@ export default class Hero extends Block {
     if (lessHp > 0) {
       block.destroy();
       hero.kill(enemyInfo);
+      this.game.sounds["attack.mp3"].play();
       hero.hp = lessHp;
 
       ui.alert([hero.name, "击败", enemyInfo.name, "，获得", enemyInfo.money, "金币", enemyInfo.experience, "经验"].join(''));
@@ -223,6 +225,7 @@ export default class Hero extends Block {
     const { id } = info;
 
     block.destroy();
+    this.game.sounds["item.mp3"].play()
     const item = blocksInfo.items.list[id];
     ui.alert([hero.name, "获得", item.name]);
     if (item.cls === "use") {

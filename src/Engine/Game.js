@@ -61,8 +61,12 @@ export default class Game {
   createMap(map) {
     if (this.map) {
       this.map.restoreHeroLayer()
+      this.sounds[this.map.config.bgm].pause();
     }
     this.map = new Map(this, { ...map });
+    const bgm = this.sounds[map.bgm];
+    bgm.loop = true;
+    bgm.play();
     this.heros.forEach((hero) => {
       this.map.add(hero)
     });
