@@ -1,15 +1,26 @@
 export const loadImage = (src) => {
   return new Promise(function (resolve, reject) {
-    try {
-      var name = src;
-      var image = new Image();
-      image.onload = function () {
-        resolve(image);
-      };
-      image.src = src;
-    } catch (e) {
-      reject(null);
-    }
+    var image = new Image();
+    image.onload = function () {
+      resolve(image);
+    };
+    image.src = src;
+    image.error = reject;
+
+  });
+};
+
+export const loadSound = (src) => {
+  return new Promise(function (resolve, reject) {
+    var myaudio = new Audio();
+    myaudio.onload = function () {
+      resolve(myaudio);
+    };
+    myaudio.addEventListener("canplay", function () {
+      // this.play()
+      resolve(this)
+    })
+    myaudio.src = src;
   });
 };
 
@@ -26,11 +37,13 @@ export function loadScript(url, callback) {
   } else {
     //Others
     script.onload = function () {
+      head.removeChild(script);
       callback();
     };
   }
   script.src = url;
-  document.getElementsByTagName_r("head")[0].appendChild(script);
+  const head = document.getElementsByTagName_r("head")[0]
+  head.appendChild(script);
 }
 
 export const http = function (
@@ -83,11 +96,11 @@ export const loadJSON = function (url) {
   });
 };
 
-export function set(key, value) {
+export function setStorage(key, value) {
   return localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function get(key) {
+export function getStorage(key) {
   try {
     return JSON.parse(localStorage.getItem(key));
   } catch (e) {

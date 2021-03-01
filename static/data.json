@@ -1,7 +1,7 @@
 {
   "main": {
     "firstData": {
-      "title": "啊亮冒险记",
+      "title": "魔塔",
       "name": "24",
       "version": "Ver 1.12",
       "mapId": "1",
@@ -145,7 +145,7 @@
           "commonEvent": "回收钥匙商店"
         }
       ],
-      "heros": ["ab", "al", "af"]
+      "heros": ["af", "al", "ag"]
     },
     "values": {
       "lavaDamage": 100,
@@ -3517,7 +3517,8 @@
           "offsetY": 13,
           "cls": "use",
           "name": "小飞羽",
-          "text": "可以飞向当前楼层中心对称的位置"
+          "text": "可以飞向当前楼层中心对称的位置",
+          "effect": "hero:lv:1,hero:hp:500,hero:atk:6,hero:def:5"
         },
         {
           "id": "downFly",
@@ -3667,7 +3668,7 @@
           "name": "破墙镐",
           "text": "可以破坏勇士面前的墙"
         },
-        { "id": "moneyPocket", "offsetY": 46, "cls": "use", "name": "金块" },
+        { "id": "moneyPocket", "offsetY": 46, "cls": "use", "name": "金块", "effect": "hero:money:300" },
         {
           "id": "shoes",
           "offsetY": 47,
@@ -3738,7 +3739,7 @@
           "offsetY": 55,
           "cls": "use",
           "name": "铁盾",
-          "effect": "hero:def:500",
+          "effect": "hero:def:10",
           "text": "一个很普通的铁盾",
           "equip": { "type": 1, "def": 10 }
         },
@@ -3747,7 +3748,7 @@
           "offsetY": 56,
           "cls": "use",
           "name": "银盾",
-          "effect": "hero:def:500",
+          "effect": "hero:def:20",
           "text": "一个很普通的银盾",
           "equip": { "type": 1, "def": 20 }
         },
@@ -3756,7 +3757,7 @@
           "offsetY": 57,
           "cls": "use",
           "name": "黄金盾",
-          "effect": "hero:def:500",
+          "effect": "hero:def:40",
           "text": "一个很普通的骑士盾",
           "equip": { "type": 1, "def": 40 }
         },
@@ -3765,7 +3766,7 @@
           "offsetY": 58,
           "cls": "use",
           "name": "圣盾",
-          "effect": "hero:def:500",
+          "effect": "hero:def:80",
           "text": "一个很普通的圣盾",
           "equip": { "type": 1, "def": 80 }
         },
@@ -3774,7 +3775,7 @@
           "offsetY": 59,
           "cls": "use",
           "name": "光芒神盾",
-          "effect": "hero:def:500",
+          "effect": "hero:def:100",
           "text": "一个很普通的神圣盾",
           "equip": { "type": 1, "def": 100, "mdef": 100 }
         },
@@ -3855,11 +3856,11 @@
       ]
     },
     "heros": {
-      "imgSrc": "hero",
+      "imgSrc": "ag",
       "list": [
         {
-          "id": "ab",
-          "name": "啊帮",
+          "id": "ag",
+          "name": "啊刚",
           "lv": 1,
           "mdef": 0,
           "money": 0,
@@ -3916,7 +3917,7 @@
         },
         {
           "id": "af",
-          "name": "啊福",
+          "name": "啊飞",
           "lv": 1,
           "mdef": 0,
           "money": 0,

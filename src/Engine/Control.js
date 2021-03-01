@@ -1,49 +1,49 @@
 export default class Control {
   constructor() {
-    this.KEY_MAP = {
-      KeyS: "down",
-      KeyW: "up",
-      KeyA: "left",
-      KeyD: "right",
+    this.DIR_KEY_MAP = {
+      ArrowDown: "down",
+      ArrowUp: "up",
+      ArrowLeft: "left",
+      ArrowRight: "right",
     };
+    this.Confirm_KEY = "Space"
+    this.Cancel_KEY = "ESC"
     this.restore();
     this.bind();
+    this.focusList = [];
   }
-
   bind() {
     document.addEventListener("keydown", this.keydown);
   }
+  destroy() {
+    document.removeEventListener("keydown", this.keydown);
+  }
+  pop() {
+    this.focusBlock = this.focusList.pop()
+    return this.focusBlock
+  }
+  push(block) {
+    this.focusBlock = block
+    return this.focusList.push(block)
+  }
+  isFocus(block) {
+    return this.focusBlock === block
+  }
   keydown = (e) => {
-    switch (e.code) {
-      case "PageDown":
-        // this.mapChange(-1);
-        break;
-      case "PageUp":
-        // this.mapChange(+1);
-        break;
-      case "KeyS":
-      case "KeyA":
-      case "KeyW":
-      case "KeyD":
-        this.direction = this.KEY_MAP[e.code];
-        break;
-      case "Space":
-        this.confirm = true;
-        break;
-      case "Esc":
-        this.cancel = true;
-        break;
-      case "KeyF":
-        this.cheat = true;
+    const { code } = e;
+    const { DIR_KEY_MAP, Confirm_KEY, Cancel_KEY } = this;
+    if (DIR_KEY_MAP[code]) {
+      this.direction = DIR_KEY_MAP[e.code];
+    } else if (code === Confirm_KEY) {
+      this.confirm = true;
+    } else if (code === Cancel_KEY) {
+      this.cancel = true;
     }
-  };
+  }
   restore() {
     this.direction = false;
     this.confirm = false;
     this.cancel = false;
     this.cheat = true;
-  }
-  destroy() {
-    document.removeEventListener("keydown", this.keydown);
   }
 }

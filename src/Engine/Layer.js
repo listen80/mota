@@ -10,7 +10,9 @@ export default class Layer {
   remove(block) {
     this.blocks.splice(this.blocks.indexOf(block), 1);
   }
-
+  removeAll() {
+    this.blocks.splice(0, this.blocks.length)
+  }
   add(block) {
     this.blocks.unshift(block);
   }

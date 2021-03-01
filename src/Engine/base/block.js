@@ -13,10 +13,11 @@ export default class Block {
 
     maxAniFrame = 0,
     playCount = 0,
-    interval = 23,
+    interval = 20,
     frame = -1,
     tick = -1
   }) {
+
     this.img = img;
 
     this.offsetX = offsetX;
@@ -53,21 +54,21 @@ export default class Block {
     Object.assign(this, setValue);
   }
   calc() {
+    // debugger
     if (this.maxAniFrame) {
       this.tick++
       
       if (this.tick % this.interval === 0) {
-        
         this.frame += 1;
-
         if (this.frame === this.maxAniFrame) {
           this.frame = 0;
           if (this.playCount) {
             this.died = true;
           }
         }
-  
+        // debugger
         this.offsetX = this.frame;
+        // console.log(this.offsetX)
       }
     }
   }
