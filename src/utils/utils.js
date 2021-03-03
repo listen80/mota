@@ -6,7 +6,6 @@ export const loadImage = (src) => {
     };
     image.src = src;
     image.error = reject;
-
   });
 };
 
@@ -14,9 +13,11 @@ export const loadSound = (src) => {
   return new Promise(function (resolve, reject) {
     var myaudio = new Audio();
     myaudio.addEventListener("canplay", function () {
-      // this.play()
-      resolve(this)
-    })
+      resolve(this);
+    });
+    myaudio.addEventListener("canplay", function () {
+      reject(this);
+    });
     myaudio.src = src;
   });
 };
@@ -39,7 +40,7 @@ export function loadScript(url, callback) {
     };
   }
   script.src = url;
-  const head = document.getElementsByTagName_r("head")[0]
+  const head = document.getElementsByTagName("head")[0];
   head.appendChild(script);
 }
 

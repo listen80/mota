@@ -30,8 +30,8 @@ const loadImages = (data) => {
         let res = top.list[x];
         top.list[res.id] = res;
         res.img = KeyMap[res.imgSrc || top.imgSrc];
-        if (res.offsetY === undefined) {
-          res.offsetY = top.offsetY;
+        if (res.imageOffsetY === undefined) {
+          res.imageOffsetY = top.imageOffsetY;
         }
         if (res.maxAniFrame === undefined) {
           res.maxAniFrame = top.maxAniFrame;

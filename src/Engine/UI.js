@@ -13,45 +13,33 @@ export default class UI {
     this.globalMessage = "";
   }
   clearRect() {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    const { context, canvas } = this;
+    context.clearRect(0, 0, canvas.width, canvas.height);
   }
-  drawRect(x, y, width, height = 20, style) {
-    this.context.fillStyle = style || "rgba(22, 155, 169, .7)";
-    this.context.fillRect(x, y, width, height);
-  }
-  drawColorBox(box) {
-    const { side } = this.config;
-    this.context.fillStyle = "rgba(255, 211, 222, .4)";
-    this.context.fillRect(box.x * side, box.y * side, side, side);
+  drawRect(box) {
+    const { context } = this;
+    const { x, y } = box;
+    context.fillStyle = "rgba(255, 211, 222, .4)";
+    context.fillRect(x, y, 50, 50);
   }
   drawText(box) {
     const { context } = this;
-    const side = this.config.side;
     const { x, y } = box;
-    context.beginPath();
-    context.save()
+
     context.font = `16px '楷体'`; //设置字体
     context.fillStyle = "white";
     context.textBaseline = "middle";
     context.textAlign = "center";
-    context.fillText(box.getText(), x * side + side / 2, y * side + side / 2);
+    context.fillText(box.getText(), x, y + 16);
     context.restore();
     context.closePath();
   }
 
-  translate({ offsetX = 0, offsetY = 0 }, next) {
-    const { context } = this;
-    context.save();
+  translate({ offsetX = 0, offsetY = 0 }) {
     context.translate(offsetX, offsetY);
-    next();
-    context.restore();
   }
-  rotate(angle, next) {
-    const { context } = this;
-    context.save();
+  rotate(angle) {
     context.rotate(angle);
-    next();
-    context.restore();
   }
   drawGlobalMessage() {
     const { context, canvas } = this;
@@ -59,24 +47,26 @@ export default class UI {
       context.save();
       const size = 24;
       context.font = `${size}px '楷体'`; //设置字体
-      const msg = this.globalMessage + ''
+      const msg = this.globalMessage + "";
       const textWidth = context.measureText(msg).width;
       const offsetHeight = 10;
       const offsetWidth = 10;
       context.save();
       const width = textWidth + 20;
-      context.translate((this.canvas.width) / 2, 32 * 2);
+      context.translate(this.canvas.width / 2, 32 * 2);
       const maxTick = 40;
-      const aniMax = maxTick / 7
+      const aniMax = maxTick / 7;
       if (this.tick < aniMax) {
-        context.scale(this.tick / aniMax, 1)
-        // context.rotate(this.tick / aniMax * Math.PI * 2)
+        context.scale(this.tick / aniMax, 1);
       }
-      //绘制圆角矩形的各个边  
-      // console.log(this.globalMessage.length * 32)
       const lineHeight = 28;
-      this.drawRoundRectPath(context, width / 2, this.globalMessage.length * lineHeight, 10);
-      context.fillStyle = "rgba(155, 144, 255, .8)"; //若是给定了值就用给定的值否则给予默认值  
+      this.drawRoundRectPath(
+        context,
+        width / 2,
+        this.globalMessage.length * lineHeight,
+        10
+      );
+      context.fillStyle = "rgba(155, 144, 255, .8)"; //若是给定了值就用给定的值否则给予默认值
       context.fill();
       context.textBaseline = "middle";
       context.textAlign = "center";
@@ -92,30 +82,14 @@ export default class UI {
     }
   }
   drawRoundRectPath(cxt, width, height, radius) {
-
     cxt.beginPath(0);
-    //从右下角顺时针绘制，弧度从0到1/2PI  
     cxt.arc(width - radius, height - radius, radius, 0, Math.PI / 2);
-
-    //矩形下边线  
     cxt.lineTo(radius, height);
-
-    //左下角圆弧，弧度从1/2PI到PI  
     cxt.arc(radius - width, height - radius, radius, Math.PI / 2, Math.PI);
-
-    //矩形左边线  
-    cxt.lineTo(- width, radius);
-
-    //左上角圆弧，弧度从PI到3/2PI  
-    cxt.arc(radius - width, radius, radius, Math.PI, Math.PI * 3 / 2);
-
-    //上边线  
+    cxt.lineTo(-width, radius);
+    cxt.arc(radius - width, radius, radius, Math.PI, (Math.PI * 3) / 2);
     cxt.lineTo(width - radius, 0);
-
-    //右上角圆弧  
-    cxt.arc(width - radius, radius, radius, Math.PI * 3 / 2, Math.PI * 2);
-
-    //右边线  
+    cxt.arc(width - radius, radius, radius, (Math.PI * 3) / 2, Math.PI * 2);
     cxt.lineTo(width, height - radius);
     cxt.closePath();
   }
@@ -124,30 +98,34 @@ export default class UI {
     this.tick = 0;
   }
   drawImage(box) {
-    const side = this.config.side;
-    const { img, offsetX, offsetY, x, y, height, width } = box;
+    const { img, offsetX, imageOffsetY, x, y, height, width } = box;
     this.context.drawImage(
       img,
       offsetX * width,
-      offsetY * height,
+      imageOffsetY * height,
       width,
       height,
-      x * side - (width - side) / 2, // 中间对齐
-      y * side - (height - side), // 脚着地
+      // x * 1 - (width - 1) / 2, // 中间对齐
+      x,
+      // y * 1 - (height - 1), // 脚着地,
+      y,
       width,
       height
     );
   }
 
   drawBlock(block) {
-    this.context.beginPath();
+    const { context } = this;
+    context.beginPath();
+    context.save();
     if (block.img) {
       this.drawImage(block);
     } else if (block.msg) {
       this.drawText(block);
     } else {
-      this.drawColorBox(block);
+      this.drawRect(block);
     }
-    this.context.closePath();
+    context.restore();
+    context.closePath();
   }
 }

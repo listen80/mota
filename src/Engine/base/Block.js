@@ -5,7 +5,7 @@ export default class Block {
     x = 0,
     y = 0,
     img,
-    offsetY = 0,
+    imageOffsetY = 0,
     offsetX = 0,
     info = null,
     width = 32,
@@ -15,21 +15,20 @@ export default class Block {
     playCount = 0,
     interval = 20,
     frame = -1,
-    tick = -1
+    tick = -1,
   }) {
-
     this.img = img;
 
     this.offsetX = offsetX;
-    this.offsetY = offsetY;
     // debugger
     this.x = x;
     this.y = y;
     this.height = height;
     this.width = width;
-
+    
     this.info = info;
-
+    
+    this.imageOffsetY = imageOffsetY;
     this.maxAniFrame = maxAniFrame;
     this.interval = interval;
     this.tick = 0;
@@ -53,11 +52,13 @@ export default class Block {
   set(setValue) {
     Object.assign(this, setValue);
   }
+  assign() {
+    Object.assign(this, setValue);
+    return this;
+  }
   calc() {
-    // debugger
     if (this.maxAniFrame) {
-      this.tick++
-      
+      this.tick++;
       if (this.tick % this.interval === 0) {
         this.frame += 1;
         if (this.frame === this.maxAniFrame) {
@@ -66,9 +67,7 @@ export default class Block {
             this.died = true;
           }
         }
-        // debugger
         this.offsetX = this.frame;
-        // console.log(this.offsetX)
       }
     }
   }

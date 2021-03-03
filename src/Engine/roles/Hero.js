@@ -1,17 +1,15 @@
 import { getStorage, setStorage } from "../../utils/utils";
-
 import Block from "../base/Block";
 
 export default class Hero extends Block {
   constructor(game, config, control) {
     if (true) {
-      config = Object.assign(
-        config,
-        getStorage("hero")
-      );
+      config = Object.assign(config, getStorage("hero"));
     }
     const {
       direction = "up",
+      vx = 8,
+      vy = 8,
       x = 6,
       y = 10,
       name = "勇士",
@@ -26,8 +24,12 @@ export default class Hero extends Block {
       follower = null,
     } = config;
     super(config);
+    // this.x = x * 32;
+    // this.y = y * 32;
     this.name = name;
 
+    this.vx = vx;
+    this.vy = vy;
     this.atk = atk;
     this.def = def;
     this.hp = hp;
@@ -48,6 +50,7 @@ export default class Hero extends Block {
     this.game = game;
     this.control = control;
     this.hero = true;
+    this.interval = 1;
   }
 
   face(direction) {
@@ -103,14 +106,16 @@ export default class Hero extends Block {
   }
 
   calc() {
-    const { control } = this;
-
+    const { control, vx, vy } = this;
+    if (control) {
+      console.log(control.direction)
+    }
     if (control && control.isFocus(this)) {
       const DirToArr = {
-        down: { x: 0, y: 1 },
-        left: { x: -1, y: 0 },
-        right: { x: 1, y: 0 },
-        up: { x: 0, y: -1 },
+        down: { x: 0, y: vy },
+        left: { x: -vx, y: 0 },
+        right: { x: vx, y: 0 },
+        up: { x: 0, y: -vy },
       };
       const { direction } = control;
       if (direction) {
@@ -122,7 +127,17 @@ export default class Hero extends Block {
           this.set(dist);
           // 新的状态
           const { x, y, atk, def, hp, items, money, exp } = this;
-          setStorage("hero", { x, y, direction, atk, def, hp, items, money, exp });
+          setStorage("hero", {
+            x,
+            y,
+            direction,
+            atk,
+            def,
+            hp,
+            items,
+            money,
+            exp,
+          });
         }
       }
     }
@@ -165,7 +180,7 @@ export default class Hero extends Block {
       if (hero.removeItem(need)) {
         // 开门
         block.destroy();
-        this.game.sounds["door.mp3"].play()
+        this.game.sounds["door.mp3"].play();
         const { img, maxAniFrame, offsetY } = blocksInfo.animates.list[id];
         mainLayer.add(
           new Block({
@@ -180,12 +195,12 @@ export default class Hero extends Block {
         );
       } else {
         const item = blocksInfo.items.list[need];
-        ui.alert([hero.name, "没有", item.name].join(''));
+        ui.alert([hero.name, "没有", item.name].join(""));
       }
     }
   }
   handleTerrains(block) {
-    return false
+    return false;
     // console.log("handleTerrains");
     // 地形，除了不能移动上去，没有可以处理的
   }
@@ -209,13 +224,24 @@ export default class Hero extends Block {
       this.game.sounds["attack.mp3"].play();
       hero.hp = lessHp;
 
-      ui.alert([hero.name, "击败", enemyInfo.name, "，获得", enemyInfo.money, "金币", enemyInfo.experience, "经验"].join(''));
+      ui.alert(
+        [
+          hero.name,
+          "击败",
+          enemyInfo.name,
+          "，获得",
+          enemyInfo.money,
+          "金币",
+          enemyInfo.experience,
+          "经验",
+        ].join("")
+      );
       // ui.alert(hero.name,);
       // ui.alert(hero.name, "获得", enemyInfo.experience, "经验");
       return true;
     } else {
       ui.alert([hero.name, "打不过", enemyInfo.name]);
-      return false
+      return false;
     }
   }
 
@@ -225,26 +251,33 @@ export default class Hero extends Block {
     const { id } = info;
 
     block.destroy();
-    this.game.sounds["item.mp3"].play()
+    this.game.sounds["item.mp3"].play();
     const item = blocksInfo.items.list[id];
     ui.alert([hero.name, "获得", item.name]);
     if (item.cls === "use") {
       if (item.effect) {
         const getString = (effect) => {
-          effect.split(',').forEach((effect) => {
+          effect.split(",").forEach((effect) => {
             effect = effect.split(":");
             const [lead, attribute, num] = effect;
             game[lead][attribute] += parseInt(num);
-            const fanyi = { atk: "攻击", def: "防御", hp: "生命", lv: "等级", exp: "经验", money: "金币" };
+            const fanyi = {
+              atk: "攻击",
+              def: "防御",
+              hp: "生命",
+              lv: "等级",
+              exp: "经验",
+              money: "金币",
+            };
             console.log(
               game[lead].name,
               fanyi[attribute],
               (num > 0 ? "增加" : "减少") + num
             );
-          })
+          });
         };
         getString(item.effect);
-        return true
+        return true;
       } else if (item.equip) {
         debugger;
       } else {
@@ -253,13 +286,13 @@ export default class Hero extends Block {
     } else if (item.cls === "store") {
       hero.items[id] = hero.items[id] || 0;
       hero.items[id]++;
-      return true
+      return true;
     }
   }
   setFollower() {
     const { follower, x, y, direction } = this;
     if (follower) {
-      this.follower.setFollower()
+      this.follower.setFollower();
       follower.set({ x, y });
       follower.face(direction);
     }
@@ -280,15 +313,15 @@ export default class Hero extends Block {
         id = mapsInfo.list.findIndex((m) => m.id === map.config.id) + 1;
       }
       game.mapChange(id);
-      game.heros.forEach(hero => hero.set({ x, y }))
+      game.heros.forEach((hero) => hero.set({ x, y }));
     }
     if (events) {
-      console.log(events)
-      return false
+      console.log(events);
+      return false;
       const run = (event, dev) => {
         const { type, who, act } = event;
         if (dev) {
-          debugger
+          debugger;
         }
         if (type === "eval") {
           act.reduce((who, s) => {
@@ -299,16 +332,16 @@ export default class Hero extends Block {
           }, this[who]);
         }
         delete this.map.e[[x, y]];
-      }
+      };
       events.forEach((event) => {
         try {
           run(event);
         } catch (e) {
-          console.error(e)
-          console.log(event, events)
+          console.error(e);
+          console.log(event, events);
           try {
             // run(event, true);
-          } catch (e) { }
+          } catch (e) {}
         }
       });
     } else if (block) {
@@ -316,11 +349,11 @@ export default class Hero extends Block {
       if (info) {
         return this.moveInfoBlock(block);
       } else if (block.hero) {
-        return true
+        return true;
       } else {
         // 没有info, 比如animate, 门打开的动作等, 一个动画，播放一次
         // 没有其他钩子了，不需要
-        return true
+        return true;
       }
     } else {
       return true;

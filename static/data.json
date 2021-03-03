@@ -2595,67 +2595,67 @@
       "imgSrc": "npcs",
       "maxAniFrame": 2,
       "list": [
-        { "id": "man", "offsetY": 0 },
-        { "id": "woman", "offsetY": 1 },
-        { "id": "thief", "offsetY": 2 },
-        { "id": "fairy", "offsetY": 3 },
-        { "id": "magician", "offsetY": 4 },
-        { "id": "womanMagician", "offsetY": 5 },
-        { "id": "oldMan", "offsetY": 6 },
-        { "id": "child", "offsetY": 7 },
-        { "id": "wood", "offsetY": 8 },
-        { "id": "pinkShop", "offsetY": 9 },
-        { "id": "blueShop", "offsetY": 10 },
-        { "id": "princess", "offsetY": 11 },
-        { "id": "wlt", "offsetY": 12 },
-        { "id": "wt", "offsetY": 13 },
-        { "id": "wrt", "offsetY": 14 },
-        { "id": "wl", "offsetY": 15 },
-        { "id": "wc", "offsetY": 16 },
-        { "id": "wr", "offsetY": 17 },
-        { "id": "wlb", "offsetY": 18 },
-        { "id": "wrb", "offsetY": 19 },
-        { "id": "dlt", "offsetY": 20 },
-        { "id": "dt", "offsetY": 21 },
-        { "id": "drt", "offsetY": 22 },
-        { "id": "dl", "offsetY": 23 },
-        { "id": "dc", "offsetY": 24 },
-        { "id": "dr", "offsetY": 25 },
-        { "id": "dlb", "offsetY": 26 },
-        { "id": "drb", "offsetY": 27 }
+        { "id": "man", "imageOffsetY": 0 },
+        { "id": "woman", "imageOffsetY": 1 },
+        { "id": "thief", "imageOffsetY": 2 },
+        { "id": "fairy", "imageOffsetY": 3 },
+        { "id": "magician", "imageOffsetY": 4 },
+        { "id": "womanMagician", "imageOffsetY": 5 },
+        { "id": "oldMan", "imageOffsetY": 6 },
+        { "id": "child", "imageOffsetY": 7 },
+        { "id": "wood", "imageOffsetY": 8 },
+        { "id": "pinkShop", "imageOffsetY": 9 },
+        { "id": "blueShop", "imageOffsetY": 10 },
+        { "id": "princess", "imageOffsetY": 11 },
+        { "id": "wlt", "imageOffsetY": 12 },
+        { "id": "wt", "imageOffsetY": 13 },
+        { "id": "wrt", "imageOffsetY": 14 },
+        { "id": "wl", "imageOffsetY": 15 },
+        { "id": "wc", "imageOffsetY": 16 },
+        { "id": "wr", "imageOffsetY": 17 },
+        { "id": "wlb", "imageOffsetY": 18 },
+        { "id": "wrb", "imageOffsetY": 19 },
+        { "id": "dlt", "imageOffsetY": 20 },
+        { "id": "dt", "imageOffsetY": 21 },
+        { "id": "drt", "imageOffsetY": 22 },
+        { "id": "dl", "imageOffsetY": 23 },
+        { "id": "dc", "imageOffsetY": 24 },
+        { "id": "dr", "imageOffsetY": 25 },
+        { "id": "dlb", "imageOffsetY": 26 },
+        { "id": "drb", "imageOffsetY": 27 }
       ]
     },
     "animates": {
       "imgSrc": "animates",
       "maxAniFrame": 4,
       "list": [
-        { "id": "star", "offsetY": 0 },
-        { "id": "lava", "offsetY": 1 },
-        { "id": "blueWater", "offsetY": 2 },
-        { "id": "water", "offsetY": 3 },
-        { "id": "yellowDoor", "offsetY": 4 },
-        { "id": "blueDoor", "offsetY": 5 },
-        { "id": "redDoor", "offsetY": 6 },
-        { "id": "greenDoor", "offsetY": 7 },
-        { "id": "specialDoor", "offsetY": 8 },
-        { "id": "steelDoor", "offsetY": 9 },
-        { "id": "yellowWall", "offsetY": 10 },
-        { "id": "whiteWall", "offsetY": 11 },
-        { "id": "blueWall", "offsetY": 12 },
-        { "id": "crystalUp", "offsetY": 13 },
-        { "id": "crystalBottom", "offsetY": 14 },
-        { "id": "starPortal", "offsetY": 15 },
-        { "id": "fire", "offsetY": 16 },
-        { "id": "portal", "offsetY": 17 },
-        { "id": "switch", "offsetY": 18 },
-        { "id": "lavaNet", "offsetY": 19 },
-        { "id": "poisonNet", "offsetY": 20 },
-        { "id": "weakNet", "offsetY": 21 },
-        { "id": "curseNet", "offsetY": 22 },
-        { "id": "downPortal", "offsetY": 23 },
-        { "id": "leftPortal", "offsetY": 24 },
-        { "id": "rightPortal", "offsetY": 25 },
-        { "id": "upPortal", "offsetY": 26 }
+        { "id": "star", "imageOffsetY": 0 },
+        { "id": "lava", "imageOffsetY": 1 },
+        { "id": "blueWater", "imageOffsetY": 2 },
+        { "id": "water", "imageOffsetY": 3 },
+        { "id": "yellowDoor", "imageOffsetY": 4 },
+        { "id": "blueDoor", "imageOffsetY": 5 },
+        { "id": "redDoor", "imageOffsetY": 6 },
+        { "id": "greenDoor", "imageOffsetY": 7 },
+        { "id": "specialDoor", "imageOffsetY": 8 },
+        { "id": "steelDoor", "imageOffsetY": 9 },
+        { "id": "yellowWall", "imageOffsetY": 10 },
+        { "id": "whiteWall", "imageOffsetY": 11 },
+        { "id": "blueWall", "imageOffsetY": 12 },
+        { "id": "crystalUp", "imageOffsetY": 13 },
+        { "id": "crystalBottom", "imageOffsetY": 14 },
+        { "id": "starPortal", "imageOffsetY": 15 },
+        { "id": "fire", "imageOffsetY": 16 },
+        { "id": "portal", "imageOffsetY": 17 },
+        { "id": "switch", "imageOffsetY": 18 },
+        { "id": "lavaNet", "imageOffsetY": 19 },
+        { "id": "poisonNet", "imageOffsetY": 20 },
+        { "id": "weakNet", "imageOffsetY": 21 },
+        { "id": "curseNet", "imageOffsetY": 22 },
+        { "id": "downPortal", "imageOffsetY": 23 },
+        { "id": "leftPortal", "imageOffsetY": 24 },
+        { "id": "rightPortal", "imageOffsetY": 25 },
+        { "id": "upPortal", "imageOffsetY": 26 }
       ]
     },
     "enemys": {
@@ -2671,7 +2671,7 @@
           "money": 1,
           "experience": 1,
           "special": 0,
-          "offsetY": 0
+          "imageOffsetY": 0
         },
         {
           "id": "redSlime",
@@ -2682,7 +2682,7 @@
           "money": 2,
           "experience": 2,
           "special": 0,
-          "offsetY": 1
+          "imageOffsetY": 1
         },
         {
           "id": "blackSlime",
@@ -2693,7 +2693,7 @@
           "money": 5,
           "experience": 5,
           "special": 0,
-          "offsetY": 2
+          "imageOffsetY": 2
         },
         {
           "id": "slimelord",
@@ -2704,7 +2704,7 @@
           "money": 32,
           "experience": 30,
           "special": 0,
-          "offsetY": 3
+          "imageOffsetY": 3
         },
         {
           "id": "bat",
@@ -2715,7 +2715,7 @@
           "money": 3,
           "experience": 3,
           "special": 0,
-          "offsetY": 4
+          "imageOffsetY": 4
         },
         {
           "id": "bigBat",
@@ -2726,7 +2726,7 @@
           "money": 10,
           "experience": 8,
           "special": 0,
-          "offsetY": 5
+          "imageOffsetY": 5
         },
         {
           "id": "redBat",
@@ -2737,7 +2737,7 @@
           "money": 25,
           "experience": 20,
           "special": 0,
-          "offsetY": 6
+          "imageOffsetY": 6
         },
         {
           "id": "vampire",
@@ -2748,7 +2748,7 @@
           "money": 250,
           "experience": 220,
           "special": 0,
-          "offsetY": 7
+          "imageOffsetY": 7
         },
         {
           "id": "vampire2",
@@ -2781,7 +2781,7 @@
           "money": 5,
           "experience": 4,
           "special": 0,
-          "offsetY": 8
+          "imageOffsetY": 8
         },
         {
           "id": "skeletonSoilder",
@@ -2792,7 +2792,7 @@
           "money": 8,
           "experience": 6,
           "special": 0,
-          "offsetY": 9
+          "imageOffsetY": 9
         },
         {
           "id": "skeletonCaptain",
@@ -2803,7 +2803,7 @@
           "money": 15,
           "experience": 12,
           "special": 0,
-          "offsetY": 10
+          "imageOffsetY": 10
         },
         {
           "id": "ghostSkeleton",
@@ -2814,7 +2814,7 @@
           "money": 84,
           "experience": 75,
           "special": 0,
-          "offsetY": 11
+          "imageOffsetY": 11
         },
         {
           "id": "zombie",
@@ -2825,7 +2825,7 @@
           "money": 13,
           "experience": 10,
           "special": 0,
-          "offsetY": 12
+          "imageOffsetY": 12
         },
         {
           "id": "zombieKnight",
@@ -2836,7 +2836,7 @@
           "money": 50,
           "experience": 50,
           "special": 0,
-          "offsetY": 13
+          "imageOffsetY": 13
         },
         {
           "id": "rock",
@@ -2847,7 +2847,7 @@
           "money": 15,
           "experience": 15,
           "special": 0,
-          "offsetY": 14
+          "imageOffsetY": 14
         },
         {
           "id": "slimeMan",
@@ -2858,7 +2858,7 @@
           "money": 92,
           "experience": 80,
           "special": 0,
-          "offsetY": 15
+          "imageOffsetY": 15
         },
         {
           "id": "bluePriest",
@@ -2869,7 +2869,7 @@
           "money": 10,
           "experience": 7,
           "special": 0,
-          "offsetY": 16
+          "imageOffsetY": 16
         },
         {
           "id": "redPriest",
@@ -2880,7 +2880,7 @@
           "money": 30,
           "experience": 25,
           "special": 0,
-          "offsetY": 17
+          "imageOffsetY": 17
         },
         {
           "id": "brownWizard",
@@ -2892,7 +2892,7 @@
           "experience": 17,
           "special": 22,
           "damage": 100,
-          "offsetY": 18
+          "imageOffsetY": 18
         },
         {
           "id": "redWizard",
@@ -2904,7 +2904,7 @@
           "experience": 45,
           "special": 22,
           "damage": 300,
-          "offsetY": 19
+          "imageOffsetY": 19
         },
         {
           "id": "yellowGuard",
@@ -2915,7 +2915,7 @@
           "money": 22,
           "experience": 19,
           "special": 0,
-          "offsetY": 20
+          "imageOffsetY": 20
         },
         {
           "id": "blueGuard",
@@ -2926,7 +2926,7 @@
           "money": 55,
           "experience": 55,
           "special": 0,
-          "offsetY": 21
+          "imageOffsetY": 21
         },
         {
           "id": "redGuard",
@@ -2937,7 +2937,7 @@
           "money": 60,
           "experience": 60,
           "special": 0,
-          "offsetY": 22
+          "imageOffsetY": 22
         },
         {
           "id": "swordsman",
@@ -2948,7 +2948,7 @@
           "money": 65,
           "experience": 75,
           "special": 0,
-          "offsetY": 23
+          "imageOffsetY": 23
         },
         {
           "id": "soldier",
@@ -2959,7 +2959,7 @@
           "money": 70,
           "experience": 65,
           "special": 0,
-          "offsetY": 24
+          "imageOffsetY": 24
         },
         {
           "id": "yellowKnight",
@@ -2970,7 +2970,7 @@
           "money": 45,
           "experience": 40,
           "special": 0,
-          "offsetY": 25
+          "imageOffsetY": 25
         },
         {
           "id": "redKnight",
@@ -2981,7 +2981,7 @@
           "money": 77,
           "experience": 70,
           "special": 0,
-          "offsetY": 26
+          "imageOffsetY": 26
         },
         {
           "id": "darkKnight",
@@ -2993,7 +2993,7 @@
           "experience": 75,
           "point": 0,
           "special": 0,
-          "offsetY": 27
+          "imageOffsetY": 27
         },
         {
           "id": "blackKing",
@@ -3006,7 +3006,7 @@
           "point": 0,
           "special": 0,
           "notBomb": true,
-          "offsetY": 28
+          "imageOffsetY": 28
         },
         {
           "id": "yellowKing",
@@ -3018,7 +3018,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 29
+          "imageOffsetY": 29
         },
         {
           "id": "greenKing",
@@ -3030,7 +3030,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 30
+          "imageOffsetY": 30
         },
         {
           "id": "blueKnight",
@@ -3042,7 +3042,7 @@
           "experience": 0,
           "point": 0,
           "special": 8,
-          "offsetY": 31
+          "imageOffsetY": 31
         },
         {
           "id": "goldSlime",
@@ -3054,7 +3054,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 32
+          "imageOffsetY": 32
         },
         {
           "id": "poisonSkeleton",
@@ -3066,7 +3066,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 33
+          "imageOffsetY": 33
         },
         {
           "id": "poisonBat",
@@ -3078,7 +3078,7 @@
           "experience": 0,
           "point": 0,
           "special": 13,
-          "offsetY": 34
+          "imageOffsetY": 34
         },
         {
           "id": "steelRock",
@@ -3090,7 +3090,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 35
+          "imageOffsetY": 35
         },
         {
           "id": "skeletonPriest",
@@ -3103,7 +3103,7 @@
           "point": 0,
           "special": 18,
           "value": 20,
-          "offsetY": 36
+          "imageOffsetY": 36
         },
         {
           "id": "skeletonKing",
@@ -3115,7 +3115,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 37
+          "imageOffsetY": 37
         },
         {
           "id": "skeletonWizard",
@@ -3127,7 +3127,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 38
+          "imageOffsetY": 38
         },
         {
           "id": "redSkeletonCaption",
@@ -3139,7 +3139,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 39
+          "imageOffsetY": 39
         },
         {
           "id": "badHero",
@@ -3151,7 +3151,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 40
+          "imageOffsetY": 40
         },
         {
           "id": "demon",
@@ -3163,7 +3163,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 41
+          "imageOffsetY": 41
         },
         {
           "id": "demonPriest",
@@ -3175,7 +3175,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 42
+          "imageOffsetY": 42
         },
         {
           "id": "goldHornSlime",
@@ -3187,7 +3187,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 43
+          "imageOffsetY": 43
         },
         {
           "id": "redKing",
@@ -3199,7 +3199,7 @@
           "experience": 100,
           "point": 0,
           "special": 0,
-          "offsetY": 44
+          "imageOffsetY": 44
         },
         {
           "id": "whiteKing",
@@ -3212,7 +3212,7 @@
           "point": 0,
           "special": 11,
           "value": 4,
-          "offsetY": 45
+          "imageOffsetY": 45
         },
         {
           "id": "blackMagician",
@@ -3227,7 +3227,7 @@
           "value": 3,
           "add": false,
           "notBomb": false,
-          "offsetY": 46
+          "imageOffsetY": 46
         },
         {
           "id": "silverSlime",
@@ -3239,7 +3239,7 @@
           "experience": 0,
           "point": 0,
           "special": 14,
-          "offsetY": 47
+          "imageOffsetY": 47
         },
         {
           "id": "swordEmperor",
@@ -3251,7 +3251,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 48
+          "imageOffsetY": 48
         },
         {
           "id": "whiteHornSlime",
@@ -3263,7 +3263,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 49
+          "imageOffsetY": 49
         },
         {
           "id": "badPrincess",
@@ -3275,7 +3275,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 50
+          "imageOffsetY": 50
         },
         {
           "id": "badFairy",
@@ -3287,7 +3287,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 51
+          "imageOffsetY": 51
         },
         {
           "id": "grayPriest",
@@ -3299,7 +3299,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 52
+          "imageOffsetY": 52
         },
         {
           "id": "redSwordsman",
@@ -3312,7 +3312,7 @@
           "point": 0,
           "special": 6,
           "n": 8,
-          "offsetY": 53
+          "imageOffsetY": 53
         },
         {
           "id": "whiteGhost",
@@ -3324,7 +3324,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 54
+          "imageOffsetY": 54
         },
         {
           "id": "poisonZombie",
@@ -3336,7 +3336,7 @@
           "experience": 0,
           "point": 0,
           "special": 12,
-          "offsetY": 55
+          "imageOffsetY": 55
         },
         {
           "id": "magicDragon",
@@ -3348,7 +3348,7 @@
           "experience": 0,
           "special": 0,
           "point": 0,
-          "offsetY": 56
+          "imageOffsetY": 56
         },
         {
           "id": "octopus",
@@ -3360,7 +3360,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 57
+          "imageOffsetY": 57
         },
         {
           "id": "darkFairy",
@@ -3372,7 +3372,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 58
+          "imageOffsetY": 58
         },
         {
           "id": "greenKnight",
@@ -3384,7 +3384,7 @@
           "experience": 0,
           "point": 0,
           "special": 0,
-          "offsetY": 59
+          "imageOffsetY": 59
         },
         {
           "id": "angel",
@@ -3442,71 +3442,71 @@
       "list": [
         {
           "id": "yellowKey",
-          "offsetY": 0,
+          "imageOffsetY": 0,
           "cls": "store",
           "name": "黄钥匙",
           "text": "可以打开一扇黄门"
         },
         {
           "id": "blueKey",
-          "offsetY": 1,
+          "imageOffsetY": 1,
           "cls": "store",
           "name": "蓝钥匙",
           "text": "可以打开一扇蓝门"
         },
         {
           "id": "redKey",
-          "offsetY": 2,
+          "imageOffsetY": 2,
           "cls": "store",
           "name": "红钥匙",
           "text": "可以打开一扇红门"
         },
         {
           "id": "greenKey",
-          "offsetY": 3,
+          "imageOffsetY": 3,
           "cls": "store",
           "name": "绿钥匙",
           "text": "可以打开一扇绿门"
         },
         {
           "id": "steelKey",
-          "offsetY": 4,
+          "imageOffsetY": 4,
           "cls": "store",
           "name": "铁门钥匙",
           "text": "可以打开一扇铁门"
         },
         {
           "id": "bigKey",
-          "offsetY": 6,
+          "imageOffsetY": 6,
           "cls": "store",
           "name": "大黄门钥匙",
           "text": "可以开启当前层所有黄门"
         },
         {
           "id": "earthquake",
-          "offsetY": 8,
+          "imageOffsetY": 8,
           "cls": "store",
           "name": "地震卷轴",
           "text": "可以破坏当前层的所有墙"
         },
         {
           "id": "book",
-          "offsetY": 9,
+          "imageOffsetY": 9,
           "cls": "constants",
           "name": "圣光徽",
           "text": "该宝物可以查看怪物的基本情况。使用时按下键盘上的L键便可查看，然后按X键则取消显示。"
         },
-        { "id": "wand", "offsetY": 10, "cls": "use", "name": "新物品" },
+        { "id": "wand", "imageOffsetY": 10, "cls": "use", "name": "新物品" },
         {
           "id": "coin",
-          "offsetY": 11,
+          "imageOffsetY": 11,
           "cls": "constants",
           "name": "幸运金币",
           "text": "持有时打败怪物可得双倍金币"
         },
         {
           "id": "fly",
-          "offsetY": 12,
+          "imageOffsetY": 12,
           "cls": "constants",
           "name": "风之罗盘",
           "text": "该宝物可以随意在已经走过的楼层间自由上下。主角可使用J键在已经走过的楼层间进行跳跃。",
@@ -3514,7 +3514,7 @@
         },
         {
           "id": "centerFly",
-          "offsetY": 13,
+          "imageOffsetY": 13,
           "cls": "use",
           "name": "小飞羽",
           "text": "可以飞向当前楼层中心对称的位置",
@@ -3522,21 +3522,21 @@
         },
         {
           "id": "downFly",
-          "offsetY": 14,
+          "imageOffsetY": 14,
           "cls": "store",
           "name": "下楼器",
           "text": "可以飞往楼下的相同位置"
         },
         {
           "id": "upFly",
-          "offsetY": 15,
+          "imageOffsetY": 15,
           "cls": "store",
           "name": "上楼器",
           "text": "可以飞往楼上的相同位置"
         },
         {
           "id": "redJewel",
-          "offsetY": 16,
+          "imageOffsetY": 16,
           "cls": "use",
           "name": "红宝石",
           "text": "'，攻击+'+core.values.redJewel",
@@ -3544,7 +3544,7 @@
         },
         {
           "id": "blueJewel",
-          "offsetY": 17,
+          "imageOffsetY": 17,
           "cls": "use",
           "name": "蓝宝石",
           "text": "'，防御+'+core.values.blueJewel",
@@ -3552,21 +3552,21 @@
         },
         {
           "id": "greenJewel",
-          "offsetY": 18,
+          "imageOffsetY": 18,
           "cls": "use",
           "name": "绿宝石",
           "text": "'，魔防+'+core.values.greenJewel"
         },
         {
           "id": "yellowJewel",
-          "offsetY": 19,
+          "imageOffsetY": 19,
           "cls": "use",
           "name": "黄宝石",
           "text": "可以进行加点"
         },
         {
           "id": "redPotion",
-          "offsetY": 20,
+          "imageOffsetY": 20,
           "cls": "use",
           "name": "小血瓶",
           "text": "'，生命+'+core.values.redPotion",
@@ -3574,46 +3574,46 @@
         },
         {
           "id": "bluePotion",
-          "offsetY": 21,
+          "imageOffsetY": 21,
           "cls": "use",
           "name": "大血瓶",
           "text": "'，生命+'+core.values.bluePotion",
           "effect": "hero:hp:500"
         },
-        { "id": "greenPotion", "offsetY": 22 },
-        { "id": "yellowPotion", "offsetY": 23 },
+        { "id": "greenPotion", "imageOffsetY": 22 },
+        { "id": "yellowPotion", "imageOffsetY": 23 },
         {
           "id": "poisonWine",
-          "offsetY": 24,
+          "imageOffsetY": 24,
           "cls": "store",
           "name": "解毒药水",
           "text": "可以解除中毒状态"
         },
         {
           "id": "weakWine",
-          "offsetY": 25,
+          "imageOffsetY": 25,
           "cls": "store",
           "name": "解衰药水",
           "text": "可以解除衰弱状态"
         },
         {
           "id": "curseWine",
-          "offsetY": 27,
+          "imageOffsetY": 27,
           "cls": "store",
           "name": "解咒药水",
           "text": "可以解除诅咒状态"
         },
         {
           "id": "superWine",
-          "offsetY": 28,
+          "imageOffsetY": 28,
           "cls": "store",
           "name": "万能药水",
           "text": "可以解除所有不良状态"
         },
-        { "id": "superPotion", "offsetY": 29, "cls": "use", "name": "圣水瓶" },
+        { "id": "superPotion", "imageOffsetY": 29, "cls": "use", "name": "圣水瓶" },
         {
           "id": "skill1",
-          "offsetY": 30,
+          "imageOffsetY": 30,
           "cls": "constants",
           "name": "技能：二倍斩",
           "text": "可以打开或关闭主动技能二倍斩",
@@ -3621,78 +3621,84 @@
         },
         {
           "id": "lifeWand",
-          "offsetY": 33,
+          "imageOffsetY": 33,
           "cls": "store",
           "name": "生命魔杖",
           "text": "可以恢复100点生命值"
         },
         {
           "id": "cross",
-          "offsetY": 40,
+          "imageOffsetY": 40,
           "cls": "constants",
           "name": "幸运十字架",
           "text": "把它交给序章中的仙子，可以将自身的所有能力提升一些（攻击、防御和生命值）。"
         },
         {
           "id": "snow",
-          "offsetY": 41,
+          "imageOffsetY": 41,
           "cls": "constants",
           "name": "冰冻徽章",
           "text": "可以将面前的熔岩变成平地"
         },
         {
           "id": "knife",
-          "offsetY": 42,
+          "imageOffsetY": 42,
           "cls": "constants",
           "name": "屠龙匕首",
           "text": "该道具尚未被定义"
         },
         {
           "id": "bomb",
-          "offsetY": 43,
+          "imageOffsetY": 43,
           "cls": "store",
           "name": "炸弹",
           "text": "可以炸掉勇士面前的怪物"
         },
         {
           "id": "icePickaxe",
-          "offsetY": 44,
+          "imageOffsetY": 44,
           "cls": "constants",
           "name": "星光神锒",
           "text": "把它交给第四层的小偷，小偷便会用它打开第十八层的隐藏地面（你就可以救出公主了）。"
         },
         {
           "id": "pickaxe",
-          "offsetY": 45,
+          "imageOffsetY": 45,
           "cls": "store",
           "name": "破墙镐",
           "text": "可以破坏勇士面前的墙"
         },
-        { "id": "moneyPocket", "offsetY": 46, "cls": "use", "name": "金块", "effect": "hero:money:300" },
+        {
+          "id": "moneyPocket",
+          "imageOffsetY": 46,
+          "cls": "use",
+          "name": "金块",
+          "effect": "hero:money:300"
+        },
         {
           "id": "shoes",
-          "offsetY": 47,
+          "imageOffsetY": 47,
           "cls": "constants",
           "name": "绿鞋",
           "text": "持有时无视负面地形"
         },
         {
           "id": "hammer",
-          "offsetY": 48,
+          "imageOffsetY": 48,
           "cls": "store",
           "name": "圣锤",
           "text": "可以炸掉勇士面前的怪物"
         },
         {
           "id": "jumpShoes",
-          "offsetY": 49,
+          "imageOffsetY": 49,
           "cls": "store",
           "name": "跳跃靴",
           "text": "能跳跃到前方两格处"
         },
         {
           "id": "sword1",
-          "offsetY": 50,
+          "imageOffsetY": 50,
           "cls": "use",
           "name": "铁剑",
           "text": "一把很普通的铁剑",
@@ -3701,7 +3707,7 @@
         },
         {
           "id": "sword2",
-          "offsetY": 51,
+          "imageOffsetY": 51,
           "cls": "use",
           "name": "银剑",
           "text": "一把很普通的银剑",
@@ -3710,7 +3716,7 @@
         },
         {
           "id": "sword3",
-          "offsetY": 52,
+          "imageOffsetY": 52,
           "cls": "use",
           "name": "青锋剑",
           "text": "一把很普通的骑士剑",
@@ -3719,7 +3725,7 @@
         },
         {
           "id": "sword4",
-          "offsetY": 53,
+          "imageOffsetY": 53,
           "cls": "use",
           "name": "圣剑",
           "text": "一把很普通的圣剑",
@@ -3727,7 +3733,7 @@
         },
         {
           "id": "sword5",
-          "offsetY": 54,
+          "imageOffsetY": 54,
           "cls": "use",
           "name": "星光神剑",
           "text": "一把很普通的神圣剑",
@@ -3736,7 +3742,7 @@
         },
         {
           "id": "shield1",
-          "offsetY": 55,
+          "imageOffsetY": 55,
           "cls": "use",
           "name": "铁盾",
           "effect": "hero:def:10",
@@ -3745,7 +3751,7 @@
         },
         {
           "id": "shield2",
-          "offsetY": 56,
+          "imageOffsetY": 56,
           "cls": "use",
           "name": "银盾",
           "effect": "hero:def:20",
@@ -3754,7 +3760,7 @@
         },
         {
           "id": "shield3",
-          "offsetY": 57,
+          "imageOffsetY": 57,
           "cls": "use",
           "name": "黄金盾",
           "effect": "hero:def:40",
@@ -3763,7 +3769,7 @@
         },
         {
           "id": "shield4",
-          "offsetY": 58,
+          "imageOffsetY": 58,
           "cls": "use",
           "name": "圣盾",
           "effect": "hero:def:80",
@@ -3772,17 +3778,17 @@
         },
         {
           "id": "shield5",
-          "offsetY": 59,
+          "imageOffsetY": 59,
           "cls": "use",
           "name": "光芒神盾",
           "effect": "hero:def:100",
           "text": "一个很普通的神圣盾",
           "equip": { "type": 1, "def": 100, "mdef": 100 }
         },
-        { "id": "sword0", "offsetY": 60 },
+        { "id": "sword0", "imageOffsetY": 60 },
         {
           "id": "shield0",
-          "offsetY": 61,
+          "imageOffsetY": 61,
           "cls": "use",
           "name": "破旧的盾",
           "text": "一个很破旧的铁盾",
@@ -3794,65 +3800,65 @@
     "terrains": {
       "imgSrc": "terrains",
       "list": [
-        { "id": "ground", "offsetY": 0 },
-        { "id": "grass", "offsetY": 1 },
-        { "id": "grass2", "offsetY": 2 },
-        { "id": "yellowWall", "offsetY": 3 },
-        { "id": "whiteWall", "offsetY": 4 },
-        { "id": "blueWall", "offsetY": 5 },
-        { "id": "snowGround", "offsetY": 6 },
-        { "id": "ground2", "offsetY": 7 },
-        { "id": "ground3", "offsetY": 8 },
-        { "id": "ground4", "offsetY": 9 },
-        { "id": "sand", "offsetY": 10 },
-        { "id": "ground5", "offsetY": 11 },
-        { "id": "yellowWall2", "offsetY": 12 },
-        { "id": "whiteWall2", "offsetY": 13 },
-        { "id": "blueWall2", "offsetY": 14 },
-        { "id": "blockWall", "offsetY": 15 },
-        { "id": "grayWall", "offsetY": 16 },
-        { "id": "white", "offsetY": 17 },
-        { "id": "ground6", "offsetY": 18 },
-        { "id": "soil", "offsetY": 19 },
-        { "id": "ground7", "offsetY": 20 },
-        { "id": "ground8", "offsetY": 21 },
-        { "id": "ice", "offsetY": 22 },
-        { "id": "downFloor", "offsetY": 23 },
-        { "id": "upFloor", "offsetY": 24 },
-        { "id": "yellowDoor", "offsetY": 25 },
-        { "id": "blueDoor", "offsetY": 26 },
-        { "id": "redDoor", "offsetY": 27 },
-        { "id": "greenDoor", "offsetY": 28 },
-        { "id": "specialDoor", "offsetY": 29 },
-        { "id": "steelDoor", "offsetY": 30 },
-        { "id": "blueShop-left", "offsetY": 31 },
-        { "id": "blueShop-right", "offsetY": 32 },
-        { "id": "pinkShop-left", "offsetY": 33 },
-        { "id": "pinkShop-right", "offsetY": 34 },
-        { "id": "arrowUp", "offsetY": 35 },
-        { "id": "arrowDown", "offsetY": 36 },
-        { "id": "arrowLeft", "offsetY": 37 },
-        { "id": "arrowRight", "offsetY": 38 },
-        { "id": "light", "offsetY": 39 },
-        { "id": "darkLight", "offsetY": 40 },
-        { "id": "ski", "offsetY": 41 },
-        { "id": "flower", "offsetY": 42 },
-        { "id": "box", "offsetY": 43 },
-        { "id": "boxed", "offsetY": 44 }
+        { "id": "ground", "imageOffsetY": 0 },
+        { "id": "grass", "imageOffsetY": 1 },
+        { "id": "grass2", "imageOffsetY": 2 },
+        { "id": "yellowWall", "imageOffsetY": 3 },
+        { "id": "whiteWall", "imageOffsetY": 4 },
+        { "id": "blueWall", "imageOffsetY": 5 },
+        { "id": "snowGround", "imageOffsetY": 6 },
+        { "id": "ground2", "imageOffsetY": 7 },
+        { "id": "ground3", "imageOffsetY": 8 },
+        { "id": "ground4", "imageOffsetY": 9 },
+        { "id": "sand", "imageOffsetY": 10 },
+        { "id": "ground5", "imageOffsetY": 11 },
+        { "id": "yellowWall2", "imageOffsetY": 12 },
+        { "id": "whiteWall2", "imageOffsetY": 13 },
+        { "id": "blueWall2", "imageOffsetY": 14 },
+        { "id": "blockWall", "imageOffsetY": 15 },
+        { "id": "grayWall", "imageOffsetY": 16 },
+        { "id": "white", "imageOffsetY": 17 },
+        { "id": "ground6", "imageOffsetY": 18 },
+        { "id": "soil", "imageOffsetY": 19 },
+        { "id": "ground7", "imageOffsetY": 20 },
+        { "id": "ground8", "imageOffsetY": 21 },
+        { "id": "ice", "imageOffsetY": 22 },
+        { "id": "downFloor", "imageOffsetY": 23 },
+        { "id": "upFloor", "imageOffsetY": 24 },
+        { "id": "yellowDoor", "imageOffsetY": 25 },
+        { "id": "blueDoor", "imageOffsetY": 26 },
+        { "id": "redDoor", "imageOffsetY": 27 },
+        { "id": "greenDoor", "imageOffsetY": 28 },
+        { "id": "specialDoor", "imageOffsetY": 29 },
+        { "id": "steelDoor", "imageOffsetY": 30 },
+        { "id": "blueShop-left", "imageOffsetY": 31 },
+        { "id": "blueShop-right", "imageOffsetY": 32 },
+        { "id": "pinkShop-left", "imageOffsetY": 33 },
+        { "id": "pinkShop-right", "imageOffsetY": 34 },
+        { "id": "arrowUp", "imageOffsetY": 35 },
+        { "id": "arrowDown", "imageOffsetY": 36 },
+        { "id": "arrowLeft", "imageOffsetY": 37 },
+        { "id": "arrowRight", "imageOffsetY": 38 },
+        { "id": "light", "imageOffsetY": 39 },
+        { "id": "darkLight", "imageOffsetY": 40 },
+        { "id": "ski", "imageOffsetY": 41 },
+        { "id": "flower", "imageOffsetY": 42 },
+        { "id": "box", "imageOffsetY": 43 },
+        { "id": "boxed", "imageOffsetY": 44 }
       ]
     },
     "icons": {
       "imgSrc": "icons",
       "list": [
-        { "id": "house", "offsetY": 0 },
-        { "id": "level", "offsetY": 1 },
-        { "id": "hp2", "offsetY": 2 },
-        { "id": "hp", "offsetY": 3 },
-        { "id": "sword", "offsetY": 4 },
-        { "id": "shield", "offsetY": 5 },
-        { "id": "cross", "offsetY": 6 },
-        { "id": "money", "offsetY": 7 },
-        { "id": "exp", "offsetY": 8 }
+        { "id": "house", "imageOffsetY": 0 },
+        { "id": "level", "imageOffsetY": 1 },
+        { "id": "hp2", "imageOffsetY": 2 },
+        { "id": "hp", "imageOffsetY": 3 },
+        { "id": "sword", "imageOffsetY": 4 },
+        { "id": "shield", "imageOffsetY": 5 },
+        { "id": "cross", "imageOffsetY": 6 },
+        { "id": "money", "imageOffsetY": 7 },
+        { "id": "exp", "imageOffsetY": 8 }
       ]
     },
     "heros": {

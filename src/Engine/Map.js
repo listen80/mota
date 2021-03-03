@@ -19,7 +19,12 @@ export default class Map {
     this.herosLayer = new Layer({ offsetX });
     this.topLayer = new Layer({ offsetX });
     this.config = map;
-    this.layers = [this.backLayer, this.mainLayer, this.herosLayer, this.topLayer];
+    this.layers = [
+      this.backLayer,
+      this.mainLayer,
+      this.herosLayer,
+      this.topLayer,
+    ];
     const { mapsInfo, blocksInfo } = game;
     mapArray.forEach((line, y) => {
       line.forEach((value, x) => {
@@ -36,8 +41,8 @@ export default class Map {
         this.backLayer.add(
           new Block({
             img: blocksInfo.terrains.list.ground.img, // 图片用的是地形最上面一个
-            y,
-            x,
+            y: y * 32,
+            x: x * 32,
           })
         );
       });
@@ -51,22 +56,22 @@ export default class Map {
     if (cls === "text") {
       this.mainLayer.add(
         new Text(game, {
-          y,
-          x,
+          y: y * 32,
+          x: x * 32,
           info,
           msg: id,
         })
       );
     } else {
       const blockInfo = blocksInfo[cls].list[id];
-      const { img, offsetY = 0, maxAniFrame = 0 } = blockInfo
+      const { img, imageOffsetY = 0, maxAniFrame = 0 } = blockInfo;
       this.mainLayer.add(
         new Block({
           img, // 动画
-          offsetY, // 动画
+          imageOffsetY, // 动画
           maxAniFrame, // 动画
-          x, // 坐标
-          y, // 坐标
+          x: x * 32, // 坐标
+          y: y * 32, // 坐标
           info, // 游戏相关
         })
       );

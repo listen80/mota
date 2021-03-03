@@ -4,17 +4,19 @@ export default class Text {
 
     this.x = x;
     this.y = y;
-
+    this.offsetY = 16;
+    this.offsetX = 0;
     this.msg = msg;
-    this.norml = true;
+    this.normal = true;
+
     const result = /\{([^}]+)\}/.exec(msg);
     if (result) {
       this.splitKeys = result[1].split(/\./);
-      this.norml = false;
+      this.normal = false;
     }
   }
   getText() {
-    if (this.norml) {
+    if (this.normal) {
       return this.msg;
     } else {
       try {
@@ -25,9 +27,8 @@ export default class Text {
         }
         return msg;
       } catch (e) {
-        this.norml = true;
-        debugger;
-        console.error(this.msg, "错误");
+        this.normal = true;
+        console.error("[Text]", this);
       }
     }
   }
