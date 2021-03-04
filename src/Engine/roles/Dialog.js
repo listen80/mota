@@ -31,35 +31,35 @@ export default class Dialog {
           textAlign: "start",
         },
       }),
-      new Text(game, {
-        x: 0,
-        y: 32,
-        msg: msg,
-        style: {
-          font: `20px '楷体'`, //设置字体
-          fillStyle: "white",
-          textBaseline: "middle",
-          textAlign: "start",
-        },
-      }),
-      new Text(game, {
-        x: 0,
-        y: 64,
-        msg: msg,
-        style: {
-          font: `20px '楷体'`, //设置字体
-          fillStyle: "white",
-          textBaseline: "middle",
-          textAlign: "start",
-        },
-      }),
+      // new Text(game, {
+      //   x: 0,
+      //   y: 32,
+      //   msg: msg,
+      //   style: {
+      //     font: `20px '楷体'`, //设置字体
+      //     fillStyle: "white",
+      //     textBaseline: "middle",
+      //     textAlign: "start",
+      //   },
+      // }),
+      // new Text(game, {
+      //   x: 0,
+      //   y: 64,
+      //   msg: msg,
+      //   style: {
+      //     font: `20px '楷体'`, //设置字体
+      //     fillStyle: "white",
+      //     textBaseline: "middle",
+      //     textAlign: "start",
+      //   },
+      // }),
     ];
     // this.scale = {
     //   x: 0.5,
     //   y: 0.5,
     // };
 
-    this.translate = { x: (game.map.config.width * 32 - x) / 2, y: 0 };
+    this.translate = { x: (game.map.config.width * 32 - x) / 2, y: 200 };
     // this.rotate = { angle: Math.PI / 2 * .01 };
   }
 

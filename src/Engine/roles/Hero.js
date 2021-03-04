@@ -121,8 +121,8 @@ export default class Hero extends Block {
       } else {
         this.x += this._x;
         this.y += this._y;
-        this.game.map.translate.x -= this._x;
-        this.game.map.translate.y -= this._y
+        // this.game.map.translate.x -= this._x;
+        // this.game.map.translate.y -= this._y
       }
     }
     if (!this.isMoving && control && control.isFocus(this)) {
