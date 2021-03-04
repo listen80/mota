@@ -8,10 +8,10 @@ const loadResource = () =>
 
 const loadImages = (data) => {
   const KeyMap = {};
-  Object.keys(data.blocksInfo).forEach((key) => {
-    const imgSrc = data.blocksInfo[key].imgSrc;
+  Object.keys(data.childrenInfo).forEach((key) => {
+    const imgSrc = data.childrenInfo[key].imgSrc;
     KeyMap[imgSrc] = null;
-    data.blocksInfo[key].list.forEach((item) => {
+    data.childrenInfo[key].list.forEach((item) => {
       if (item.imgSrc) {
         KeyMap[item.imgSrc] = null;
       }
@@ -24,8 +24,8 @@ const loadImages = (data) => {
     )
   ).then((images) => {
     Object.keys(KeyMap).forEach((key, index) => (KeyMap[key] = images[index]));
-    Object.keys(data.blocksInfo).forEach((key, resIndex) => {
-      const top = data.blocksInfo[key];
+    Object.keys(data.childrenInfo).forEach((key, resIndex) => {
+      const top = data.childrenInfo[key];
       for (let x in top.list) {
         let res = top.list[x];
         top.list[res.id] = res;

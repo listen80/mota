@@ -15,7 +15,7 @@ export const loadSound = (src) => {
     myaudio.addEventListener("canplay", function () {
       resolve(this);
     });
-    myaudio.addEventListener("canplay", function () {
+    myaudio.addEventListener("error", function () {
       reject(this);
     });
     myaudio.src = src;

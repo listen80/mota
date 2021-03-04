@@ -1,7 +1,7 @@
 // 地图生成
 
 import Block from "./base/Block";
-import Text from "./Roles/Text";
+import Text from "./roles/Text";
 import Layer from "./Layer";
 
 const cache = {};
@@ -14,24 +14,25 @@ export default class Map {
       }
       cache[id] = this;
     }
-    this.backLayer = new Layer({ offsetX });
-    this.mainLayer = new Layer({ offsetX });
-    this.herosLayer = new Layer({ offsetX });
-    this.topLayer = new Layer({ offsetX });
+    this.backLayer = new Layer();
+    this.mainLayer = new Layer();
+    this.herosLayer = new Layer();
+    this.topLayer = new Layer();
     this.config = map;
-    this.layers = [
+    this.children = [
       this.backLayer,
       this.mainLayer,
       this.herosLayer,
       this.topLayer,
     ];
-    const { mapsInfo, blocksInfo } = game;
+    this.tick = 1;
+    const { mapsInfo, childrenInfo } = game;
     mapArray.forEach((line, y) => {
       line.forEach((value, x) => {
         if (value) {
           const info = mapsInfo.mapMapping[value];
           if (info) {
-            this.createBlock(info, blocksInfo, { x, y });
+            this.createBlock(info, childrenInfo, { x, y });
           } else {
             console.error("未知的地图元素", "映射ID为", value);
           }
@@ -40,7 +41,7 @@ export default class Map {
         }
         this.backLayer.add(
           new Block({
-            img: blocksInfo.terrains.list.ground.img, // 图片用的是地形最上面一个
+            img: childrenInfo.terrains.list.ground.img, // 图片用的是地形最上面一个
             y: y * 32,
             x: x * 32,
           })
@@ -49,9 +50,20 @@ export default class Map {
     });
     this.offsetX = offsetX * 32;
     this.offsetY = offsetY * 32;
-    this.rotate = (rotate * Math.PI) / 2;
+    this.translate = { x: 0, y: 0 };
+    // this.rotate = (rotate * Math.PI) / 2;
+    // this.scale = { scaleX: 0.5, scaleY: 0.5, x: 272, y: 208 };
+    // this.rotate = { angle: Math.PI * 0, x: 272, y: 208 };
+    // this.rotate = Math.PI * .1
   }
-  createBlock(info, blocksInfo, { x, y }) {
+  calc() {
+    this.tick++;
+    // this.translate.x++
+    // this.rotate.angle += 0.01;
+    // this.scale.scaleX = 1 * Math.sin(this.tick / 50) + 1;
+    // this.scale.scaleY = 1 * Math.sin(this.tick / 50) + 1;
+  }
+  createBlock(info, childrenInfo, { x, y }) {
     const { cls, id } = info;
     if (cls === "text") {
       this.mainLayer.add(
@@ -63,7 +75,7 @@ export default class Map {
         })
       );
     } else {
-      const blockInfo = blocksInfo[cls].list[id];
+      const blockInfo = childrenInfo[cls].list[id];
       const { img, imageOffsetY = 0, maxAniFrame = 0 } = blockInfo;
       this.mainLayer.add(
         new Block({
@@ -76,9 +88,6 @@ export default class Map {
         })
       );
     }
-  }
-  nextFrame(ui) {
-    this.layers.map((layer) => layer.nextFrame(ui));
   }
   restoreHeroLayer() {
     this.herosLayer.removeAll();

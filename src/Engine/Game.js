@@ -7,13 +7,15 @@ import Hero from "./Roles/Hero";
 import loder from "../utils/loader";
 import Block from "./base/Block";
 import { setStorage, getStorage, deepFreeze } from "../utils/utils";
+import Dialog from "./roles/Dialog";
 export default class Game {
   constructor() {
     const config = {
-      el: document.body,
-      side: 32,
-      width: 17,
-      height: 13,
+      screen: {
+        el: document.body,
+        width: 17 * 32,
+        height: 13 * 32,
+      },
     };
 
     this.config = config; // 配置
@@ -29,11 +31,14 @@ export default class Game {
   init() {
     const { main } = this;
     document.title = main.firstData.title;
-    this.ui = new UI(this);
+    this.ui = new UI(this.config.screen);
     this.control = new Control();
     this.hero = main.firstData.heros.reduceRight((pre, id, i) => {
-      const heroConfig = this.getBlockInfo({ cls: "heros", id })
-      let hero = new Hero(this, heroConfig);
+      const heroConfig = this.getBlockInfo({ cls: "heros", id });
+      // hack
+      heroConfig.x = heroConfig.x * 32;
+      heroConfig.y = heroConfig.y * 32;
+      const hero = new Hero(this, heroConfig);
       this.heros.push(hero);
       hero.follower = pre;
       return hero;
@@ -47,6 +52,7 @@ export default class Game {
     this.mapChange(mapId);
     this.gameStart();
   }
+
   mapChange(id) {
     const { mapsInfo } = this;
     const map = mapsInfo.list[id];
@@ -60,16 +66,16 @@ export default class Game {
 
   createMap(map) {
     if (this.map) {
-      this.map.restoreHeroLayer()
+      this.map.restoreHeroLayer();
       this.sounds[this.map.config.bgm].pause();
     }
-    this.map = new Map(this, { ...map });
-    this.sounds["floor.mp3"].play()
+    this.map = new Map(this, map);
+    this.sounds["floor.mp3"].play();
     const bgm = this.sounds[map.bgm];
     bgm.loop = true;
     bgm.play();
     this.heros.forEach((hero) => {
-      this.map.add(hero)
+      this.map.add(hero);
     });
   }
 
@@ -80,22 +86,28 @@ export default class Game {
 
   gameStart() {
     this.ident = setInterval(() => {
-      this.nextFrame();
+      this.keyFrame();
     }, 16);
   }
 
-  nextFrame() {
-    const { ui } = this;
+  keyFrame() {
     this.tick++;
-    this.map.nextFrame(ui);
-    this.ui.drawGlobalMessage(); // 全局提示
+    this.ui.clearRect();
+    this.ui.render(this.map);
     this.control.restore();
   }
 
   getBlockInfo(info) {
-    const { cls, id } = info
-    const clses = this.blocksInfo[cls]
-    return clses.list[id]
+    const { cls, id } = info;
+    const clses = this.childrenInfo[cls];
+    return clses.list[id];
+  }
+
+  alert(msg) {
+    this.map.topLayer.children.splice(0, 1);
+    this.map.topLayer.add(
+      new Dialog(this, { x: 0, y: 0, width: 32 * 4, height: 32 * 3, msg })
+    );
   }
 }
 
