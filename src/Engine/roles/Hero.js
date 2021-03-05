@@ -270,7 +270,7 @@ export default class Hero extends Block {
     block.destroy();
     this.game.sounds["item.mp3"].play();
     const item = childrenInfo.items.list[id];
-    this.game.alert([hero.name, "获得", item.name]);
+    this.game.alert(["获得", item.name]);
     if (item.cls === "use") {
       if (item.effect) {
         const getString = (effect) => {
@@ -358,7 +358,7 @@ export default class Hero extends Block {
           console.log(event, events);
           try {
             // run(event, true);
-          } catch (e) {}
+          } catch (e) { }
         }
       });
     } else if (block) {
