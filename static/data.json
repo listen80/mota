@@ -3877,7 +3877,7 @@
           "def": 10,
           "hp": 1000,
           "hpmax": 999999,
-          "maxAniFrame": 4,
+          "maxAniFrame": 0,
           "items": {
             "yellowKey": 0,
             "blueKey": 0,
@@ -3905,7 +3905,7 @@
           "def": 10,
           "hp": 1000,
           "hpmax": 999999,
-          "maxAniFrame": 4,
+          "maxAniFrame": 0,
           "items": {
             "yellowKey": 0,
             "blueKey": 0,
@@ -3934,7 +3934,7 @@
           "def": 10,
           "hp": 1000,
           "hpmax": 999999,
-          "maxAniFrame": 4,
+          "maxAniFrame": 0,
           "items": {
             "yellowKey": 0,
             "blueKey": 0,

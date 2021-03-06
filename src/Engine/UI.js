@@ -71,6 +71,9 @@ export default class UI {
   }
   render(block) {
     const { context } = this;
+    if (block.died) {
+      return;
+    }
     context.beginPath();
     context.save();
     if (block.calc) {

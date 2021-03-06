@@ -15,6 +15,6 @@ export default class Layer {
     this.children.unshift(block);
   }
   find({ x, y }) {
-    return this.children.find((block) => block.y === y && block.x === x);
+    return this.children.find((block) => !block.died && block.y === y && block.x === x);
   }
 }
