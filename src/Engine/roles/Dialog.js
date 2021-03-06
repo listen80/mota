@@ -25,7 +25,21 @@ export default class Dialog {
       }
       return len
     }
-    const len = calcLength(this.msg)
+    let len = calcLength(this.msg)
+    if (len > 20) {
+      len = 18
+    }
+    new Text(game, {
+      x: -len * 5,
+      y: 0,
+      msg: msg,
+      style: {
+        font: `20px '楷体'`, //设置字体
+        fillStyle: "white",
+        textBaseline: "middle",
+        textAlign: "start",
+      },
+    })
     this.children = [
       new Block({
         x: -len * 5 - 10,
@@ -34,17 +48,7 @@ export default class Dialog {
         height: height,
         radius: 20,
       }),
-      new Text(game, {
-        x: -len * 5,
-        y: 0,
-        msg: msg,
-        style: {
-          font: `20px '楷体'`, //设置字体
-          fillStyle: "white",
-          textBaseline: "middle",
-          textAlign: "start",
-        },
-      }),
+      
       // new Text(game, {
       //   x: 0,
       //   y: 32,

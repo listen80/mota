@@ -70,12 +70,12 @@ export default class UI {
     );
   }
   render(block) {
-    const { context } = this;
-    context.beginPath();
-    context.save();
     if (block.died) {
       return;
     }
+    const { context } = this;
+    context.beginPath();
+    context.save();
     if (block.calc) {
       block.calc();
     }

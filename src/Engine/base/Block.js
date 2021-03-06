@@ -62,14 +62,8 @@ export default class Block {
   calc() {
     if (this.maxAniFrame) {
       this.tick++;
-      if (this.interval === 4) {
-        console.log(this.tick)
-      }
       if (this.tick % this.interval === 0) {
         this.frame += 1;
-        if (this.interval === 4) {
-          console.log(this.frame)
-        }
         if (this.frame === this.maxAniFrame) {
           this.frame = 0;
           if (this.playCount) {

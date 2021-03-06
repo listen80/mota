@@ -235,7 +235,7 @@ export default class Hero extends Block {
     const hero = this;
     const { info } = block;
     const { id } = info;
-    const enemyInfo = getBlockInfo({cls: "enemys", id});
+    const enemyInfo = getBlockInfo({ cls: "enemys", id });
     const lessHp = hero.attack(enemyInfo);
     if (lessHp > 0) {
       block.destroy();
@@ -256,7 +256,7 @@ export default class Hero extends Block {
       );
       return true;
     } else {
-      this.game.alert(["打不过", enemyInfo.name]);
+      this.game.alert(["打不过" + enemyInfo.name]);
       return false;
     }
   }
@@ -270,7 +270,6 @@ export default class Hero extends Block {
     this.game.sounds["item.mp3"].play();
     const item = getBlockInfo(info);
 
-    this.game.alert(["获得", item.name]);
     if (item.cls === "use") {
       if (item.effect) {
         const getString = (effect) => {
@@ -286,10 +285,9 @@ export default class Hero extends Block {
               exp: "经验",
               money: "金币",
             };
-            console.log(
-              fanyi[attribute],
-              (num > 0 ? "增加" : "减少") + num
-            );
+            this.game.alert("获得" + item.name + fanyi[attribute] +
+              (num > 0 ? "增加" : "减少") + num);
+
           });
         };
         getString(item.effect);
