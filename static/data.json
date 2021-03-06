@@ -2438,7 +2438,7 @@
       }
     ]
   },
-  "childrenInfo": {
+  "blocksInfo": {
     "npcs": {
       "imgSrc": "npcs",
       "maxAniFrame": 2,

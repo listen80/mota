@@ -27,9 +27,10 @@ export default class Map {
       this.topLayer,
     ];
     this.tick = 1;
-    const { mapsInfo, childrenInfo } = game;
-    mapArray.forEach((line, y) => {
-      line.forEach((value, x) => {
+    const { mapsInfo } = game;
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const value = mapArray[y][x];
         if (value) {
           const info = mapsInfo.mapMapping[value];
           if (info) {
@@ -37,18 +38,17 @@ export default class Map {
           } else {
             console.error("未知的地图元素", "映射ID为", value);
           }
-        } else {
-          // 空地，显示背景
         }
         this.backLayer.add(
           new Block({
-            ...getBlockInfo({cls: "terrains", id: 0}),
+            ...getBlockInfo({ cls: "terrains", id: 0 }),
             y: y * 32,
             x: x * 32,
           })
         );
-      });
-    });
+      }
+    }
+
     this.offsetX = offsetX * 32;
     this.offsetY = offsetY * 32;
     this.translate = { x: 0, y: 0 };

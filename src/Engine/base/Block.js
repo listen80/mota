@@ -34,7 +34,7 @@ export default class Block {
     this.imageOffsetY = imageOffsetY;
     this.maxAniFrame = maxAniFrame;
     this.interval = interval;
-    this.tick = 0;
+    this.tick = -1;
     this.frame = frame;
     this.playCount = playCount;
 
@@ -62,8 +62,14 @@ export default class Block {
   calc() {
     if (this.maxAniFrame) {
       this.tick++;
+      if (this.interval === 4) {
+        console.log(this.tick)
+      }
       if (this.tick % this.interval === 0) {
         this.frame += 1;
+        if (this.interval === 4) {
+          console.log(this.frame)
+        }
         if (this.frame === this.maxAniFrame) {
           this.frame = 0;
           if (this.playCount) {

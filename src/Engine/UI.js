@@ -71,13 +71,16 @@ export default class UI {
   }
   render(block) {
     const { context } = this;
+    context.beginPath();
+    context.save();
     if (block.died) {
       return;
     }
-    context.beginPath();
-    context.save();
     if (block.calc) {
       block.calc();
+    }
+    if (block.died) {
+      return;
     }
     if (block.translate) {
       const { x = 0, y = 0 } = block.translate;

@@ -193,7 +193,7 @@ export default class Hero extends Block {
     // 1. 移除静态地形 门
     // 2. 创建动画地kaimen形 开门
     // 3. 对应钥匙减1
-    const { map, childrenInfo, hero } = this.game;
+    const { map, hero } = this.game;
     const { mainLayer } = map;
     const { info, x, y } = block;
     const { id, cls, trigger, need } = info;
@@ -203,22 +203,18 @@ export default class Hero extends Block {
         // 开门
         block.destroy();
         this.game.sounds["door.mp3"].play();
-        const { img, maxAniFrame, imageOffsetY } = childrenInfo.animates.list[
-          id
-        ];
+
         mainLayer.add(
           new Block({
             x,
             y,
-            img,
-            maxAniFrame,
-            imageOffsetY,
+            ...getBlockInfo({ cls: "animates", id }),
             playCount: 1,
             interval: 4,
           })
         );
       } else {
-        const item = childrenInfo.items.list[need];
+        const item = getBlockInfo({ cls: "items", id: need })
         this.game.alert([hero.name, "没有", item.name].join(""));
       }
     }
@@ -236,11 +232,10 @@ export default class Hero extends Block {
     // console.log("handleNpcs");
   }
   handleEnemys(block) {
-    const { childrenInfo } = this.game;
     const hero = this;
     const { info } = block;
     const { id } = info;
-    const enemyInfo = childrenInfo.enemys.list[id];
+    const enemyInfo = getBlockInfo({cls: "enemys", id});
     const lessHp = hero.attack(enemyInfo);
     if (lessHp > 0) {
       block.destroy();
