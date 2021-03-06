@@ -3,7 +3,10 @@ import { loadImage, loadSound, loadJSON } from "./utils";
 const baseURL = ".";
 const loadResource = () =>
   loadJSON("data.json").then((data) =>
-    Promise.all([loadImages(data), loadSounds(data)]).then(() => data)
+    Promise.all([loadImages(data), loadSounds(data)]).then(() => {
+      __data = data;
+      return data
+    })
   );
 
 const loadImages = (data) => {
@@ -51,5 +54,13 @@ const loadSounds = (data) => {
     return data;
   });
 };
+
+let __data = null;
+
+export const getBlockInfo = (info) => {
+  const { cls, id } = info;
+  const clses = __data.childrenInfo[cls];
+  return clses.list[id];
+}
 
 export default loadResource;

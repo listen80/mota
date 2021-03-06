@@ -4,9 +4,10 @@ import Map from "./Map";
 import UI from "./UI";
 import Control from "./Control";
 import Hero from "./Roles/Hero";
-import loder from "../utils/loader";
+import loder, { getBlockInfo } from "../utils/loader";
 import Block from "./base/Block";
 import { setStorage, getStorage, deepFreeze } from "../utils/utils";
+
 import Dialog from "./roles/Dialog";
 export default class Game {
   constructor() {
@@ -34,7 +35,7 @@ export default class Game {
     this.ui = new UI(this.config.screen);
     this.control = new Control();
     this.hero = main.firstData.heros.reduceRight((pre, id, i) => {
-      const heroConfig = this.getBlockInfo({ cls: "heros", id });
+      const heroConfig = getBlockInfo({ cls: "heros", id });
       // hack
       heroConfig.x = heroConfig.x * 32;
       heroConfig.y = heroConfig.y * 32;
@@ -73,7 +74,7 @@ export default class Game {
     this.sounds["floor.mp3"].play();
     const bgm = this.sounds[map.bgm];
     bgm.loop = true;
-    bgm.play();
+    // bgm.play();
     this.heros.forEach((hero) => {
       this.map.add(hero);
     });
@@ -95,12 +96,6 @@ export default class Game {
     this.ui.clearRect();
     this.ui.render(this.map);
     this.control.restore();
-  }
-
-  getBlockInfo(info) {
-    const { cls, id } = info;
-    const clses = this.childrenInfo[cls];
-    return clses.list[id];
   }
 
   alert(msg) {

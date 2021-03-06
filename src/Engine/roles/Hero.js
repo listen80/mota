@@ -1,4 +1,5 @@
 import { getStorage, setStorage } from "../../utils/utils";
+import { getBlockInfo } from "../../utils/loader";
 import Block from "../base/Block";
 
 export default class Hero extends Block {
@@ -260,19 +261,20 @@ export default class Hero extends Block {
       );
       return true;
     } else {
-      this.game.alert([hero.name, "打不过", enemyInfo.name]);
+      this.game.alert(["打不过", enemyInfo.name]);
       return false;
     }
   }
 
   handleItem(block) {
-    const { childrenInfo, hero } = this.game;
+    const { hero } = this.game;
     const { info, x, y } = block;
     const { id } = info;
 
     block.destroy();
     this.game.sounds["item.mp3"].play();
-    const item = childrenInfo.items.list[id];
+    const item = getBlockInfo(info);
+
     this.game.alert(["获得", item.name]);
     if (item.cls === "use") {
       if (item.effect) {
