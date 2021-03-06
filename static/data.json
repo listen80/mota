@@ -3888,7 +3888,7 @@
           },
           "direction": "up",
           "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
-          "height": 32,
+          "height": 33,
           "width": 32
         },
         {
@@ -3916,7 +3916,7 @@
           },
           "direction": "up",
           "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
-          "height": 32,
+          "height": 33,
           "width": 32,
           "imgSrc": "al"
         },
@@ -3945,7 +3945,7 @@
           },
           "direction": "up",
           "faces": { "Down": 0, "Left": 1, "Right": 2, "Up": 3 },
-          "height": 32,
+          "height": 33,
           "width": 32,
           "imgSrc": "af"
         }

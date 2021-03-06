@@ -290,7 +290,6 @@ export default class Hero extends Block {
               money: "金币",
             };
             console.log(
-              game[lead].name,
               fanyi[attribute],
               (num > 0 ? "增加" : "减少") + num
             );

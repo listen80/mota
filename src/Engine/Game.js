@@ -104,9 +104,9 @@ export default class Game {
   }
 
   alert(msg) {
-    this.map.topLayer.children.splice(0, 1);
+    // this.map.topLayer.children.splice(0, 1);
     this.map.topLayer.add(
-      new Dialog(this, { x: 0, y: 0, width: 32 * 6, height: 32 * 1, msg })
+      new Dialog(this, { x: 0, y: 0, width: 32 * 6, height: 32 * 1, msg }, this.control)
     );
   }
 }

@@ -7,7 +7,7 @@ import Layer from "./Layer";
 const cache = {};
 export default class Map {
   constructor(game, map) {
-    const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0, id } = map;
+    const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0, id, height, width } = map;
     if (id) {
       if (cache[id]) {
         return cache[id];

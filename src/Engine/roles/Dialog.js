@@ -76,6 +76,8 @@ export default class Dialog {
     };
 
     this.translate = { x: (game.map.config.width * 32) / 2, y: ((game.map.config.height - 3) * 32) / 2 };
+
+    // this.control.push(this)
     // this.rotate = { angle: Math.PI / 2 * .01 };
   }
 
@@ -86,12 +88,17 @@ export default class Dialog {
         this.died = true;
       }
     }
+    // if (this.control && this.control.isFocus(this)) {
+    //   if (this.control.confirm) {
+    //     this.died = true;
+    //     this.control.pop();
+    //   }
+    // }
     if (this.scale.scaleX < 1) {
       this.scale.scaleX *= 1.3;
       if (this.scale.scaleX > 1) {
         this.scale.scaleX = 1
       }
     }
-    
   }
 }
