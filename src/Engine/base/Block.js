@@ -34,7 +34,7 @@ export default class Block {
     this.imageOffsetY = imageOffsetY;
     this.maxAniFrame = maxAniFrame;
     this.interval = interval;
-    this.tick = 0;
+    this.tick = -1;
     this.frame = frame;
     this.playCount = playCount;
 

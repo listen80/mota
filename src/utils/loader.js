@@ -3,15 +3,18 @@ import { loadImage, loadSound, loadJSON } from "./utils";
 const baseURL = ".";
 const loadResource = () =>
   loadJSON("data.json").then((data) =>
-    Promise.all([loadImages(data), loadSounds(data)]).then(() => data)
+    Promise.all([loadImages(data), loadSounds(data)]).then(() => {
+      __data = data;
+      return data
+    })
   );
 
 const loadImages = (data) => {
   const KeyMap = {};
-  Object.keys(data.childrenInfo).forEach((key) => {
-    const imgSrc = data.childrenInfo[key].imgSrc;
+  Object.keys(data.blocksInfo).forEach((key) => {
+    const imgSrc = data.blocksInfo[key].imgSrc;
     KeyMap[imgSrc] = null;
-    data.childrenInfo[key].list.forEach((item) => {
+    data.blocksInfo[key].list.forEach((item) => {
       if (item.imgSrc) {
         KeyMap[item.imgSrc] = null;
       }
@@ -24,8 +27,8 @@ const loadImages = (data) => {
     )
   ).then((images) => {
     Object.keys(KeyMap).forEach((key, index) => (KeyMap[key] = images[index]));
-    Object.keys(data.childrenInfo).forEach((key, resIndex) => {
-      const top = data.childrenInfo[key];
+    Object.keys(data.blocksInfo).forEach((key, resIndex) => {
+      const top = data.blocksInfo[key];
       for (let x in top.list) {
         let res = top.list[x];
         top.list[res.id] = res;
@@ -51,5 +54,13 @@ const loadSounds = (data) => {
     return data;
   });
 };
+
+let __data = null;
+
+export const getBlockInfo = (info) => {
+  const { cls, id } = info;
+  const clses = __data.blocksInfo[cls];
+  return clses.list[id];
+}
 
 export default loadResource;

@@ -1,4 +1,5 @@
 import { getStorage, setStorage } from "../../utils/utils";
+import { getBlockInfo } from "../../utils/loader";
 import Block from "../base/Block";
 
 export default class Hero extends Block {
@@ -46,12 +47,13 @@ export default class Hero extends Block {
     this.follower = follower;
     this.game = game;
     this.control = control;
-    this.interval = 20;
+    this.interval = 5;
     this.isMoving = false;
     this.step = 4;
   }
 
   changeDir(direction) {
+    this.direction = direction;
     this.imageOffsetY = this.directionsOffseY[direction];
   }
 
@@ -103,6 +105,8 @@ export default class Hero extends Block {
   }
   setDist(dist) {
     this.dist = dist;
+    this.isMoving = true;
+    this.maxAniFrame = 4;
     this._x = (dist.x - this.x) / 8;
     this._y = (dist.y - this.y) / 8;
   }
@@ -118,6 +122,7 @@ export default class Hero extends Block {
       // debugger
       if (this.x === x && this.y === y) {
         this.isMoving = false;
+        this.maxAniFrame = 0
       } else {
         this.x += this._x;
         this.y += this._y;
@@ -142,7 +147,6 @@ export default class Hero extends Block {
         if (this.move(dist)) {
           this.setFollower();
           this.setDist(dist);
-          this.isMoving = true;
           // 新的状态
           const { x, y, atk, def, hp, items, money, exp } = this;
           setStorage("hero", {
@@ -189,7 +193,7 @@ export default class Hero extends Block {
     // 1. 移除静态地形 门
     // 2. 创建动画地kaimen形 开门
     // 3. 对应钥匙减1
-    const { map, childrenInfo, hero } = this.game;
+    const { map, hero } = this.game;
     const { mainLayer } = map;
     const { info, x, y } = block;
     const { id, cls, trigger, need } = info;
@@ -199,22 +203,18 @@ export default class Hero extends Block {
         // 开门
         block.destroy();
         this.game.sounds["door.mp3"].play();
-        const { img, maxAniFrame, imageOffsetY } = childrenInfo.animates.list[
-          id
-        ];
+
         mainLayer.add(
           new Block({
             x,
             y,
-            img,
-            maxAniFrame,
-            imageOffsetY,
+            ...getBlockInfo({ cls: "animates", id }),
             playCount: 1,
             interval: 4,
           })
         );
       } else {
-        const item = childrenInfo.items.list[need];
+        const item = getBlockInfo({ cls: "items", id: need })
         this.game.alert([hero.name, "没有", item.name].join(""));
       }
     }
@@ -232,11 +232,10 @@ export default class Hero extends Block {
     // console.log("handleNpcs");
   }
   handleEnemys(block) {
-    const { childrenInfo } = this.game;
     const hero = this;
     const { info } = block;
     const { id } = info;
-    const enemyInfo = childrenInfo.enemys.list[id];
+    const enemyInfo = getBlockInfo({ cls: "enemys", id });
     const lessHp = hero.attack(enemyInfo);
     if (lessHp > 0) {
       block.destroy();
@@ -257,20 +256,20 @@ export default class Hero extends Block {
       );
       return true;
     } else {
-      this.game.alert([hero.name, "打不过", enemyInfo.name]);
+      this.game.alert(["打不过" + enemyInfo.name]);
       return false;
     }
   }
 
   handleItem(block) {
-    const { childrenInfo, hero } = this.game;
+    const { hero } = this.game;
     const { info, x, y } = block;
     const { id } = info;
 
     block.destroy();
     this.game.sounds["item.mp3"].play();
-    const item = childrenInfo.items.list[id];
-    this.game.alert(["获得", item.name]);
+    const item = getBlockInfo(info);
+
     if (item.cls === "use") {
       if (item.effect) {
         const getString = (effect) => {
@@ -286,11 +285,9 @@ export default class Hero extends Block {
               exp: "经验",
               money: "金币",
             };
-            console.log(
-              game[lead].name,
-              fanyi[attribute],
-              (num > 0 ? "增加" : "减少") + num
-            );
+            this.game.alert("获得" + item.name + fanyi[attribute] +
+              (num > 0 ? "增加" : "减少") + num);
+
           });
         };
         getString(item.effect);
@@ -310,7 +307,7 @@ export default class Hero extends Block {
     const { follower, x, y, direction } = this;
     if (follower) {
       this.follower.setFollower();
-      follower.set({ x, y });
+      follower.setDist({ x, y });
       follower.changeDir(direction);
     }
   }
@@ -361,7 +358,8 @@ export default class Hero extends Block {
           } catch (e) { }
         }
       });
-    } else if (block) {
+    }
+    if (block) {
       const info = block.info;
       if (info) {
         return this.moveInfoBlock(block);

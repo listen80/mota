@@ -19,8 +19,8 @@ export default class Control {
     document.removeEventListener("keydown", this.keydown);
   }
   pop() {
-    this.focusBlock = this.focusList.pop()
-    return this.focusBlock
+    this.focusList.pop()
+    this.focusBlock = this.focusList[this.focusList.length - 1]
   }
   push(block) {
     this.focusBlock = block

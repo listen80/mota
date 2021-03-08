@@ -3,11 +3,12 @@
 import Block from "./base/Block";
 import Text from "./roles/Text";
 import Layer from "./Layer";
+import { getBlockInfo } from "../utils/loader";
 
 const cache = {};
 export default class Map {
   constructor(game, map) {
-    const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0, id } = map;
+    const { map: mapArray, offsetX = 0, offsetY = 0, rotate = 0, id, height, width } = map;
     if (id) {
       if (cache[id]) {
         return cache[id];
@@ -26,28 +27,28 @@ export default class Map {
       this.topLayer,
     ];
     this.tick = 1;
-    const { mapsInfo, childrenInfo } = game;
-    mapArray.forEach((line, y) => {
-      line.forEach((value, x) => {
+    const { mapsInfo } = game;
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const value = mapArray[y][x];
         if (value) {
           const info = mapsInfo.mapMapping[value];
           if (info) {
-            this.createBlock(info, childrenInfo, { x, y });
+            this.createBlock(info, { x, y });
           } else {
             console.error("未知的地图元素", "映射ID为", value);
           }
-        } else {
-          // 空地，显示背景
         }
         this.backLayer.add(
           new Block({
-            img: childrenInfo.terrains.list.ground.img, // 图片用的是地形最上面一个
+            ...getBlockInfo({ cls: "terrains", id: 0 }),
             y: y * 32,
             x: x * 32,
           })
         );
-      });
-    });
+      }
+    }
+
     this.offsetX = offsetX * 32;
     this.offsetY = offsetY * 32;
     this.translate = { x: 0, y: 0 };
@@ -63,7 +64,7 @@ export default class Map {
     // this.scale.scaleX = 1 * Math.sin(this.tick / 50) + 1;
     // this.scale.scaleY = 1 * Math.sin(this.tick / 50) + 1;
   }
-  createBlock(info, childrenInfo, { x, y }) {
+  createBlock(info, { x, y }) {
     const { cls, id } = info;
     if (cls === "text") {
       this.mainLayer.add(
@@ -75,7 +76,7 @@ export default class Map {
         })
       );
     } else {
-      const blockInfo = childrenInfo[cls].list[id];
+      const blockInfo = getBlockInfo(info);
       const { img, imageOffsetY = 0, maxAniFrame = 0 } = blockInfo;
       this.mainLayer.add(
         new Block({

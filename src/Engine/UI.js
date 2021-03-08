@@ -70,11 +70,17 @@ export default class UI {
     );
   }
   render(block) {
+    if (block.died) {
+      return;
+    }
     const { context } = this;
     context.beginPath();
     context.save();
     if (block.calc) {
       block.calc();
+    }
+    if (block.died) {
+      return;
     }
     if (block.translate) {
       const { x = 0, y = 0 } = block.translate;
