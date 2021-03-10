@@ -5,7 +5,6 @@ import UI from "./UI";
 import Control from "./Control";
 import Hero from "./Roles/Hero";
 import loder, { getBlockInfo } from "../utils/loader";
-import Block from "./base/Block";
 import { setStorage, getStorage, deepFreeze } from "../utils/utils";
 
 import Dialog from "./roles/Dialog";
@@ -24,9 +23,9 @@ export default class Game {
     this.map = null; // 通过new Map 生成的 对象
     this.heros = [];
     loder().then((data) => {
+      deepFreeze(data)
       Object.assign(this, data);
       this.init();
-      // console.log()
       this.alert(data.main.firstData.init)
     });
   }
@@ -37,7 +36,7 @@ export default class Game {
     this.ui = new UI(this.config.screen);
     this.control = new Control();
     this.hero = main.firstData.heros.reduceRight((pre, id, i) => {
-      const heroConfig = getBlockInfo({ cls: "heros", id });
+      const heroConfig = { ...getBlockInfo({ cls: "heros", id }) };
       // hack
       heroConfig.x = heroConfig.x * 32;
       heroConfig.y = heroConfig.y * 32;
